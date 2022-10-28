@@ -20,7 +20,7 @@ class MyDataSet(Dataset):
             if image[4:8] == 'mask':
                 data_y_path = os.path.join(path, image)
                 data = cv2.imread(data_y_path, cv2.IMREAD_GRAYSCALE)
-                print(data)
+                # print(data)
                 # data = cv2.resize(data, (512, 512))
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
@@ -28,7 +28,7 @@ class MyDataSet(Dataset):
             else:
                 data_x_path = os.path.join(path, image)
                 data = cv2.imread(data_x_path, cv2.IMREAD_GRAYSCALE)
-                print(data)
+                # print(data)
                 data = cv2.resize(data, (512, 512))
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
@@ -126,22 +126,23 @@ def test(net):
         batch_size=1
     )
     with torch.no_grad():
+        dices = np.array([])
         for i, data in enumerate(dataloader):
-            dices = np.numarray([])
             input_data, labels = data
             predict = net(input_data)
             img_pre = torch.reshape(predict, (512, 512)).detach().numpy()
             img_lab = torch.reshape(labels, (512, 512)).detach().numpy()
             img_pre = np.round(img_pre)
             img_lab = np.round(img_lab)
+            print(img_lab.sum())
             temp = dice(img_pre, img_lab)
-            print(temp)
-            dices.append(temp)
+            dices = np.append(dices,temp)
             img_pre = img_pre * 255
             im = Image.fromarray(img_pre)
             im = np.array(im, dtype='uint8')
             Image.fromarray(im, 'L').save("result/%03d.png" % i)
-            print("average%f", dices.sum() / dataloader.len())
+            print("dice:", temp)
+        print("average_dice:", dices.sum() / len(dataloader))
 
 
 def dice(predict, label):
@@ -156,7 +157,7 @@ def dice(predict, label):
 
 if __name__ == '__main__':
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(device)
+    # print(device)
     net = train()
     torch.save(net, 'model/cnn.pt')
     test(net)
