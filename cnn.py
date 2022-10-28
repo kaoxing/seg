@@ -7,7 +7,7 @@ from torch.autograd import Variable
 from matplotlib import pyplot as plt
 import numpy as np
 from PIL import Image
-
+import swin_transformer
 
 class MyDataSet(Dataset):
     def __init__(self, path):
@@ -20,15 +20,17 @@ class MyDataSet(Dataset):
             if image[4:8] == 'mask':
                 data_y_path = os.path.join(path, image)
                 data = cv2.imread(data_y_path, cv2.IMREAD_GRAYSCALE)
-                print(data)
-                # data = cv2.resize(data, (512, 512))
+                print(data_y_path)
+                # print(data)
+                data = cv2.resize(data, (512, 512))
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
                 data_y.append(data)
-            else:
+            elif image[4:] == "png":
                 data_x_path = os.path.join(path, image)
                 data = cv2.imread(data_x_path, cv2.IMREAD_GRAYSCALE)
-                print(data)
+                print(data_x_path)
+                # print(data)
                 data = cv2.resize(data, (512, 512))
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
@@ -72,6 +74,7 @@ class Net(nn.Module):
         out = nn.Sigmoid()(ret)
         return out
 
+
     def block1(self, in_size, out_size, kfilter, padding, kernel_size, stride):
         return nn.Sequential(
             nn.Conv2d(in_size, out_size, kfilter, padding=padding),
@@ -88,7 +91,7 @@ class Net(nn.Module):
 
 
 def train():
-    batch_size = 5
+    batch_size = 1
     path = 'mydataset'
     data_set = MyDataSet(path)
     dataloader = DataLoader(
@@ -107,6 +110,7 @@ def train():
         print('第%d轮迭代' % cnt)
         for i, data in enumerate(dataloader):
             input_data, labels = data
+            print(data)
             optimizer.zero_grad()  # 梯度置零
             predict = net(input_data)  # 数据输入网络输出预测值
             # labels=labels.view(5,1,512,512)

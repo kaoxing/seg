@@ -23,4 +23,5 @@ for image in file_name_list:
         cv.imwrite('mydataset/thin_result/{:0>3}_result.png'.format(cnt), img_bin, [cv.IMWRITE_PNG_COMPRESSION, 0])
         cnt = cnt+1
 
+
 # print(np.count_nonzero(img_thinning))
