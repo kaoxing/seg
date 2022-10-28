@@ -7,7 +7,7 @@ from torch.autograd import Variable
 from matplotlib import pyplot as plt
 import numpy as np
 from PIL import Image
-import swin_transformer
+
 
 class MyDataSet(Dataset):
     def __init__(self, path):
@@ -20,16 +20,14 @@ class MyDataSet(Dataset):
             if image[4:8] == 'mask':
                 data_y_path = os.path.join(path, image)
                 data = cv2.imread(data_y_path, cv2.IMREAD_GRAYSCALE)
-                print(data_y_path)
                 # print(data)
-                data = cv2.resize(data, (512, 512))
+                # data = cv2.resize(data, (512, 512))
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
                 data_y.append(data)
-            elif image[4:] == "png":
+            else:
                 data_x_path = os.path.join(path, image)
                 data = cv2.imread(data_x_path, cv2.IMREAD_GRAYSCALE)
-                print(data_x_path)
                 # print(data)
                 data = cv2.resize(data, (512, 512))
                 data = torch.Tensor(data / 255)  # 归一
@@ -74,7 +72,6 @@ class Net(nn.Module):
         out = nn.Sigmoid()(ret)
         return out
 
-
     def block1(self, in_size, out_size, kfilter, padding, kernel_size, stride):
         return nn.Sequential(
             nn.Conv2d(in_size, out_size, kfilter, padding=padding),
@@ -91,7 +88,7 @@ class Net(nn.Module):
 
 
 def train():
-    batch_size = 1
+    batch_size = 5
     path = 'mydataset'
     data_set = MyDataSet(path)
     dataloader = DataLoader(
@@ -110,7 +107,6 @@ def train():
         print('第%d轮迭代' % cnt)
         for i, data in enumerate(dataloader):
             input_data, labels = data
-            print(data)
             optimizer.zero_grad()  # 梯度置零
             predict = net(input_data)  # 数据输入网络输出预测值
             # labels=labels.view(5,1,512,512)
@@ -130,22 +126,23 @@ def test(net):
         batch_size=1
     )
     with torch.no_grad():
+        dices = np.array([])
         for i, data in enumerate(dataloader):
-            dices = np.numarray([])
             input_data, labels = data
             predict = net(input_data)
             img_pre = torch.reshape(predict, (512, 512)).detach().numpy()
             img_lab = torch.reshape(labels, (512, 512)).detach().numpy()
             img_pre = np.round(img_pre)
             img_lab = np.round(img_lab)
+            print(img_lab.sum())
             temp = dice(img_pre, img_lab)
-            print(temp)
-            dices.append(temp)
+            dices = np.append(dices,temp)
             img_pre = img_pre * 255
             im = Image.fromarray(img_pre)
             im = np.array(im, dtype='uint8')
             Image.fromarray(im, 'L').save("result/%03d.png" % i)
-            print("average%f", dices.sum() / dataloader.len())
+            print("dice:", temp)
+        print("average_dice:", dices.sum() / len(dataloader))
 
 
 def dice(predict, label):
@@ -160,7 +157,7 @@ def dice(predict, label):
 
 if __name__ == '__main__':
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(device)
+    # print(device)
     net = train()
     torch.save(net, 'model/cnn.pt')
     test(net)

@@ -4,7 +4,7 @@ import numpy as np
 # 导入os模块
 import os
 
-path = "mydataset/"
+path = "mydataset_test/"
 file_name_list = os.listdir(path)
 for image in file_name_list:
     if image[4:8] == 'mask':
