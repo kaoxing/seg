@@ -22,6 +22,3 @@ for image in file_name_list:
         cv.imwrite('mydataset/thin/{:0^3}_thin.png'.format(cnt), img_thinning, [cv.IMWRITE_PNG_COMPRESSION, 0])
         cnt = cnt+1
 
-print(np.count_nonzero(img_thinning))
-cv.waitKey()
-cv.destroyAllWindows()

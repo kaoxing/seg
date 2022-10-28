@@ -20,7 +20,7 @@ for image in file_name_list:
         # 3.细化处理
         img_thinning = cv.ximgproc.thinning(img_bin, thinningType=cv.ximgproc.THINNING_ZHANGSUEN)
         img_bin = img_bin - img_thinning
-        cv.imwrite('mydataset/thin_result/{:0^3}_result.png'.format(cnt), img_bin, [cv.IMWRITE_PNG_COMPRESSION, 0])
+        cv.imwrite('mydataset/thin_result/{:0>3}_result.png'.format(cnt), img_bin, [cv.IMWRITE_PNG_COMPRESSION, 0])
         cnt = cnt+1
 
 # print(np.count_nonzero(img_thinning))
