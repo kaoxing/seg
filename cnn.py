@@ -25,10 +25,10 @@ class MyDataSet(Dataset):
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
                 data_y.append(data)
-            else:
+            elif image[4:] == "png":
                 data_x_path = os.path.join(path, image)
                 data = cv2.imread(data_x_path, cv2.IMREAD_GRAYSCALE)
-                # print(data)
+                # print(data_x_path)
                 data = cv2.resize(data, (512, 512))
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
@@ -97,7 +97,8 @@ def train():
         shuffle=True,
         num_workers=2
     )
-    net = Net()
+    # net = Net()
+    net = torch.load('model/cnn.pt')
     loss_function = nn.BCELoss()
     optimizer = torch.optim.SGD(net.parameters(), lr=0.01)
     count = 1
@@ -134,14 +135,14 @@ def test(net):
             img_lab = torch.reshape(labels, (512, 512)).detach().numpy()
             img_pre = np.round(img_pre)
             img_lab = np.round(img_lab)
-            print(img_lab.sum())
+            # print(img_lab.sum())
             temp = dice(img_pre, img_lab)
             dices = np.append(dices,temp)
             img_pre = img_pre * 255
             im = Image.fromarray(img_pre)
             im = np.array(im, dtype='uint8')
             Image.fromarray(im, 'L').save("result/%03d.png" % i)
-            print("dice:", temp)
+            # print("dice:", temp)
         print("average_dice:", dices.sum() / len(dataloader))
 
 

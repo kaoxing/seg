@@ -25,7 +25,7 @@ class MyDataSet(Dataset):
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
                 data_y.append(data)
-            else:
+            elif image[4:] == "png":
                 data_x_path = os.path.join(path, image)
                 data = cv2.imread(data_x_path, cv2.IMREAD_GRAYSCALE)
                 # data = cv2.resize(data, (512, 512))
@@ -88,7 +88,7 @@ class Net(nn.Module):
 
 def train():
     batch_size = 8
-    path = './data/train'
+    path = 'mydataset'
     data_set = MyDataSet(path)
     dataloader = DataLoader(
         dataset=data_set,
@@ -124,14 +124,14 @@ def train():
 
 
 def test(net):
-    path = './data/test'
+    path = 'mydataset_test'
     data_set = MyDataSet(path)
     dataloader = DataLoader(
         dataset=data_set,
         batch_size=1
     )
     with torch.no_grad():
-        dices = []
+        dices = np.array([])
         for i, data in enumerate(dataloader):
             input_data, labels = data
             input_data = input_data.to(device)
@@ -141,13 +141,13 @@ def test(net):
             img_pre = np.round(img_pre)
             img_lab = np.round(img_lab)
             temp = dice(img_pre, img_lab)
-            print(temp)
-            dices.append(temp)
+            # print(temp)
+            dices = np.append(dices,temp)
             img_pre = img_pre * 255
             im = Image.fromarray(img_pre)
             im = np.array(im, dtype='uint8')
             Image.fromarray(im, 'L').save("./result/%03d.png" % i)
-            print("average:", np.sum(dices) / len(dataloader))
+            print("average:", dices.sum() / len(dataloader))
 
 
 def dice(predict, label):
