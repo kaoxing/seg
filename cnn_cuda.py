@@ -99,7 +99,7 @@ def train():
     net = Net()
     net = net.to(device)
     summary(net, input_size=(1, 512, 512))
-    loss_function = nn.BCELoss()
+    loss_function = nn.MSELoss()
     loss_function = loss_function.to(device)
     optimizer = torch.optim.SGD(net.parameters(), lr=0.01)
     count = 100

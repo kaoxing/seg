@@ -19,6 +19,6 @@ for image in file_name_list:
         ret, img_bin = cv.threshold(img_org, 30, 255, 0)
         # 3.细化处理
         img_thinning = cv.ximgproc.thinning(img_bin, thinningType=cv.ximgproc.THINNING_ZHANGSUEN)
-        cv.imwrite('mydataset/thin/{:0^3}_thin.png'.format(cnt), img_thinning, [cv.IMWRITE_PNG_COMPRESSION, 0])
+        cv.imwrite('mydataset/thin/{:0>3}_thin.png'.format(cnt), img_thinning, [cv.IMWRITE_PNG_COMPRESSION, 0])
         cnt = cnt+1
 

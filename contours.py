@@ -13,10 +13,13 @@ for image in file_name_list:
         groundtruth = cv2.imread(groundtruth_path, cv2.IMREAD_GRAYSCALE)
         h1, w1 = groundtruth.shape
         contours, cnt = cv2.findContours(groundtruth.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        image = np.zeros([h1, w1], dtype=groundtruth.dtype)
         for contour in contours:
-            M = cv2.moments(contour)  # 计算第一条轮廓的各阶矩,字典形式
+            M = cv2.moments(contour)
             center_x = int(M["m10"] / M["m00"])
             center_y = int(M["m01"] / M["m00"])
-            cv2.circle(groundtruth, (center_x, center_y), 0, 0, -1)  # 绘制中心点
+            cv2.circle(groundtruth, (center_x, center_y), 0, 0, -1)
+            cv2.circle(image, (center_x, center_y), 0, 255, -1)
+        cv2.imwrite('mydataset/thin/{:0>3}_result.png'.format(count), image, [cv2.IMWRITE_PNG_COMPRESSION, 0])
         cv2.imwrite('mydataset/thin_result/{:0>3}_result.png'.format(count), groundtruth, [cv2.IMWRITE_PNG_COMPRESSION, 0])
         count = count + 1

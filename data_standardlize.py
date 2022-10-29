@@ -14,6 +14,6 @@ for image in file_name_list:
         ret, img_bin = cv.threshold(img_org, 1, 255, 0)
         cv.imwrite(img_path, img_bin, [cv.IMWRITE_PNG_COMPRESSION, 0])
     else:
-        img_path = os.path.join(path,image)
+        img_path = os.path.join(path, image)
         img = cv.imread(img_path)
-        cv.imwrite(img_path, img_bin, [cv.IMWRITE_PNG_COMPRESSION, 0])
+        cv.imwrite(img_path, img, [cv.IMWRITE_PNG_COMPRESSION, 0])
