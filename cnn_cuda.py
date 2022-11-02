@@ -7,7 +7,8 @@ from torch.autograd import Variable
 from matplotlib import pyplot as plt
 import numpy as np
 from PIL import Image
-from torchsummary import summary
+
+from UNet import UNet
 
 
 class MyDataSet(Dataset):
@@ -44,65 +45,21 @@ class MyDataSet(Dataset):
         return self.len
 
 
-class Net(nn.Module):
-    def __init__(self):
-        super(Net, self).__init__()
-        self.cov1 = self.block1(1, 16, 5, 2, 2, 2)  # 1*512*512->16*256*256
-        self.cov2 = self.block1(16, 64, 3, 1, 2, 2)  # 16*256*256->64*128*128
-        self.cov3 = self.block1(64, 256, 3, 1, 2, 2)  # 64*128*128->256*64*64
-        self.cov4 = self.block1(256, 256, 1, 0, 1, 1)  # 256*64*64->256*64*64
-        self.rcov1 = self.block2(256, 64, 2, 0, 2)  # 256*64*64->64*128*128
-        self.rcov2 = self.block2(64, 16, 2, 0, 2)  # 64*128*128->16*256*256
-        self.rcov3 = self.block2(16, 1, 2, 0, 2)  # 16*256*256->1*512*512
-
-    def forward(self, x):
-        ret = self.cov1(x)
-        # x_4_256=ret.clone()
-        ret = self.cov2(ret)
-        # x_16_128=ret.clone()
-        ret = self.cov3(ret)
-        # x_32_64=ret.clone()
-        ret = self.cov4(ret)
-        ret = self.rcov1(ret)
-        # ret=ret+x_16_128
-        ret = self.rcov2(ret)
-        # ret=ret+x_4_256
-        ret = self.rcov3(ret)
-        out = nn.Sigmoid()(ret)
-        return out
-
-    def block1(self, in_size, out_size, kfilter, padding, kernel_size, stride):
-        return nn.Sequential(
-            nn.Conv2d(in_size, out_size, kfilter, padding=padding),
-            nn.MaxPool2d(kernel_size, stride),
-            nn.BatchNorm2d(out_size),
-            nn.ReLU(True)
-        )
-
-    def block2(self, in_size, out_size, kfilter, padding, stride):
-        return nn.Sequential(
-            nn.ConvTranspose2d(in_size, out_size, kfilter, stride, padding, bias=False),
-            nn.BatchNorm2d(out_size)
-        )
-
-
 def train():
-    batch_size = 8
+    batch_size = 1
     path = 'mydataset'
     data_set = MyDataSet(path)
     dataloader = DataLoader(
         dataset=data_set,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=2
     )
-    net = Net()
+    net = UNet(1, 1)
     net = net.to(device)
-    summary(net, input_size=(1, 512, 512))
-    loss_function = nn.MSELoss()
+    loss_function = nn.BCELoss()
     loss_function = loss_function.to(device)
-    optimizer = torch.optim.SGD(net.parameters(), lr=0.01)
-    count = 100
+    optimizer = torch.optim.SGD(net.parameters(), lr=0.0002)
+    count = 300
 
     for cnt in range(count):
         Loss = 0
@@ -113,7 +70,20 @@ def train():
             labels = labels.to(device)
             optimizer.zero_grad()  # 梯度置零
             predict = net(input_data)  # 数据输入网络输出预测值
+            # if cnt%10 == 0:
+            #     imgs = predict * 255
+            #     for j in range(batch_size):
+            #         img = torch.reshape(imgs[j], (512, 512)).cpu().detach().numpy()
+            #         img = Image.fromarray(img)
+            #         img = np.array(img, dtype='uint8')
+            #         cv2.imwrite("mid_result/{0}_{1}.png".format(i,cnt), img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
             # labels=labels.view(5,1,512,512)
+            # if cnt % 10 == 0:
+            #     img = predict * 255
+            #     img = torch.reshape(img, (512, 512)).cpu().detach().numpy()
+            #     img = Image.fromarray(img)
+            #     img = np.array(img, dtype='uint8')
+            #     cv2.imwrite("mid_result/{0}_{1}.png".format(i, cnt), img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
             loss = loss_function(predict, labels)  # 通过预测值与标签算出误差
             loss.backward()  # 误差逆传播
             optimizer.step()  # 通过梯度调整参数
@@ -128,7 +98,8 @@ def test(net):
     data_set = MyDataSet(path)
     dataloader = DataLoader(
         dataset=data_set,
-        batch_size=1
+        batch_size=1,
+        shuffle=False,
     )
     with torch.no_grad():
         dices = np.array([])
@@ -142,12 +113,13 @@ def test(net):
             img_lab = np.round(img_lab)
             temp = dice(img_pre, img_lab)
             # print(temp)
-            dices = np.append(dices,temp)
+            dices = np.append(dices, temp)
             img_pre = img_pre * 255
             im = Image.fromarray(img_pre)
             im = np.array(im, dtype='uint8')
-            Image.fromarray(im, 'L').save("./result/%03d.png" % i)
-            print("average:", dices.sum() / len(dataloader))
+            cv2.imwrite("./result/%03d.png" % i, im, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            print("dice:", temp)
+        print("average:", dices.sum() / len(dataloader))
 
 
 def dice(predict, label):
