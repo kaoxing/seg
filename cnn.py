@@ -117,6 +117,6 @@ if __name__ == '__main__':
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(device)
     net = train()
-    torch.save(net, 'model/cnn.pt')
+    torch.save(net, 'projectFiles/model/cnn.pt')
     test(net)
     print("finished")

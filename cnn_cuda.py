@@ -19,14 +19,14 @@ class MyDataSet(Dataset):
         data_y = []
         image_list = os.listdir(path)
         for image in image_list:
-            if image[4:8] == 'mask':
+            if image[-8:-4] == 'mask':
                 data_y_path = os.path.join(path, image)
                 data = cv2.imread(data_y_path, cv2.IMREAD_GRAYSCALE)
                 # data = cv2.resize(data, (512, 512))
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
                 data_y.append(data)
-            elif image[4:] == "png":
+            elif image[-3:] == "png":
                 data_x_path = os.path.join(path, image)
                 data = cv2.imread(data_x_path, cv2.IMREAD_GRAYSCALE)
                 # data = cv2.resize(data, (512, 512))
@@ -46,7 +46,7 @@ class MyDataSet(Dataset):
 
 
 def train():
-    batch_size = 1
+    batch_size = 8
     path = 'mydataset'
     data_set = MyDataSet(path)
     dataloader = DataLoader(
@@ -112,7 +112,6 @@ def test(net):
             img_pre = np.round(img_pre)
             img_lab = np.round(img_lab)
             temp = dice(img_pre, img_lab)
-            # print(temp)
             dices = np.append(dices, temp)
             img_pre = img_pre * 255
             im = Image.fromarray(img_pre)
@@ -136,6 +135,6 @@ if __name__ == '__main__':
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(device)
     net = train()
-    torch.save(net, 'model/cnn.pt')
+    torch.save(net, 'projectFiles/model/cnn.pt')
     test(net)
     print("finished")
