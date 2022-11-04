@@ -6,25 +6,25 @@ class UNet(nn.Module):
 
     def __init__(self, in_channels, out_channels):
         super(UNet, self).__init__()
-        self.conv1 = ConvolutionLayer(in_channels, 64)  # 三通道拓展至32通道
+        self.conv1 = ConvolutionLayer(in_channels, 32)  # 三通道拓展至32通道
         self.down1 = DownSample()  # 下采样至1/2
-        self.conv2 = ConvolutionLayer(64, 128)  # 32通道==>64通道
+        self.conv2 = ConvolutionLayer(32, 64)  # 32通道==>64通道
         self.down2 = DownSample()  # 下采样至1/4
-        self.conv3 = ConvolutionLayer(128, 256)  # 64通道==>128通道
+        self.conv3 = ConvolutionLayer(64, 128)  # 64通道==>128通道
         self.down3 = DownSample()  # 下采样至1/8
-        self.conv4 = ConvolutionLayer(256, 512)  # 128通道==>256通道
+        self.conv4 = ConvolutionLayer(128, 256)  # 128通道==>256通道
         self.down4 = DownSample()  # 下采样至1/16
-        self.conv5 = ConvolutionLayer(512, 1024)  # 256通道==>512通道
-        self.up1 = UpSample(1024)  # 上采样至1/8
-        self.conv6 = ConvolutionLayer(1024, 512)  # 512通道==>256通道
-        self.up2 = UpSample(512)  # 上采样至1/4
-        self.conv7 = ConvolutionLayer(512, 256)  # 256通道==>128通道
-        self.up3 = UpSample(256)  # 上采样至1/2
-        self.conv8 = ConvolutionLayer(256, 128)  # 128通道==>64通道
-        self.up4 = UpSample(128)  # 上采样至1/1
-        self.conv9 = ConvolutionLayer(128, 64)  # 64通道==>32通道
+        self.conv5 = ConvolutionLayer(256, 512)  # 256通道==>512通道
+        self.up1 = UpSample(512)  # 上采样至1/8
+        self.conv6 = ConvolutionLayer(512, 256)  # 512通道==>256通道
+        self.up2 = UpSample(256)  # 上采样至1/4
+        self.conv7 = ConvolutionLayer(256, 128)  # 256通道==>128通道
+        self.up3 = UpSample(128)  # 上采样至1/2
+        self.conv8 = ConvolutionLayer(128, 64)  # 128通道==>64通道
+        self.up4 = UpSample(64)  # 上采样至1/1
+        self.conv9 = ConvolutionLayer(64, 32)  # 64通道==>32通道
         self.predict = nn.Sequential(  # 输出层，由sigmoid函数激活
-            nn.Conv2d(64, out_channels, kernel_size=(3, 3), stride=(1, 1), padding=1),
+            nn.Conv2d(32, out_channels, kernel_size=(3, 3), stride=(1, 1), padding=1),
             nn.Sigmoid()
         )
 

@@ -23,16 +23,20 @@ class MyDataSet(Dataset):
                 data_y_path = os.path.join(path, image)
                 data = cv2.imread(data_y_path, cv2.IMREAD_GRAYSCALE)
                 # data = cv2.resize(data, (512, 512))
+                # temp = (data / 255)
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
                 data_y.append(data)
+                # print(data_y_path)
             elif image[-3:] == "png":
                 data_x_path = os.path.join(path, image)
                 data = cv2.imread(data_x_path, cv2.IMREAD_GRAYSCALE)
                 # data = cv2.resize(data, (512, 512))
+                # temp = (data/255)
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
                 data_x.append(data)
+                # print(data_x_path)
         self.data_x = torch.stack(data_x)
         self.data_y = torch.stack(data_y)
         # print(data_x)
@@ -54,12 +58,13 @@ def train():
         batch_size=batch_size,
         shuffle=True,
     )
+    # net = torch.load("projectFiles/model/cnn_24.pt", map_location='cuda' if torch.cuda.is_available() else 'cpu')
     net = UNet(1, 1)
     net = net.to(device)
     loss_function = nn.BCELoss()
     loss_function = loss_function.to(device)
-    optimizer = torch.optim.SGD(net.parameters(), lr=0.0002)
-    count = 300
+    optimizer = torch.optim.Adam(net.parameters())
+    count = 10
 
     for cnt in range(count):
         Loss = 0
@@ -68,22 +73,10 @@ def train():
             input_data, labels = data
             input_data = input_data.to(device)
             labels = labels.to(device)
+            # cv2.imwrite("Test/input_data_%03d.png" % i,torch.reshape(input_data, (512, 512)).cpu().detach().numpy() * 255,[cv2.IMWRITE_PNG_COMPRESSION, 0])
+            # cv2.imwrite("Test/labels_%03d.png" % i,torch.reshape(labels, (512, 512)).cpu().detach().numpy() * 255,[cv2.IMWRITE_PNG_COMPRESSION, 0])
             optimizer.zero_grad()  # 梯度置零
             predict = net(input_data)  # 数据输入网络输出预测值
-            # if cnt%10 == 0:
-            #     imgs = predict * 255
-            #     for j in range(batch_size):
-            #         img = torch.reshape(imgs[j], (512, 512)).cpu().detach().numpy()
-            #         img = Image.fromarray(img)
-            #         img = np.array(img, dtype='uint8')
-            #         cv2.imwrite("mid_result/{0}_{1}.png".format(i,cnt), img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-            # labels=labels.view(5,1,512,512)
-            # if cnt % 10 == 0:
-            #     img = predict * 255
-            #     img = torch.reshape(img, (512, 512)).cpu().detach().numpy()
-            #     img = Image.fromarray(img)
-            #     img = np.array(img, dtype='uint8')
-            #     cv2.imwrite("mid_result/{0}_{1}.png".format(i, cnt), img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
             loss = loss_function(predict, labels)  # 通过预测值与标签算出误差
             loss.backward()  # 误差逆传播
             optimizer.step()  # 通过梯度调整参数

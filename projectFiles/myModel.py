@@ -40,11 +40,11 @@ class Model:
             predict = predict.round()
             predict = predict * 255
             img = np.array(predict, dtype='uint8')
-            cv2.imwrite("{0}/{1:0<3d}.png".format(result_path, i), img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            cv2.imwrite("{0}/{1:0>3d}.png".format(result_path, i), img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
 
 if __name__ == '__main__':
     model = Model()
-    model.load_model("model/cnn.pt")
+    model.load_model("model/cnn_24.pt")
     model.load_data("data")
     model.run_model("result")
