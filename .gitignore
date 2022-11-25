@@ -11,4 +11,8 @@
 /mid_result
 /projectFiles/UI/__pycache__
 /.idea
+<<<<<<< HEAD
 /projectFiles/__pycache__
+=======
+/mydataset_expand/
+>>>>>>> 11f846d33f6efdadbeb4755057119e05bd47dc29
