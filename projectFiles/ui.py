@@ -28,7 +28,7 @@ class EvaluateThread(QThread):
         model = Model()
         if self.model_index == 1:
             model.load_model("model/cnn_24.pt")
-        model.load_data(self.image_folder)
+        model.load_predict_data(self.image_folder)
         model.run_model(self.result_folder)
         # self.sig.emit(True)
 

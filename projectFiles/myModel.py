@@ -26,19 +26,19 @@ class Model:
         """"加载数据,参数（数据路径）"""
         self.predict_dataset = MyDataSetPre(data_path)
         self.predict_dataset = DataLoader(
-            dataset=self.myDataSet,
+            dataset=self.predict_dataset,
             batch_size=1,
             shuffle=False,
         )
 
     def load_train_data(self, data_path, mask_path):
         """加载标签,参数（标签路径）"""
-        self.predict_dataset = MyDataSetTra(data_path, mask_path)
+        self.train_dataset = MyDataSetTra(data_path, mask_path)
 
     def run_model(self, predict_result_path):
         """运行模型，参数(结果保存路径)"""
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        for i, data in enumerate(self.myDataSet):
+        for i, data in enumerate(self.predict_dataset):
             data = data.to(device)
             predict = self.model(data)
             predict = torch.reshape(predict, (512, 512))
@@ -54,7 +54,7 @@ class Model:
               shuffle=True, optim="Adam", model_name=None):
         """训练模型,参数（训练结果,训练轮数,训练批次大小,学习率,数据集是否打乱,model保存名），若新model名为空则将覆盖原model"""
         dataloader = DataLoader(
-            dataset=self.predict_dataset,
+            dataset=self.train_dataset,
             batch_size=batch_size,
             shuffle=shuffle,
         )
