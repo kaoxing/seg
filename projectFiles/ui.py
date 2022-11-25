@@ -14,6 +14,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.workdir = None
         self.setupUi(self)
         self.treeView.hide()
+        self.widget.hide()
 
     def q_action(self, q):
         """
@@ -48,10 +49,14 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.treeView.setColumnHidden(2, True)
             self.treeView.setColumnHidden(3, True)
             self.treeView.show()
+            self.widget.show()
+
         elif q == self.action_close_workdir:
             # 关闭工作区
             self.workdir = None
             self.treeView.hide()
+            self.widget.hide()
+
 
 
 if __name__ == "__main__":
