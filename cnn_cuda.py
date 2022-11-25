@@ -50,21 +50,21 @@ class MyDataSet(Dataset):
 
 
 def train():
-    batch_size = 8
-    path = 'mydataset'
+    batch_size = 1
+    path = 'mydataset_expand'
     data_set = MyDataSet(path)
     dataloader = DataLoader(
         dataset=data_set,
         batch_size=batch_size,
         shuffle=True,
     )
-    # net = torch.load("projectFiles/model/cnn_24.pt", map_location='cuda' if torch.cuda.is_available() else 'cpu')
-    net = UNet(1, 1)
+    net = torch.load("projectFiles/model/cnn.pt", map_location='cuda' if torch.cuda.is_available() else 'cpu')
+    # net = UNet(1, 1)
     net = net.to(device)
     loss_function = nn.BCELoss()
     loss_function = loss_function.to(device)
-    optimizer = torch.optim.Adam(net.parameters())
-    count = 10
+    optimizer = torch.optim.Adam(net.parameters(), lr=0.00000001)
+    count = 50
 
     for cnt in range(count):
         Loss = 0
@@ -87,7 +87,7 @@ def train():
 
 
 def test(net):
-    path = 'mydataset_test'
+    path = 'Test/test'
     data_set = MyDataSet(path)
     dataloader = DataLoader(
         dataset=data_set,
@@ -126,8 +126,9 @@ def dice(predict, label):
 
 if __name__ == '__main__':
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(device)
-    net = train()
-    torch.save(net, 'projectFiles/model/cnn.pt')
+    # print(device)
+    # net = train()
+    net = torch.load("model/cnn1.pt", map_location='cuda' if torch.cuda.is_available() else 'cpu')
+    # torch.save(net, 'model/cnn.pt')
     test(net)
     print("finished")

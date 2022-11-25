@@ -46,5 +46,5 @@ class Model:
 if __name__ == '__main__':
     model = Model()
     model.load_model("model/cnn_24.pt")
-    model.load_data("data")
+    model.load_data("mydataset_test")
     model.run_model("result")

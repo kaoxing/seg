@@ -31,7 +31,6 @@ if __name__ == '__main__':
     from PIL import Image
     import numpy as np
     import matplotlib.pyplot as plt
-    batch_size
     from cnn_cuda import MyDataSet
     path = 'mydataset_test'
     data_set = MyDataSet(path)

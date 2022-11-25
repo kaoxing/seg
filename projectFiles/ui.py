@@ -5,7 +5,7 @@ from time import strftime
 
 from PyQt5.QtWidgets import QMessageBox, QMainWindow, QSpinBox, QApplication, QFileSystemModel, QFileDialog
 from PyQt5.QtCore import Qt
-from UI.MainWindow import Ui_MainWindow
+from UI.mainWindow import Ui_MainWindow
 
 
 class MainWindow(Ui_MainWindow, QMainWindow):
