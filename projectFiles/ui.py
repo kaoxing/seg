@@ -28,7 +28,7 @@ class EvaluateThread(QThread):
         model = Model()
         if self.model_index == 1:
             localpath = "E:/大创/Seg/projectFiles"
-            model.load_model(localpath+"/model/cnn_32.pt")
+            model.load_model("D:\\BigProject\\Seg\\Seg\\projectFiles\\model\\cnn_24.pt",None)
         model.load_predict_data(self.image_folder)
         model.run_model(self.result_folder)
         # self.sig.emit(True)

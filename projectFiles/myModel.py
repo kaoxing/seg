@@ -17,10 +17,15 @@ class Model:
         self.predict_dataset = None
         self.train_dataset = None
 
-    def load_model(self, load_path):
-        """加载模型,参数（模型路径）"""
+    def load_model(self, load_path, model_path):
+        """加载模型,参数（模型路径，网络路径）"""
+        # self.model = MyModel(model_path)
+        # model.load_state_dict(torch.load(PATH))
+        # model.eval()
         self.model_path = load_path
         self.model = torch.load(load_path, map_location='cuda' if torch.cuda.is_available() else 'cpu')
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.model.to(device)
 
     def load_predict_data(self, data_path):
         """"加载数据,参数（数据路径）"""

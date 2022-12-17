@@ -1,3 +1,6 @@
+import json
+
+
 class Workspace:
     """
     工作区，用于存放和操作各种项目数据
@@ -45,11 +48,27 @@ class Workspace:
         return self.model_index
 
     def save_project(self):
-        pass
-        # TODO
+        dic = {
+            "result_folder": self.result_folder,
+            "project_name": self.project_name,
+            "image_folder": self.image_folder,
+            "label_folder": self.label_folder,
+            "model_index": self.model_index,
+        }
+        with open("./projectList/"+self.project_name+".proj", 'w') as file:
+            json.dump(dic, file)
+        with open("./projectList/projectList.sav", 'a') as file:
+            file.write(self.project_name+"\n")
 
     def load_project(self):
-        pass
+        with open(self.project_name) as file:
+            dic = json.load(file)
+        self.result_folder = dic["result_folder"]
+        self.project_name = dic["project_name"]
+        self.image_folder = dic["image_folder"]
+        self.label_folder = dic["label_folder"]
+        self.model_index = dic["model_index"]
+        print(dic)
         # TODO
 
     def check(self):

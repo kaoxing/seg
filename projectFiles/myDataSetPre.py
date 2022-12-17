@@ -6,6 +6,7 @@ from torch.utils.data import Dataset
 
 class MyDataSetPre(Dataset):
     def __init__(self, path):
+        # print(path)
         self.data_x = []
         data = []
         image_list = os.listdir(path)
