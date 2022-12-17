@@ -53,7 +53,7 @@ class Workspace:
         # TODO
 
     def check(self):
-        if self.image_folder is not None and self.label_folder is not None:
+        if self.image_folder is not None:
             return True
         else:
             return False

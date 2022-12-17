@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1088</width>
-    <height>664</height>
+    <width>1161</width>
+    <height>766</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,24 +26,74 @@
         <bold>true</bold>
        </font>
       </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>项目</string>
+        <string>Project</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_tab">
+       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,2,7">
         <item>
-         <widget class="QStackedWidget" name="stackedWidget">
+         <widget class="QStackedWidget" name="stackedWidget_state">
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="page_new">
-           <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1,1,1,5,1">
-            <property name="spacing">
-             <number>1</number>
-            </property>
+          <widget class="QWidget" name="page">
+           <layout class="QHBoxLayout" name="horizontalLayout_13">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
+              <item>
+               <spacer name="horizontalSpacer_11">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_12">
+                <property name="font">
+                 <font>
+                  <family>宋体</family>
+                  <pointsize>20</pointsize>
+                  <weight>75</weight>
+                  <italic>false</italic>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>New Project</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_12">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="page_2">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_5">
               <item>
@@ -71,7 +121,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>新项目</string>
+                 <string>Overview</string>
                 </property>
                </widget>
               </item>
@@ -90,185 +140,237 @@
               </item>
              </layout>
             </item>
-            <item>
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,4,1">
+          <item>
+           <spacer name="horizontalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>44</height>
-               </size>
+              <property name="text">
+               <string>Project Name：</string>
               </property>
-             </spacer>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
             </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-               <widget class="QLabel" name="label">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string> 项目名称 ：</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_new_project_name">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="inputMask">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="placeholderText">
-                 <string>请输入项目名称</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEdit_project_name">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>input a name</string>
+              </property>
+             </widget>
             </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <item>
-               <widget class="QLabel" name="label_2">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>图片文件夹：</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_new_image_folder">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="inputMask">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="readOnly">
-                 <bool>true</bool>
-                </property>
-                <property name="placeholderText">
-                 <string>请打开图片文件夹</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_2">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>打开</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Image Folder：</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
             </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
-              <item>
-               <widget class="QLabel" name="label_3">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>标签文件夹：</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_new_label_folder">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="inputMask">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="readOnly">
-                 <bool>true</bool>
-                </property>
-                <property name="placeholderText">
-                 <string>请打开标签文件夹</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_3">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>打开</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="lineEdit_image_folder">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="placeholderText">
+               <string>select image folder</string>
+              </property>
+             </widget>
             </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Browse</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="text">
+               <string>Label Folder：</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="lineEdit_label_folder">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="placeholderText">
+               <string>select label folder</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QPushButton" name="pushButton_3">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Browse</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_10">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QStackedWidget" name="stackedWidget">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="page_new">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <widget class="QWidget" name="widget" native="true"/>
+             <widget class="QWidget" name="widget" native="true">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QTextEdit" name="textEdit">
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                 <property name="html">
+                  <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'黑体'; font-size:20pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Guide&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -284,7 +386,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>返回</string>
+                 <string>Back</string>
                 </property>
                </widget>
               </item>
@@ -316,7 +418,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>创建</string>
+                 <string>Create</string>
                 </property>
                </widget>
               </item>
@@ -324,13 +426,10 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="page_current">
-           <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1,1,1,1,5">
-            <property name="spacing">
-             <number>1</number>
-            </property>
+          <widget class="QWidget" name="page_3">
+           <layout class="QVBoxLayout" name="verticalLayout">
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,0,0,0,0">
               <item>
                <spacer name="horizontalSpacer_5">
                 <property name="orientation">
@@ -345,18 +444,50 @@
                </spacer>
               </item>
               <item>
-               <widget class="QLabel" name="label_7">
+               <widget class="QPushButton" name="pushButton_9">
                 <property name="font">
                  <font>
                   <family>宋体</family>
-                  <pointsize>20</pointsize>
-                  <weight>75</weight>
+                  <pointsize>15</pointsize>
+                  <weight>50</weight>
                   <italic>false</italic>
-                  <bold>true</bold>
+                  <bold>false</bold>
                  </font>
                 </property>
                 <property name="text">
-                 <string>项目概况</string>
+                 <string>New</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_20">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_7">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>宋体</family>
+                  <pointsize>15</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Confirm</string>
                 </property>
                </widget>
               </item>
@@ -376,200 +507,60 @@
              </layout>
             </item>
             <item>
-             <spacer name="verticalSpacer_2">
+             <widget class="Line" name="line">
               <property name="orientation">
-               <enum>Qt::Vertical</enum>
+               <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>49</height>
-               </size>
-              </property>
-             </spacer>
+             </widget>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <layout class="QHBoxLayout" name="horizontalLayout_14">
               <item>
-               <widget class="QLabel" name="label_8">
+               <spacer name="horizontalSpacer_13">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_13">
                 <property name="font">
                  <font>
                   <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
+                  <pointsize>20</pointsize>
+                  <weight>75</weight>
                   <italic>false</italic>
-                  <bold>false</bold>
+                  <bold>true</bold>
                  </font>
                 </property>
                 <property name="text">
-                 <string> 项目名称 ：</string>
+                 <string>Recent Project</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_project_name">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
+               <spacer name="horizontalSpacer_14">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="inputMask">
-                 <string/>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
                 </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="placeholderText">
-                 <string>请输入项目名称</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_10">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>修改</string>
-                </property>
-               </widget>
+               </spacer>
               </item>
              </layout>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_8">
-              <item>
-               <widget class="QLabel" name="label_6">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>图片文件夹：</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_image_folder">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="inputMask">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="readOnly">
-                 <bool>true</bool>
-                </property>
-                <property name="placeholderText">
-                 <string>请打开图片文件夹</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_9">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>修改</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_7">
-              <item>
-               <widget class="QLabel" name="label_5">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>标签文件夹：</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_label_folder">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="inputMask">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="readOnly">
-                 <bool>true</bool>
-                </property>
-                <property name="placeholderText">
-                 <string>请打开标签文件夹</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_8">
-                <property name="font">
-                 <font>
-                  <family>宋体</family>
-                  <pointsize>15</pointsize>
-                  <weight>50</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>修改</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QWidget" name="widget_2" native="true"/>
+             <widget class="QListWidget" name="listWidget"/>
             </item>
            </layout>
           </widget>
@@ -579,7 +570,7 @@
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>模型</string>
+        <string>Model</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
@@ -610,7 +601,7 @@
                      </font>
                     </property>
                     <property name="text">
-                     <string>模型：</string>
+                     <string>Model：</string>
                     </property>
                    </widget>
                   </item>
@@ -665,7 +656,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>我的模型：</string>
+                   <string>My Model：</string>
                   </property>
                  </widget>
                 </item>
@@ -699,7 +690,7 @@
                      </font>
                     </property>
                     <property name="text">
-                     <string>删除</string>
+                     <string>Delete</string>
                     </property>
                    </widget>
                   </item>
@@ -728,7 +719,7 @@
                      </font>
                     </property>
                     <property name="text">
-                     <string>加载</string>
+                     <string>load</string>
                     </property>
                    </widget>
                   </item>
@@ -783,12 +774,418 @@
       </widget>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
-        <string>训练</string>
+        <string>Training</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="1,0,2">
+        <item>
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,6,1,1">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="font">
+              <font>
+               <family>宋体</family>
+               <pointsize>20</pointsize>
+               <weight>75</weight>
+               <italic>false</italic>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Settings</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_4" rowstretch="1,1,1,1,1" columnstretch="7,8">
+             <property name="leftMargin">
+              <number>9</number>
+             </property>
+             <property name="topMargin">
+              <number>9</number>
+             </property>
+             <property name="rightMargin">
+              <number>9</number>
+             </property>
+             <property name="bottomMargin">
+              <number>9</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="font">
+                <font>
+                 <family>Times New Roman</family>
+                 <pointsize>16</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Epochs:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QSpinBox" name="spinBox">
+               <property name="font">
+                <font>
+                 <family>Times New Roman</family>
+                 <pointsize>16</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="font">
+                <font>
+                 <family>Times New Roman</family>
+                 <pointsize>16</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Batch size:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="spinBox_2">
+               <property name="font">
+                <font>
+                 <family>Times New Roman</family>
+                 <pointsize>16</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="font">
+                <font>
+                 <family>Times New Roman</family>
+                 <pointsize>16</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Loss function:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="comboBox_2">
+               <property name="font">
+                <font>
+                 <family>Times New Roman</family>
+                 <pointsize>16</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Cross-Entropy</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_14">
+               <property name="font">
+                <font>
+                 <family>Times New Roman</family>
+                 <pointsize>16</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Learning rate:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox">
+               <property name="font">
+                <font>
+                 <family>Times New Roman</family>
+                 <pointsize>16</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_15">
+               <property name="font">
+                <font>
+                 <family>Times New Roman</family>
+                 <pointsize>16</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Optimizer:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QComboBox" name="comboBox_3">
+               <property name="font">
+                <font>
+                 <family>Times New Roman</family>
+                 <pointsize>16</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Adam</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="0,0,0">
+             <item>
+              <spacer name="horizontalSpacer_15">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_8">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="font">
+                <font>
+                 <family>宋体</family>
+                 <pointsize>15</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Run</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_16">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSplitter" name="splitter_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <widget class="QSplitter" name="splitter_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <widget class="QFrame" name="frame_3">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QLabel" name="label_16">
+               <property name="font">
+                <font>
+                 <family>宋体</family>
+                 <pointsize>20</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Loss:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGraphicsView" name="graphicsView"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QFrame" name="frame_4">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <widget class="QLabel" name="label_17">
+               <property name="font">
+                <font>
+                 <family>宋体</family>
+                 <pointsize>20</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Dice:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGraphicsView" name="graphicsView_2"/>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+          <widget class="QSplitter" name="splitter_4">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <widget class="QFrame" name="frame_5">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <item>
+              <widget class="QLabel" name="label_18">
+               <property name="font">
+                <font>
+                 <family>宋体</family>
+                 <pointsize>20</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>...:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGraphicsView" name="graphicsView_3"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QFrame" name="frame_6">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_13">
+             <item>
+              <widget class="QLabel" name="label_19">
+               <property name="font">
+                <font>
+                 <family>宋体</family>
+                 <pointsize>20</pointsize>
+                 <weight>75</weight>
+                 <italic>false</italic>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>...:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGraphicsView" name="graphicsView_4"/>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
-        <string>预测</string>
+        <string>Evaluate</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_11" stretch="2,1,9,1">
         <item>
@@ -805,7 +1202,7 @@
              </font>
             </property>
             <property name="text">
-             <string> 结果文件夹 ：</string>
+             <string> Result Folder：</string>
             </property>
            </widget>
           </item>
@@ -830,7 +1227,7 @@
              <bool>true</bool>
             </property>
             <property name="placeholderText">
-             <string/>
+             <string>select result folder</string>
             </property>
            </widget>
           </item>
@@ -846,7 +1243,7 @@
              </font>
             </property>
             <property name="text">
-             <string>打开</string>
+             <string>Browse</string>
             </property>
            </widget>
           </item>
@@ -873,7 +1270,7 @@
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
-             <widget class="QWidget" name="">
+             <widget class="QWidget" name="layoutWidget">
               <layout class="QVBoxLayout" name="verticalLayout_9">
                <item>
                 <widget class="QLabel" name="label_26">
@@ -887,16 +1284,16 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string> 图片：</string>
+                  <string> image：</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QTreeView" name="treeView"/>
+                <widget class="QTreeView" name="treeView_image"/>
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="">
+             <widget class="QWidget" name="layoutWidget">
               <layout class="QVBoxLayout" name="verticalLayout_10">
                <item>
                 <widget class="QLabel" name="label_27">
@@ -910,12 +1307,12 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>预测：</string>
+                  <string>evaluate：</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QTreeView" name="treeView_2"/>
+                <widget class="QTreeView" name="treeView_evaluate"/>
                </item>
               </layout>
              </widget>
@@ -954,7 +1351,7 @@
              </font>
             </property>
             <property name="text">
-             <string>开始预测</string>
+             <string>start</string>
             </property>
            </widget>
           </item>
@@ -984,7 +1381,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1088</width>
+     <width>1161</width>
      <height>23</height>
     </rect>
    </property>
@@ -1058,11 +1455,11 @@
    <slot>select_image_folder()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1029</x>
-     <y>252</y>
+     <x>741</x>
+     <y>185</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1010</x>
+     <x>945</x>
      <y>30</y>
     </hint>
    </hints>
@@ -1074,11 +1471,11 @@
    <slot>select_label_folder()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1044</x>
-     <y>302</y>
+     <x>756</x>
+     <y>222</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1085</x>
+     <x>945</x>
      <y>293</y>
     </hint>
    </hints>
@@ -1090,60 +1487,12 @@
    <slot>create_project()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1043</x>
-     <y>583</y>
+     <x>901</x>
+     <y>592</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1085</x>
+     <x>945</x>
      <y>579</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_10</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>modify_project_name()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1042</x>
-     <y>214</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1083</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_9</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>modify_image_folder()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1043</x>
-     <y>272</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1086</x>
-     <y>269</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_8</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>modify_label_folder()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1044</x>
-     <y>322</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1086</x>
-     <y>327</y>
     </hint>
    </hints>
   </connection>
@@ -1170,11 +1519,11 @@
    <slot>select_result_folder()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1047</x>
+     <x>905</x>
      <y>117</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1088</x>
+     <x>945</x>
      <y>62</y>
     </hint>
    </hints>
@@ -1186,12 +1535,28 @@
    <slot>evaluate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>580</x>
+     <x>509</x>
      <y>602</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
      <y>637</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>stackedWidget_state</sender>
+   <signal>currentChanged(int)</signal>
+   <receiver>stackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>509</x>
+     <y>101</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>633</x>
+     <y>433</y>
     </hint>
    </hints>
   </connection>
