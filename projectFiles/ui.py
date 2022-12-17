@@ -19,7 +19,7 @@ class EvaluateThread(QThread):
     def __del__(self):
         self.wait()
 
-    def set_workspace(self, workspace:Workspace):
+    def set_workspace(self, workspace: Workspace):
         self.image_folder = workspace.get_image_folder()
         self.result_folder = workspace.get_result_folder()
         self.model_index = workspace.get_model_index()
@@ -31,6 +31,7 @@ class EvaluateThread(QThread):
         model.load_predict_data(self.image_folder)
         model.run_model(self.result_folder)
         # self.sig.emit(True)
+
 
 class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self):
@@ -136,7 +137,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.lineEdit_label_folder.setText(temp)
             self.workspace.set_label_folder(temp)
 
-    def model_chosen(self,index:int):
+    def model_chosen(self, index: int):
         if index == 0:
             self.textEdit_model_explaination.setText("请选择一个模型")
         elif index == 1:
@@ -151,10 +152,10 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.lineEdit_result_folder.setText(temp)
             self.workspace.set_result_folder(temp)
 
-
     def evaluate(self):
         evaluate_thread.set_workspace(self.workspace)
         evaluate_thread.start()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
