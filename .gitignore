@@ -4,15 +4,13 @@
 /mydataset
 /mydataset_1
 /mydataset_test
-/result
 /temp
 /centerline_data
 /*.rar
 /mid_result
 /projectFiles/UI/__pycache__
 /.idea
-<<<<<<< HEAD
 /projectFiles/__pycache__
-=======
+/projectFiles/projectList
 /mydataset_expand/
->>>>>>> 11f846d33f6efdadbeb4755057119e05bd47dc29
+

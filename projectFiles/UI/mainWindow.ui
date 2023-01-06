@@ -606,7 +606,7 @@ p, li { white-space: pre-wrap; }
                    </widget>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="comboBox">
+                   <widget class="QComboBox" name="comboBox_model">
                     <property name="font">
                      <font>
                       <family>宋体</family>
@@ -1382,7 +1382,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1161</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -1455,8 +1455,8 @@ p, li { white-space: pre-wrap; }
    <slot>select_image_folder()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>741</x>
-     <y>185</y>
+     <x>946</x>
+     <y>222</y>
     </hint>
     <hint type="destinationlabel">
      <x>945</x>
@@ -1471,8 +1471,8 @@ p, li { white-space: pre-wrap; }
    <slot>select_label_folder()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>756</x>
-     <y>222</y>
+     <x>946</x>
+     <y>263</y>
     </hint>
     <hint type="destinationlabel">
      <x>945</x>
@@ -1487,8 +1487,8 @@ p, li { white-space: pre-wrap; }
    <slot>create_project()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>901</x>
-     <y>592</y>
+     <x>1128</x>
+     <y>711</y>
     </hint>
     <hint type="destinationlabel">
      <x>945</x>
@@ -1497,7 +1497,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>comboBox</sender>
+   <sender>comboBox_model</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>MainWindow</receiver>
    <slot>model_chosen()</slot>
@@ -1519,8 +1519,8 @@ p, li { white-space: pre-wrap; }
    <slot>select_result_folder()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>905</x>
-     <y>117</y>
+     <x>1137</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel">
      <x>945</x>
@@ -1535,8 +1535,8 @@ p, li { white-space: pre-wrap; }
    <slot>evaluate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>509</x>
-     <y>602</y>
+     <x>616</x>
+     <y>711</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -1560,17 +1560,48 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>modify_project()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>770</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1154</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listWidget</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>load_recent_project(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>795</x>
+     <y>613</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>915</x>
+     <y>738</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>q_action()</slot>
   <slot>select_image_folder()</slot>
   <slot>select_label_folder()</slot>
   <slot>create_project()</slot>
-  <slot>modify_project_name()</slot>
-  <slot>modify_image_folder()</slot>
-  <slot>modify_label_folder()</slot>
+  <slot>modify_project()</slot>
   <slot>model_chosen()</slot>
   <slot>select_result_folder()</slot>
   <slot>evaluate()</slot>
+  <slot>load_recent_project(QListWidgetItem*)</slot>
  </slots>
 </ui>
