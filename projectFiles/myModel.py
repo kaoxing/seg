@@ -8,6 +8,7 @@ import torch.nn as nn
 from myDataSetPre import MyDataSetPre
 from myDataSetTra import MyDataSetTra
 
+
 class Model:
     """模型"""
 
@@ -16,6 +17,7 @@ class Model:
         self.model_path = None
         self.predict_dataset = None
         self.train_dataset = None
+        self.train_loss = 0
 
     def load_model(self, load_path, model_path):
         """加载模型,参数（模型路径，网络路径）"""
@@ -55,7 +57,7 @@ class Model:
             img = np.array(predict, dtype='uint8')
             cv2.imwrite("{0}/{1:0>3d}.png".format(predict_result_path, i), img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
-    def train(self, train_result_path, epoch, batch_size, learning_rate=0.00000001,
+    def train(self, train_result_path, epoch, batch_size, learning_rate=0.000001,
               shuffle=True, optim="Adam", model_name=None):
         """训练模型,参数（训练结果,训练轮数,训练批次大小,学习率,数据集是否打乱,model保存名），若新model名为空则将覆盖原model"""
         dataloader = DataLoader(
@@ -85,10 +87,10 @@ class Model:
                 optimizer.step()  # 通过梯度调整参数
                 Loss += loss
             # print(Loss.item())
+            self.train_loss = Loss
         if model_name is None:
             torch.save(self.model, self.model_path)
         else:
-
             torch.save(self.model, self.model_path)
 
 
