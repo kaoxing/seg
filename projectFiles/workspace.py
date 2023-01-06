@@ -58,8 +58,10 @@ class Workspace:
         }
         with open("./projectList/"+self.project_name+".proj", 'w') as file:
             json.dump(dic, file)
-        with open("./projectList/projectList.sav", 'a') as file:
-            file.write(self.project_name+"\n")
+        with open("./projectList/projectList.sav", 'r+') as file:
+            content = file.read()
+            if content.count(self.project_name) == 0:
+                file.write(self.project_name+"\n")
 
     def load_project(self, file: str):
         path = f"./projectList/{file}.proj"
