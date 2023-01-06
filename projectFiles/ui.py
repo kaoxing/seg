@@ -3,8 +3,9 @@ import sys
 import datetime
 from time import strftime
 
-from PyQt5.QtWidgets import QMessageBox, QMainWindow, QSpinBox, QApplication, QFileSystemModel, QFileDialog, QTreeView,QListWidgetItem
-from PyQt5.QtCore import QThread, pyqtSignal,pyqtSlot
+from PyQt5.QtWidgets import QMessageBox, QMainWindow, QSpinBox, QApplication, QFileSystemModel, QFileDialog, QTreeView, \
+    QListWidgetItem
+from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot
 from UI.mainWindow import Ui_MainWindow
 from workspace import Workspace
 from myModel import Model
@@ -28,12 +29,12 @@ class EvaluateThread(QThread):
     def run(self):
         model = Model()
         if self.model_index == 1:
-            model.load_model("./models/UNet/cnn_24.pth","./models/UNet/UNet.py")
-        print(self.image_folder)
+            model.load_model("./models/UNet/cnn_24.pth", "./models/UNet/UNet.py")
         model.load_predict_data(self.image_folder)
-        print(self.result_folder)
         model.run_model(self.result_folder)
+
         # self.sig.emit(True)
+
 
 class RunThread(QThread):
     # sig = pyqtSignal(bool)
@@ -54,10 +55,13 @@ class RunThread(QThread):
     def run(self):
         model = Model()
         if self.model_index == 1:
-            model.load_model("./model/cnn_24.pt","./net/Unet.py")
-        model.load_predict_data(self.image_folder)
-        model.run_model(self.result_folder)
+            model.load_model("./models/UNet/cnn_24.pth", "./models/UNet/UNet.py")
+        # model.load_predict_data(self.image_folder)
+        # model.run_model(self.result_folder)
+        model.load_train_data(self.image_folder, self.label_folder)
+        model.train_model(2, 1)
         pass
+
 
 class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self):
@@ -67,11 +71,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         sav = "./projectList/projectList.sav"
         if os.path.exists(sav):
             with open(sav, 'r') as f:
-            # 逐行读取文件内容
+                # 逐行读取文件内容
                 for line in f:
                     # 将该行内容添加到 QListWidget 组件中
                     self.listWidget.addItem(line.strip())
-            self.stackedWidget_state.setCurrentIndex(1)
+            # self.stackedWidget_state.setCurrentIndex(1)
 
     def q_action(self, q):
         """
@@ -90,7 +94,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             if q == self.action_new_workdir:
                 # 新建工作区
                 self.workdir = self.workdir + "/workdir_" + \
-                    datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                               datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
                 # 初始化工作区
                 os.mkdir(self.workdir)
                 os.mkdir(self.workdir + "/data")
@@ -116,7 +120,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.treeView.hide()
             self.widget.hide()
 
-    def set_tree_view(self,view:QTreeView,path:str):
+    def set_tree_view(self, view: QTreeView, path: str):
         tree_model = QFileSystemModel()
         tree_model.setRootPath(path)
         view.setModel(tree_model)
@@ -131,8 +135,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.lineEdit_image_folder.clear()
         else:
             self.lineEdit_image_folder.setText(temp)
-            self.set_tree_view(self.treeView_image,temp)
-
+            self.set_tree_view(self.treeView_image, temp)
 
     def select_label_folder(self):
         temp = QFileDialog.getExistingDirectory()
@@ -177,8 +180,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.lineEdit_result_folder.setText(temp)
             self.workspace.set_result_folder(temp)
             self.workspace.save_project()
-            self.set_tree_view(self.treeView_evaluate,temp)
-
+            self.set_tree_view(self.treeView_evaluate, temp)
 
     def select_test_folder(self):
         temp = QFileDialog.getExistingDirectory()
@@ -198,25 +200,24 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def on_pushButton_run_clicked(self):
         run_thread.set_workspace(self.workspace)
         run_thread.start()
-    
+
     @pyqtSlot()
     def on_pushButton_save_clicked(self):
-        file, _ = QFileDialog.getSaveFileName(self,"save model",filter="pth file(*.pth)")
+        file, _ = QFileDialog.getSaveFileName(self, "save model", filter="pth file(*.pth)")
         print(file)
 
     def modify_project(self):
-        pass # TODO
+        pass  # TODO
 
-    def load_recent_project(self,item:QListWidgetItem):
+    def load_recent_project(self, item: QListWidgetItem):
         if self.workspace.load_project(item.text()):
             self.lineEdit_result_folder.setText(self.workspace.get_result_folder())
             self.lineEdit_project_name.setText(self.workspace.get_project_name())
             self.lineEdit_image_folder.setText(self.workspace.get_image_folder())
             self.lineEdit_label_folder.setText(self.workspace.get_label_folder())
             self.comboBox_model.setCurrentIndex(self.workspace.get_model_index())
-            self.set_tree_view(self.treeView_image,self.workspace.get_image_folder())
-            self.set_tree_view(self.treeView_evaluate,self.workspace.get_result_folder())
-
+            self.set_tree_view(self.treeView_image, self.workspace.get_image_folder())
+            self.set_tree_view(self.treeView_evaluate, self.workspace.get_result_folder())
 
 
 if __name__ == "__main__":

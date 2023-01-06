@@ -114,6 +114,7 @@ class Model:
                 loss.backward()  # 误差逆传播
                 optimizer.step()  # 通过梯度调整参数
                 Loss += loss
+                # print(loss)
             # print(Loss.item())
             self.train_loss = Loss
             self.state_change()
