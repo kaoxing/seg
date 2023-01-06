@@ -17,7 +17,8 @@ class EvaluateThread(QThread):
         super(EvaluateThread, self).__init__(parent)
 
     def __del__(self):
-        self.wait()
+        # self.wait()
+        pass
 
     def set_workspace(self, workspace: Workspace):
         self.image_folder = workspace.get_image_folder()
@@ -27,8 +28,10 @@ class EvaluateThread(QThread):
     def run(self):
         model = Model()
         if self.model_index == 1:
-            model.load_model("./models/cnn_24.pt","./net/Unet.py")
+            model.load_model("./models/UNet/cnn_24.pth","./models/UNet/UNet.py")
+        print(self.image_folder)
         model.load_predict_data(self.image_folder)
+        print(self.result_folder)
         model.run_model(self.result_folder)
         # self.sig.emit(True)
 
@@ -39,7 +42,8 @@ class RunThread(QThread):
         super(RunThread, self).__init__(parent)
 
     def __del__(self):
-        self.wait()
+        # self.wait()
+        pass
 
     def set_workspace(self, workspace: Workspace):
         self.image_folder = workspace.get_image_folder()
