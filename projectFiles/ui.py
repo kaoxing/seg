@@ -48,9 +48,10 @@ class RunThread(QThread):
         self.model_index = workspace.get_model_index()
 
     def run(self):
-        # model = Model()
-        # if self.model_index == 1:
-        #     model.load_model("./model/cnn_24.pt","./net/Unet.py")
+        model = Model()
+        if self.model_index == 1:
+            model.load_model("./model/cnn_24.pt","./net/Unet.py")
+        model.load_train_data()
         # model.load_predict_data(self.image_folder)
         # model.run_model(self.result_folder)
         pass
