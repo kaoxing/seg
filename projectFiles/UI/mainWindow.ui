@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>889</width>
-    <height>684</height>
+    <width>1161</width>
+    <height>766</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
        <enum>QTabWidget::North</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -161,25 +161,6 @@
           </item>
           <item>
            <layout class="QGridLayout" name="gridLayout_3">
-            <item row="0" column="0">
-             <widget class="QLabel" name="label">
-              <property name="font">
-               <font>
-                <family>宋体</family>
-                <pointsize>15</pointsize>
-                <weight>50</weight>
-                <italic>false</italic>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Project Name：</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1">
              <widget class="QLineEdit" name="lineEdit_project_name">
               <property name="font">
@@ -202,8 +183,30 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_2">
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="text">
+               <string>Label Folder：</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QPushButton" name="pushButton_3">
               <property name="font">
                <font>
                 <family>宋体</family>
@@ -214,10 +217,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Image Folder：</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>Browse</string>
               </property>
              </widget>
             </item>
@@ -262,8 +262,8 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_3">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_2">
               <property name="font">
                <font>
                 <family>宋体</family>
@@ -273,11 +273,27 @@
                 <bold>false</bold>
                </font>
               </property>
-              <property name="layoutDirection">
-               <enum>Qt::LeftToRight</enum>
+              <property name="text">
+               <string>Image Folder：</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
               </property>
               <property name="text">
-               <string>Label Folder：</string>
+               <string>Project Name：</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -309,8 +325,40 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="2">
-             <widget class="QPushButton" name="pushButton_3">
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_20">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Test  Folder：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="lineEdit_test_folder">
+              <property name="font">
+               <font>
+                <family>宋体</family>
+                <pointsize>15</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="placeholderText">
+               <string>select test folder</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QPushButton" name="pushButton_8">
               <property name="font">
                <font>
                 <family>宋体</family>
@@ -992,7 +1040,7 @@ p, li { white-space: pre-wrap; }
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_8">
+              <widget class="QPushButton" name="pushButton_run">
                <property name="enabled">
                 <bool>true</bool>
                </property>
@@ -1024,7 +1072,7 @@ p, li { white-space: pre-wrap; }
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_SaveModel">
+              <widget class="QPushButton" name="pushButton_save">
                <property name="font">
                 <font>
                  <family>宋体</family>
@@ -1093,7 +1141,7 @@ p, li { white-space: pre-wrap; }
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_7">
+            <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1">
              <item>
               <widget class="QLabel" name="label_16">
                <property name="font">
@@ -1111,7 +1159,7 @@ p, li { white-space: pre-wrap; }
               </widget>
              </item>
              <item>
-              <widget class="QGraphicsView" name="graphicsView"/>
+              <widget class="LossWidget" name="widget_2" native="true"/>
              </item>
             </layout>
            </widget>
@@ -1410,8 +1458,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>889</width>
-     <height>23</height>
+     <width>1161</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -1459,6 +1507,14 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LossWidget</class>
+   <extends>QWidget</extends>
+   <header>UI/LossWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -1485,7 +1541,7 @@ p, li { white-space: pre-wrap; }
    <hints>
     <hint type="sourcelabel">
      <x>946</x>
-     <y>222</y>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
      <x>945</x>
@@ -1501,7 +1557,7 @@ p, li { white-space: pre-wrap; }
    <hints>
     <hint type="sourcelabel">
      <x>946</x>
-     <y>263</y>
+     <y>241</y>
     </hint>
     <hint type="destinationlabel">
      <x>945</x>
@@ -1532,8 +1588,8 @@ p, li { white-space: pre-wrap; }
    <slot>model_chosen()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>422</x>
-     <y>104</y>
+     <x>119</x>
+     <y>105</y>
     </hint>
     <hint type="destinationlabel">
      <x>503</x>
@@ -1596,8 +1652,8 @@ p, li { white-space: pre-wrap; }
    <slot>modify_project()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>770</x>
-     <y>312</y>
+     <x>815</x>
+     <y>321</y>
     </hint>
     <hint type="destinationlabel">
      <x>1154</x>
@@ -1612,12 +1668,28 @@ p, li { white-space: pre-wrap; }
    <slot>load_recent_project(QListWidgetItem*)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>795</x>
-     <y>613</y>
+     <x>139</x>
+     <y>660</y>
     </hint>
     <hint type="destinationlabel">
      <x>915</x>
      <y>738</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_8</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>select_test_folder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>929</x>
+     <y>257</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1159</x>
+     <y>254</y>
     </hint>
    </hints>
   </connection>
@@ -1632,5 +1704,6 @@ p, li { white-space: pre-wrap; }
   <slot>select_result_folder()</slot>
   <slot>evaluate()</slot>
   <slot>load_recent_project(QListWidgetItem*)</slot>
+  <slot>select_test_folder()</slot>
  </slots>
 </ui>
