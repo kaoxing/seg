@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'MainWindow.ui'
+# Form implementation generated from reading ui file 'mainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -324,18 +324,18 @@ class Ui_MainWindow(object):
         self.label_10.setFont(font)
         self.label_10.setObjectName("label_10")
         self.horizontalLayout_6.addWidget(self.label_10)
-        self.comboBox = QtWidgets.QComboBox(self.widget_3)
+        self.comboBox_model = QtWidgets.QComboBox(self.widget_3)
         font = QtGui.QFont()
         font.setFamily("宋体")
         font.setPointSize(15)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.comboBox.setFont(font)
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.horizontalLayout_6.addWidget(self.comboBox)
+        self.comboBox_model.setFont(font)
+        self.comboBox_model.setObjectName("comboBox_model")
+        self.comboBox_model.addItem("")
+        self.comboBox_model.addItem("")
+        self.horizontalLayout_6.addWidget(self.comboBox_model)
         self.horizontalLayout_6.setStretch(1, 3)
         self.verticalLayout_3.addLayout(self.horizontalLayout_6)
         self.textEdit_model_explaination = QtWidgets.QTextEdit(self.widget_3)
@@ -770,7 +770,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_centralwidget.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1161, 23))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1161, 22))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
@@ -802,15 +802,17 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
         self.stackedWidget_state.setCurrentIndex(0)
         self.stackedWidget.setCurrentIndex(0)
-        self.comboBox.setCurrentIndex(0)
+        self.comboBox_model.setCurrentIndex(0)
         self.menubar.triggered['QAction*'].connect(MainWindow.q_action)
         self.pushButton_2.clicked.connect(MainWindow.select_image_folder)
         self.pushButton_3.clicked.connect(MainWindow.select_label_folder)
         self.pushButton_5.clicked.connect(MainWindow.create_project)
-        self.comboBox.currentIndexChanged['int'].connect(MainWindow.model_chosen)
+        self.comboBox_model.currentIndexChanged['int'].connect(MainWindow.model_chosen)
         self.pushButton_19.clicked.connect(MainWindow.select_result_folder)
         self.pushButton_20.clicked.connect(MainWindow.evaluate)
         self.stackedWidget_state.currentChanged['int'].connect(self.stackedWidget.setCurrentIndex)
+        self.pushButton_7.clicked.connect(MainWindow.modify_project)
+        self.listWidget.itemDoubleClicked['QListWidgetItem*'].connect(MainWindow.load_recent_project)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -841,8 +843,8 @@ class Ui_MainWindow(object):
         self.label_13.setText(_translate("MainWindow", "Recent Project"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Project"))
         self.label_10.setText(_translate("MainWindow", "Model："))
-        self.comboBox.setItemText(0, _translate("MainWindow", "--未选择--"))
-        self.comboBox.setItemText(1, _translate("MainWindow", "U-net"))
+        self.comboBox_model.setItemText(0, _translate("MainWindow", "--未选择--"))
+        self.comboBox_model.setItemText(1, _translate("MainWindow", "U-net"))
         self.label_9.setText(_translate("MainWindow", "My Model："))
         self.pushButton_6.setText(_translate("MainWindow", "Delete"))
         self.pushButton.setText(_translate("MainWindow", "load"))

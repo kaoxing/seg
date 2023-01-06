@@ -1,4 +1,5 @@
 import json
+import os
 
 
 class Workspace:
@@ -60,19 +61,28 @@ class Workspace:
         with open("./projectList/projectList.sav", 'a') as file:
             file.write(self.project_name+"\n")
 
-    def load_project(self):
-        with open(self.project_name) as file:
-            dic = json.load(file)
-        self.result_folder = dic["result_folder"]
-        self.project_name = dic["project_name"]
-        self.image_folder = dic["image_folder"]
-        self.label_folder = dic["label_folder"]
-        self.model_index = dic["model_index"]
-        print(dic)
-        # TODO
+    def load_project(self, file: str):
+        path = f"./projectList/{file}.proj"
+        if os.path.exists(path):
+            with open(path) as file:
+                dic = json.load(file)
+            self.result_folder = dic["result_folder"]
+            self.project_name = dic["project_name"]
+            self.image_folder = dic["image_folder"]
+            self.label_folder = dic["label_folder"]
+            self.model_index = dic["model_index"]
+            print(dic)
+            return True
+        else:
+            return False
 
     def check(self):
         if self.image_folder is not None:
             return True
         else:
             return False
+
+
+if __name__ == "__main__":
+    a = os.path.abspath("./")
+    print(a)
