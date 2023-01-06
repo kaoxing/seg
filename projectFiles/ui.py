@@ -27,7 +27,7 @@ class EvaluateThread(QThread):
     def run(self):
         model = Model()
         if self.model_index == 1:
-            model.load_model("./model/cnn_24.pt","./net/Unet.py")
+            model.load_model("./models/cnn_24.pt","./net/Unet.py")
         model.load_predict_data(self.image_folder)
         model.run_model(self.result_folder)
         # self.sig.emit(True)
@@ -70,7 +70,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
                 os.mkdir(self.workdir + "/data")
                 # os.mkdir(self.workdir + "/data/train")
                 # os.mkdir(self.workdir + "/data/test")
-                os.mkdir(self.workdir + "/model")
+                os.mkdir(self.workdir + "/models")
                 os.mkdir(self.workdir + "/result")
             # 更新工作区视图
             print(self.workdir)
@@ -167,7 +167,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.lineEdit_image_folder.setText(self.workspace.get_image_folder())
             self.lineEdit_label_folder.setText(self.workspace.get_label_folder())
             self.comboBox_model.setCurrentIndex(self.workspace.get_model_index())
-
 
 
 if __name__ == "__main__":

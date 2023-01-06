@@ -58,7 +58,7 @@ def train():
         batch_size=batch_size,
         shuffle=True,
     )
-    net = torch.load("projectFiles/model/cnn.pt", map_location='cuda' if torch.cuda.is_available() else 'cpu')
+    net = torch.load("projectFiles/models/cnn.pt", map_location='cuda' if torch.cuda.is_available() else 'cpu')
     # net = UNet(1, 1)
     net = net.to(device)
     loss_function = nn.BCELoss()
@@ -128,8 +128,8 @@ if __name__ == '__main__':
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # print(device)
     # net = train()
-    net = torch.load('./projectFiles/model/cnn_24.pt', map_location='cuda' if torch.cuda.is_available() else 'cpu')
-    torch.save(net, 'projectFiles/model/cnn24.pt')
-    # torch.save(net.state_dict(), './projectFiles/model/cnn_24.pth')
+    net = torch.load('./projectFiles/models/cnn_24.pt', map_location='cuda' if torch.cuda.is_available() else 'cpu')
+    torch.save(net, 'projectFiles/models/cnn24.pt')
+    # torch.save(net.state_dict(), './projectFiles/models/cnn_24.pth')
     # test(net)
     print("finished")

@@ -231,7 +231,7 @@ def train():
         shuffle=True,
         num_workers=1
     )
-    # model = UNet(1, 2)
+    # models = UNet(1, 2)
     model = Net()
     # 查看每层的输出大小
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -286,6 +286,6 @@ if __name__ == '__main__':
     # 模型保存
     torch.save(net, 'model/cnn.pth')
 
-    model = torch.load("model/cnn.pth")
+    model = torch.load("models/cnn.pth")
     test(model)
     print('done')
