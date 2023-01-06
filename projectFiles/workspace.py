@@ -8,6 +8,7 @@ class Workspace:
     """
 
     def __init__(self):
+        self.test_folder = None
         self.result_folder = None
         self.project_name = None
         self.image_folder = None
@@ -30,6 +31,10 @@ class Workspace:
         self.result_folder = result_folder
         print(self.result_folder)
 
+    def set_test_folder(self, test_folder: str):
+        self.test_folder = test_folder
+        print(self.result_folder)
+
     def set_model_index(self, model_index: int):
         self.model_index = model_index
 
@@ -45,6 +50,9 @@ class Workspace:
     def get_result_folder(self):
         return self.result_folder
 
+    def get_test_folder(self):
+        return self.test_folder
+
     def get_model_index(self):
         return self.model_index
 
@@ -54,6 +62,7 @@ class Workspace:
             "project_name": self.project_name,
             "image_folder": self.image_folder,
             "label_folder": self.label_folder,
+            "test_folder": self.test_folder,
             "model_index": self.model_index,
         }
         with open("./projectList/"+self.project_name+".proj", 'w') as file:
@@ -72,6 +81,7 @@ class Workspace:
             self.project_name = dic["project_name"]
             self.image_folder = dic["image_folder"]
             self.label_folder = dic["label_folder"]
+            self.test_folder = dic["test_folder"]
             self.model_index = dic["model_index"]
             print(dic)
             return True

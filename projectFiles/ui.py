@@ -4,7 +4,7 @@ import datetime
 from time import strftime
 
 from PyQt5.QtWidgets import QMessageBox, QMainWindow, QSpinBox, QApplication, QFileSystemModel, QFileDialog, QTreeView,QListWidgetItem
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt5.QtCore import QThread, pyqtSignal,pyqtSlot
 from UI.mainWindow import Ui_MainWindow
 from workspace import Workspace
 from myModel import Model
@@ -32,6 +32,28 @@ class EvaluateThread(QThread):
         model.run_model(self.result_folder)
         # self.sig.emit(True)
 
+class RunThread(QThread):
+    # sig = pyqtSignal(bool)
+
+    def __init__(self, parent=None):
+        super(RunThread, self).__init__(parent)
+
+    def __del__(self):
+        self.wait()
+
+    def set_workspace(self, workspace: Workspace):
+        self.image_folder = workspace.get_image_folder()
+        self.label_folder = workspace.get_label_folder()
+        self.test_folder = workspace.get_test_folder()
+        self.model_index = workspace.get_model_index()
+
+    def run(self):
+        # model = Model()
+        # if self.model_index == 1:
+        #     model.load_model("./model/cnn_24.pt","./net/Unet.py")
+        # model.load_predict_data(self.image_folder)
+        # model.run_model(self.result_folder)
+        pass
 
 class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self):
@@ -153,9 +175,30 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.workspace.save_project()
             self.set_tree_view(self.treeView_evaluate,temp)
 
+
+    def select_test_folder(self):
+        temp = QFileDialog.getExistingDirectory()
+        if temp == "":
+            self.lineEdit_test_folder.clear()
+            self.workspace.set_test_folder(None)
+        else:
+            self.lineEdit_test_folder.setText(temp)
+            self.workspace.set_test_folder(temp)
+            self.workspace.save_project()
+
     def evaluate(self):
         evaluate_thread.set_workspace(self.workspace)
         evaluate_thread.start()
+
+    @pyqtSlot()
+    def on_pushButton_run_clicked(self):
+        run_thread.set_workspace(self.workspace)
+        run_thread.start()
+    
+    @pyqtSlot()
+    def on_pushButton_save_clicked(self):
+        file, _ = QFileDialog.getSaveFileName(self,"save model",filter="pth file(*.pth)")
+        print(file)
 
     def modify_project(self):
         pass # TODO
@@ -173,6 +216,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     evaluate_thread = EvaluateThread()
+    run_thread = RunThread()
     main_window = MainWindow()
     main_window.show()
     sys.exit(app.exec_())

@@ -11,7 +11,6 @@ from myDataSetTra import MyDataSetTra
 
 class Model:
     """模型"""
-
     def __init__(self):
         self.model = None
         self.model_path = None
