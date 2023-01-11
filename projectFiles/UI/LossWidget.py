@@ -4,9 +4,9 @@ import numpy as np
 import pyqtgraph as pg
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout
 
-class LossWidget(QWidget):
+class lossWidget(QWidget):
     def __init__(self,parent=None):
-        super(LossWidget, self).__init__(parent)
+        super(lossWidget, self).__init__(parent)
         # self.resize(600, 600)
 
         # 1
