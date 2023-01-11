@@ -8,10 +8,7 @@
 /centerline_data
 /*.rar
 /mid_result
-/projectFiles/UI/__pycache__
 /.idea
-/projectFiles/__pycache__
 /projectFiles/projectList
 /mydataset_expand/
-/projectFiles/models/UNet/__pycache__
-
+__pycache__/
