@@ -21,7 +21,7 @@ class EvaluateThread(QThread):
     def run(self):
         model = Model()
         if self.model_index == 1:
-            model.load_model("./models/UNet/cnn_24.pth", "./models/UNet/UNet.py")
+            model.__load_model("./models/UNet/cnn_24.pth", "./models/UNet/UNet.py")
         model.load_predict_data(self.image_folder)
         model.run_model(self.result_folder)
 
