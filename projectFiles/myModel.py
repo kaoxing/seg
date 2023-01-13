@@ -23,7 +23,7 @@ class Model:
         self.test_dataset = None
         self.train_loss = 0
 
-    def __load_model(self, model_path, net_path):
+    def load_model(self, model_path, net_path):
         """加载模型,参数（模型路径，网络路径）"""
         # self.models = MyModel(model_path)
         # models.load_state_dict(torch.load(PATH))
@@ -127,6 +127,6 @@ class Model:
 
 if __name__ == '__main__':
     model = Model()
-    model.__load_model("./models/UNet/cnn_24.pth", "./models/UNet/UNet.py")
+    model.load_model("./models/UNet/cnn_24.pth", "./models/UNet/UNet.py")
     model.load_predict_data("./data")
     model.run_model("./result")

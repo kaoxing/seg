@@ -27,7 +27,7 @@
           <enum>Qt::Horizontal</enum>
          </property>
          <widget class="QWidget" name="widget_3" native="true">
-          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,3">
              <item>
@@ -75,16 +75,12 @@
             </layout>
            </item>
            <item>
-            <widget class="QTextEdit" name="textEdit_model_explaination">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
+            <widget class="QTextBrowser" name="textBrowser_model_explaination"/>
            </item>
           </layout>
          </widget>
          <widget class="QWidget" name="widget_4" native="true">
-          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
             <widget class="QLabel" name="label_9">
              <property name="font">
@@ -102,7 +98,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QListView" name="listView"/>
+            <widget class="QListWidget" name="listWidget"/>
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_11">

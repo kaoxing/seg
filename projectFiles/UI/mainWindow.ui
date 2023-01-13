@@ -137,24 +137,7 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>menubar</sender>
-   <signal>triggered(QAction*)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>q_action()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>584</x>
-     <y>13</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>588</x>
-     <y>29</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>q_action()</slot>
   <slot>select_image_folder()</slot>
