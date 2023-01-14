@@ -120,6 +120,19 @@ class Model:
             self.train_loss = Loss
             self.state_change()
 
+    # def test_model(self):
+
+    @staticmethod
+    def __dice(predict, label):
+        same = 0
+        cnt = label.sum() + predict.sum()
+        for x in range(predict.shape[0]):
+            for y in range(predict.shape[1]):
+                if predict[x][y] == 1 and label[x][y] == 1:
+                    same += 1
+        return same * 2 / cnt
+
+
     @abstractmethod
     def state_change(self):
         pass

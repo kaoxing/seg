@@ -6,18 +6,24 @@
 |-- workdir
 |   |-- .config
 |   |-- data
-|       |-- image
-|           |-- 000.jpg/.png
-|           |-- 001.jpg/.png
-|           ...
-|       |-- label
-|           |-- 000.jpg/.png
-|           |-- 001.jpg/.png
-|           |-- ...
+|       |-- train
+|           |-- image
+|               |-- 000.jpg/.png
+|               |-- 001.jpg/.png
+|               ...
+|           |-- label
+|              |-- 000_mask.jpg/.png
+|              |-- 001_mask.jpg/.png
+|              |-- ...
 |       |-- test
-|           |-- 000.jpg/.png
-|           |-- 001.jpg/.png
-|           |-- ...
+|           |-- image
+|               |-- 000.jpg/.png
+|               |-- 001.jpg/.png
+|               ...
+|           |-- label
+|              |-- 000_mask.jpg/.png
+|              |-- 001_mask.jpg/.png
+|              |-- ...
 |   |-- model
 |       |-- xxNet
 |           |-- xxNet.pth

@@ -11,7 +11,7 @@ class MyDataSetPre(Dataset):
         data = []
         image_list = os.listdir(path)
         for image in image_list:
-            if image[-3:] == "png":
+            if image[-3:] == "png" or image[-3:] == "jpg":
                 data_path = os.path.join(path, image)
                 img = cv2.imread(data_path, cv2.IMREAD_GRAYSCALE)
                 img = torch.Tensor(img / 255)  # 归一
