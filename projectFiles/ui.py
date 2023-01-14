@@ -14,6 +14,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setupUi(self)
         self.workspace = None
         self.tabWidget.hide()
+        self.tab_3.change_tab_sig.connect(self.change_tab)
 
     def init_workspace(self, workdir: str):
         """
@@ -30,9 +31,12 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def new_workspace(self, workdir: str):
         os.mkdir(workdir)
         os.mkdir(workdir + "/data")
-        os.mkdir(workdir + "/data/image")
-        os.mkdir(workdir + "/data/label")
+        os.mkdir(workdir + "/data/train")
+        os.mkdir(workdir + "/data/train/image")
+        os.mkdir(workdir + "/data/train/label")
         os.mkdir(workdir + "/data/test")
+        os.mkdir(workdir + "/data/test/image")
+        os.mkdir(workdir + "/data/test/label")
         os.mkdir(workdir + "/models")
         os.mkdir(workdir + "/result")
         self.init_workspace(workdir)
@@ -74,3 +78,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         view.setColumnHidden(1, True)
         view.setColumnHidden(2, True)
         view.setColumnHidden(3, True)
+
+    def change_tab(self,page:int):
+        self.tabWidget.setCurrentIndex(page)

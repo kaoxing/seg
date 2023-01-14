@@ -1,11 +1,18 @@
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import QWidget, QFileDialog
 from UI.static.trainTab import Ui_trainTab
 from UI.threads.RunThread import RunThread
 from workspace import Workspace
-
+import logging
+logging.basicConfig(
+    # filename='./log.txt',
+    level=logging.DEBUG,
+    format='%(asctime)s %(filename)s[line:%(lineno)d]%(levelname)s:%(message)s'
+)
 
 class trainTab(Ui_trainTab, QWidget):
+    change_tab_sig = pyqtSignal(int)
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -40,16 +47,25 @@ class trainTab(Ui_trainTab, QWidget):
             "loss_function": self.comboBox_loss_function.currentText(),
             "lr": self.doubleSpinBox_lr.value(),
             "optimizer": self.comboBox_optimizer.currentText(),
-            "prtrain_model": self.lineEdit_pretrain_model.text(),
+            "pretrain_model": self.lineEdit_pretrain_model.text(),
             "status": self.lineEdit_status.text(),
         }
         self.workspace.set_settings(settings)
         self.workspace.save_project()
 
     @pyqtSlot()
+    def on_pushButton_change_clicked(self):
+        self.change_tab_sig.emit(1)
+
+    @pyqtSlot()
     def on_pushButton_train_clicked(self):
+        self.update_settings()
         self.run_thread.set_workspace(self.workspace)
         self.run_thread.start()
+
+    @pyqtSlot()
+    def on_pushButton_test_clicked(self):
+        logging.info("pushButton_test clicked")
 
     @pyqtSlot()
     def on_pushButton_save_clicked(self):

@@ -23,8 +23,7 @@ class RunThread(QThread):
         pass
 
     def set_workspace(self, workspace: Workspace):
-        self.image_folder = workspace.get_image_folder()
-        self.label_folder = workspace.get_label_folder()
+        self.train_folder = workspace.get_train_folder()
         self.test_folder = workspace.get_test_folder()
         self.model_index = workspace.get_model_index()
         self.settings = workspace.get_settings()
@@ -36,7 +35,9 @@ class RunThread(QThread):
                              "./models/UNet/UNet.py")
         else:
             return
-        model.load_train_data(self.image_folder, self.label_folder)
+        data_path = f"{self.train_folder}/image"
+        mask_path = f"{self.train_folder}/label"
+        model.load_train_data(data_path, mask_path)
         model.train_model(
             epoch=self.settings["epochs"],
             batch_size=self.settings["batch_size"],

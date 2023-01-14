@@ -14,7 +14,7 @@ class EvaluateThread(QThread):
         pass
 
     def set_workspace(self, workspace: Workspace):
-        self.image_folder = workspace.get_image_folder()
+        self.evaluate_folder = workspace.get_evaluate_folder()
         self.result_folder = workspace.get_result_folder()
         self.model_index = workspace.get_model_index()
 
@@ -22,7 +22,7 @@ class EvaluateThread(QThread):
         model = Model()
         if self.model_index == 1:
             model.load_model("./models/UNet/cnn_24.pth", "./models/UNet/UNet.py")
-        model.load_predict_data(self.image_folder)
+        model.load_predict_data(self.evaluate_folder)
         model.run_model(self.result_folder)
 
         # self.sig.emit(True)

@@ -28,12 +28,12 @@
         </font>
        </property>
        <property name="text">
-        <string> Result Folder：</string>
+        <string> Input Folder：</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_result_folder">
+      <widget class="QLineEdit" name="lineEdit_evaluate_folder">
        <property name="font">
         <font>
          <family>宋体</family>
@@ -53,12 +53,12 @@
         <bool>true</bool>
        </property>
        <property name="placeholderText">
-        <string>select result folder</string>
+        <string>select input folder</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_result">
+      <widget class="QPushButton" name="pushButton_evaluate">
        <property name="font">
         <font>
          <family>宋体</family>

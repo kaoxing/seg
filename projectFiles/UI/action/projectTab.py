@@ -27,8 +27,7 @@ class projectTab(Ui_projectTab, QWidget):
         """
         self.workspace = workspace
         self.lineEdit_project_name.setText(workspace.get_project_name())
-        self.lineEdit_image_folder.setText(workspace.get_image_folder())
-        self.lineEdit_label_folder.setText(workspace.get_label_folder())
+        self.lineEdit_train_folder.setText(workspace.get_train_folder())
         self.lineEdit_test_folder.setText(workspace.get_test_folder())
         self.lineEdit_result_folder.setText(workspace.get_result_folder())
 
@@ -39,13 +38,8 @@ class projectTab(Ui_projectTab, QWidget):
             item.setText(temp)
 
     @pyqtSlot()
-    def on_pushButton_image_clicked(self):
-        self.select_folder(self.lineEdit_image_folder)
-        # TODO self.set_tree_view(self.treeView_image, temp)
-
-    @pyqtSlot()
-    def on_pushButton_label_clicked(self):
-        self.select_folder(self.lineEdit_label_folder)
+    def on_pushButton_train_clicked(self):
+        self.select_folder(self.lineEdit_train_folder)
 
     @pyqtSlot()
     def on_pushButton_test_clicked(self):
@@ -59,8 +53,7 @@ class projectTab(Ui_projectTab, QWidget):
     @pyqtSlot()
     def on_pushButton_confirm_clicked(self):
         self.workspace.set_project_name(self.lineEdit_project_name.text())
-        self.workspace.set_image_folder(self.lineEdit_image_folder.text())
-        self.workspace.set_label_folder(self.lineEdit_label_folder.text())
+        self.workspace.set_train_folder(self.lineEdit_train_folder.text())
         self.workspace.set_test_folder(self.lineEdit_test_folder.text())
         self.workspace.set_result_folder(self.lineEdit_result_folder.text())
         self.workspace.save_project()

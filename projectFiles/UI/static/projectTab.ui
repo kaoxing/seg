@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>projectTab</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1,5,1,1,1">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1,4,1,1,1">
    <item>
     <spacer name="horizontalSpacer">
      <property name="orientation">
@@ -103,9 +103,6 @@
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <property name="spacing">
-        <number>10</number>
-       </property>
        <item row="0" column="0">
         <widget class="QLabel" name="label">
          <property name="font">
@@ -162,18 +159,18 @@
           </font>
          </property>
          <property name="text">
-          <string>Image Folder：</string>
+          <string>Train Folder：</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
          <property name="buddy">
-          <cstring>lineEdit_image_folder</cstring>
+          <cstring>lineEdit_train_folder</cstring>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_image_folder">
+        <widget class="QLineEdit" name="lineEdit_train_folder">
          <property name="font">
           <font>
            <family>宋体</family>
@@ -193,12 +190,12 @@
           <bool>true</bool>
          </property>
          <property name="placeholderText">
-          <string>select image folder</string>
+          <string>select train folder</string>
          </property>
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QPushButton" name="pushButton_image">
+        <widget class="QPushButton" name="pushButton_train">
          <property name="font">
           <font>
            <family>宋体</family>
@@ -214,72 +211,6 @@
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="font">
-          <font>
-           <family>宋体</family>
-           <pointsize>15</pointsize>
-           <weight>50</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Label Folder：</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="buddy">
-          <cstring>lineEdit_label_folder</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_label_folder">
-         <property name="font">
-          <font>
-           <family>宋体</family>
-           <pointsize>15</pointsize>
-           <weight>50</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="inputMask">
-          <string/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string>select label folder</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QPushButton" name="pushButton_label">
-         <property name="font">
-          <font>
-           <family>宋体</family>
-           <pointsize>15</pointsize>
-           <weight>50</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Browse</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
         <widget class="QLabel" name="label_20">
          <property name="font">
           <font>
@@ -301,7 +232,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="2" column="1">
         <widget class="QLineEdit" name="lineEdit_test_folder">
          <property name="font">
           <font>
@@ -317,7 +248,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
+       <item row="2" column="2">
         <widget class="QPushButton" name="pushButton_test">
          <property name="font">
           <font>
@@ -333,7 +264,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="label_21">
          <property name="font">
           <font>
@@ -355,7 +286,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="3" column="1">
         <widget class="QLineEdit" name="lineEdit_result_folder">
          <property name="font">
           <font>
@@ -371,7 +302,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="2">
+       <item row="3" column="2">
         <widget class="QPushButton" name="pushButton_result">
          <property name="font">
           <font>
