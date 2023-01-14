@@ -26,6 +26,13 @@ class Workspace:
             self.test_folder = workdir + "/data/test"
             self.result_folder = workdir + "/result"
             self.model_index = 0
+            self.epochs = 0
+            self.batch_size = 0
+            self.loss_function = "Cross-Entropy"
+            self.lr = 0.000001
+            self.optimizer = "Adam"
+            self.prtrain_model = "to be loaded"
+            self.status = "waiting..."
             self.save_project()
 
     def set_project_name(self, project_name: str):
@@ -46,6 +53,15 @@ class Workspace:
     def set_model_index(self, model_index: int):
         self.model_index = model_index
 
+    def set_settings(self, settings: dict):
+        self.epochs = settings["epochs"]
+        self.batch_size = settings["batch_size"]
+        self.loss_function = settings["loss_function"]
+        self.lr = settings["lr"]
+        self.optimizer = settings["optimizer"]
+        self.prtrain_model = settings["prtrain_model"]
+        self.status = settings["status"]
+
     def get_project_name(self):
         return self.project_name
 
@@ -64,6 +80,18 @@ class Workspace:
     def get_model_index(self):
         return self.model_index
 
+    def get_settings(self):
+        settings = {
+            "epochs": self.epochs,
+            "batch_size": self.batch_size,
+            "loss_function": self.loss_function,
+            "lr": self.lr,
+            "optimizer": self.optimizer,
+            "prtrain_model": self.prtrain_model,
+            "status": self.status,
+        }
+        return settings
+
     def save_project(self):
         dic = {
             "project_name": self.project_name,
@@ -72,6 +100,13 @@ class Workspace:
             "test_folder": self.test_folder,
             "result_folder": self.result_folder,
             "model_index": self.model_index,
+            "epochs": self.epochs,
+            "batch_size": self.batch_size,
+            "loss_function": self.loss_function,
+            "lr": self.lr,
+            "optimizer": self.optimizer,
+            "prtrain_model": self.prtrain_model,
+            "status": self.status,
         }
         path = self.workdir+"/.config"
         with open(path, 'w') as file:
@@ -93,6 +128,13 @@ class Workspace:
             self.test_folder = dic["test_folder"]
             self.result_folder = dic["result_folder"]
             self.model_index = dic["model_index"]
+            self.epochs = dic["epochs"]
+            self.batch_size = dic["batch_size"]
+            self.loss_function = dic["loss_function"]
+            self.lr = dic["lr"]
+            self.optimizer = dic["optimizer"]
+            self.prtrain_model = dic["prtrain_model"]
+            self.status = dic["status"]
             logging.info(f"project loaded from {path}")
             return True
         else:

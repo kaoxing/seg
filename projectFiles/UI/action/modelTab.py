@@ -7,7 +7,6 @@ from workspace import Workspace
 
 class modelTab(Ui_modelTab, QWidget):
     def __init__(self):
-        print("2")
         super().__init__()
         self.setupUi(self)
 
