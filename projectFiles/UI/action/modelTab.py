@@ -38,7 +38,6 @@ class modelTab(Ui_modelTab, QWidget):
         if os.path.exists(md_path):
             with open(md_path, 'r', encoding="UTF-8") as fp:
                 md_content = fp.read()
-        print(md_content)
         self.textBrowser_model_explaination.setMarkdown(md_content)
         self.workspace.set_model_index(index)
         self.workspace.save_project()

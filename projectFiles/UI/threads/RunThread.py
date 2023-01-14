@@ -1,22 +1,20 @@
-from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot
+from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot, QObject
 from workspace import Workspace
 from myModel import Model
+import logging
+logging.basicConfig(
+    # filename='./log.txt',
+    level=logging.DEBUG,
+    format='%(asctime)s %(filename)s[line:%(lineno)d]%(levelname)s:%(message)s'
+)
 
-class RealtimeModel(Model):
-    loss_sig = pyqtSignal(int,int)
-    def __init__(self):
-        super().__init__()
-        self.epoch = 0
 
-    def state_change(self):
-        self.loss_sig.emit(self.epoch,self.train_loss)
-        return super().state_change()
-        
-class RunThread(QThread):
-    # sig = pyqtSignal(bool)
+class RunThread(QThread, Model):
+    loss_sig = pyqtSignal(float)
 
     def __init__(self, parent=None):
         super(RunThread, self).__init__(parent)
+        self.epoch = 0
 
     def __del__(self):
         # self.wait()
@@ -28,17 +26,23 @@ class RunThread(QThread):
         self.model_index = workspace.get_model_index()
         self.settings = workspace.get_settings()
 
+    def state_change(self):
+        self.loss_sig.emit(self.train_loss)
+        logging.info(f"loss sig emitted,loss:{self.train_loss}")
+        return super().state_change()
+
     def run(self):
-        model = RealtimeModel()
+        logging.info("run thread is running")
         if self.model_index == 1:
-            model.load_model("./models/UNet/cnn_24.pth",
-                             "./models/UNet/UNet.py")
+            self.load_model("./models/UNet/cnn_24.pth",
+                            "./models/UNet/UNet.py")
         else:
+            logging.error("model not found")
             return
         data_path = f"{self.train_folder}/image"
         mask_path = f"{self.train_folder}/label"
-        model.load_train_data(data_path, mask_path)
-        model.train_model(
+        self.load_train_data(data_path, mask_path)
+        self.train_model(
             epoch=self.settings["epochs"],
             batch_size=self.settings["batch_size"],
             learning_rate=self.settings["lr"],
@@ -46,3 +50,4 @@ class RunThread(QThread):
             optim=self.settings["optimizer"],
             loss_func=self.settings["loss_function"],
         )
+        return

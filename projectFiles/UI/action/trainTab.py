@@ -36,6 +36,8 @@ class trainTab(Ui_trainTab, QWidget):
         设置线程
         """
         self.run_thread = run_thread
+        self.run_thread.loss_sig.connect(self.widget_loss.loss_plot)
+        self.run_thread.finished.connect(self.train_finished)
 
     def update_settings(self):
         """
@@ -52,6 +54,9 @@ class trainTab(Ui_trainTab, QWidget):
         }
         self.workspace.set_settings(settings)
         self.workspace.save_project()
+        logging.info("setting updated")
+        print(settings)
+
 
     @pyqtSlot()
     def on_pushButton_change_clicked(self):
@@ -61,7 +66,13 @@ class trainTab(Ui_trainTab, QWidget):
     def on_pushButton_train_clicked(self):
         self.update_settings()
         self.run_thread.set_workspace(self.workspace)
+        self.lineEdit_status.setText("running...")
+        self.widget_loss.reset_plot_item()
         self.run_thread.start()
+
+    def train_finished(self):
+        logging.info("train finished")
+        self.lineEdit_status.setText("train finished")
 
     @pyqtSlot()
     def on_pushButton_test_clicked(self):

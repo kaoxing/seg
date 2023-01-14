@@ -109,9 +109,9 @@ class Model:
                 loss = loss_func(predict, labels)  # 通过预测值与标签算出误差
                 loss.backward()  # 误差逆传播
                 optimizer.step()  # 通过梯度调整参数
-                Loss += loss
-                # print(loss)
-            # print(Loss.item())
+                Loss += loss.item()
+                print("loss.item():",loss.item())
+            print("Loss:",Loss)
             self.train_loss = Loss
             self.state_change()
 

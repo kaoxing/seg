@@ -16,7 +16,7 @@ class evaluateTab(Ui_evaluateTab, QWidget):
         设置工作区
         """
         self.workspace = workspace
-        self.pushButton_start
+        self.lineEdit_evaluate_folder.setText(workspace.get_evaluate_folder())
     
     def set_threads(self,evaluate_thread:EvaluateThread):
         """
@@ -25,16 +25,12 @@ class evaluateTab(Ui_evaluateTab, QWidget):
         self.evaluate_thread = evaluate_thread
 
     @pyqtSlot()
-    def on_pushButton_result_clicked(self):
+    def on_pushButton_evaluate_clicked(self):
         temp = QFileDialog.getExistingDirectory()
-        if temp == "":
-            self.lineEdit_result_folder.clear()
-            self.workspace.set_result_folder(None)
-        else:
-            self.lineEdit_result_folder.setText(temp)
-            self.workspace.set_result_folder(temp)
+        if temp != "":
+            self.lineEdit_evaluate_folder.setText(temp)
+            self.workspace.set_evaluate_folder(temp)
             self.workspace.save_project()
-            # TODO self.set_tree_view(self.treeView_evaluate, temp)
 
     @pyqtSlot()
     def on_pushButton_start_clicked(self):

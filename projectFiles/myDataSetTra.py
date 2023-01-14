@@ -15,7 +15,7 @@ class MyDataSetTra(Dataset):
         for image in mask_list:
             # print(image)
             if image[-3:] == "png" or image[-3:] == "jpg":
-                data_y_path = os.path.join(data_path, image)
+                data_y_path = os.path.join(mask_path, image)
                 data = cv2.imread(data_y_path, cv2.IMREAD_GRAYSCALE)
                 data = torch.Tensor(data / 255)  # 归一
                 data = data.view(1, 512, 512)
