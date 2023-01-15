@@ -47,7 +47,6 @@ class ModelTrainer:
             optimizer = torch.optim.RMSprop(self.model.parameters(), lr=learning_rate)
         for cnt in range(epoch):
             Loss = 0
-            # print('第%d轮迭代' % cnt)
             for i, data in enumerate(dataloader):
                 input_data, labels = data
                 optimizer.zero_grad()  # 梯度置零

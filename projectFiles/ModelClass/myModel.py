@@ -32,8 +32,3 @@ class Model:
         torch.save(self.model.state_dict(), save_path)
 
 
-if __name__ == '__main__':
-    model = Model()
-    model.load_model("./models/UNet/cnn_24.pth", "./models/UNet/UNet.py")
-    model.load_predict_data("./data")
-    model.run_model("./result")

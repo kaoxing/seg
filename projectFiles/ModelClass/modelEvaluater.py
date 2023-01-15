@@ -39,8 +39,3 @@ class ModelEvaluater:
             cv2.imwrite("{0}/{1:0>3d}.png".format(predict_result_path, i), img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
 
-if __name__ == '__main__':
-    model = Model()
-    model.load_model("./models/UNet/cnn_24.pth", "./models/UNet/UNet.py")
-    model.load_predict_data("./data")
-    model.run_model("./result")
