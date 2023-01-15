@@ -1,3 +1,4 @@
+import imghdr
 import os
 import cv2
 import torch
@@ -12,9 +13,10 @@ class MyDataSetTra(Dataset):
         data_x = []
         data_y = []
         mask_list = os.listdir(mask_path)
+        imgType_list = {'jpg', 'bmp', 'png', 'jpeg', 'jfif'}
         for image in mask_list:
             # print(image)
-            if image[-3:] == "png" or image[-3:] == "jpg":
+            if imghdr.what(mask_path + image) in imgType_list:
                 data_y_path = os.path.join(mask_path, image)
                 data = cv2.imread(data_y_path, cv2.IMREAD_GRAYSCALE)
                 data = torch.Tensor(data / 255)  # 归一
@@ -24,7 +26,7 @@ class MyDataSetTra(Dataset):
         raw_list = os.listdir(data_path)
         for image in raw_list:
             # print(image)
-            if image[-3:] == "png" or image[-3:] == "jpg":
+            if imghdr.what(data_path + image) in imgType_list:
                 data_x_path = os.path.join(data_path, image)
                 data = cv2.imread(data_x_path, cv2.IMREAD_GRAYSCALE)
                 data = torch.Tensor(data / 255)  # 归一

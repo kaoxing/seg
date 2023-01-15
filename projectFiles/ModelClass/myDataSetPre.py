@@ -1,3 +1,4 @@
+import imghdr
 import os
 import cv2
 import torch
@@ -9,9 +10,10 @@ class MyDataSetPre(Dataset):
         # print(path)
         self.data_x = []
         data = []
+        imgType_list = {'jpg', 'bmp', 'png', 'jpeg', 'jfif'}
         image_list = os.listdir(path)
         for image in image_list:
-            if image[-3:] == "png" or image[-3:] == "jpg":
+            if imghdr.what(path + image) in imgType_list:
                 data_path = os.path.join(path, image)
                 img = cv2.imread(data_path, cv2.IMREAD_GRAYSCALE)
                 img = torch.Tensor(img / 255)  # 归一
