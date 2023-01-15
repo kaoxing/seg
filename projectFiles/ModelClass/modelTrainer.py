@@ -9,20 +9,21 @@ from ModelClass.myModel import Model
 class ModelTrainer:
     """模型训练器"""
 
-    def __init__(self, model: Model = None):
-        self.model: Model = model
+    def __init__(self):
+        self.model: Model = None
         self.train_dataset = None
         self.train_loss = 0
+        self.flag = True
 
     def set_model(self, model):
-        self.model = model
+        self.model = model.get_model()
 
     def load_train_data(self, data_path, mask_path):
         """加载标签,参数（标签路径）"""
         self.train_dataset = MyDataSetTra(data_path, mask_path)
 
     def save_model(self, save_path):
-        self.model.save_model(save_path)
+        torch.save(self.model.state_dict(), save_path)
 
     def train_model(self, epoch, batch_size, learning_rate=0.000001,
                     shuffle=True, optim="Adam", loss_func="BCELoss"):
@@ -49,6 +50,8 @@ class ModelTrainer:
         elif optim == "RMSProp":
             optimizer = torch.optim.RMSprop(self.model.parameters(), lr=learning_rate)
         for cnt in range(epoch):
+            if not self.flag:
+                break
             Loss = 0
             for i, data in enumerate(dataloader):
                 input_data, labels = data

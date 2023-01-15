@@ -12,6 +12,9 @@ class Model:
         self.model = None
         self.model_path = None
 
+    def get_model(self):
+        return self.model
+
     def load_model(self, model_path, net_path):
         """加载模型,参数（模型路径，网络路径）"""
         # self.models = MyModel(model_path)
@@ -28,7 +31,6 @@ class Model:
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.model.to(device)
 
-    def save_model(self, save_path):
-        torch.save(self.model.state_dict(), save_path)
+
 
 

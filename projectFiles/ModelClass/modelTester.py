@@ -12,13 +12,13 @@ from ModelClass.myModel import Model
 class ModelTester:
     """模型测试器"""
 
-    def __init__(self, model: Model):
-        self.model: Model = model
+    def __init__(self):
+        self.model: Model = None
         self.test_dataset = None
         self.test_dice = 0
 
     def set_model(self, model):
-        self.model = model
+        self.model = model.get_model()
 
     def load_test_data(self, data_path, mask_path):
         """加载测试集,参数（测试集数据）"""

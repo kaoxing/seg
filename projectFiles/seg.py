@@ -1,6 +1,6 @@
 import os
 import sys
-# import sysPath
+import sysPath
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileSystemModel, QFileDialog, QTreeView
 from ui import MainWindow
 from UI.action.newWorkspace import newWorkspace
