@@ -1,13 +1,15 @@
 from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot
 from workspace import Workspace
-from myModel import Model
+from ModelClass.myModel import Model
+from ModelClass.modelEvaluater import ModelEvaluater
 
 
-class EvaluateThread(QThread):
+class EvaluateThread(QThread, ModelEvaluater):
     # sig = pyqtSignal(bool)
 
-    def __init__(self, parent=None):
+    def __init__(self, model: Model, parent=None):
         super(EvaluateThread, self).__init__(parent)
+        super(ModelEvaluater, self).__init__(model)
 
     def __del__(self):
         # self.wait()
@@ -26,14 +28,3 @@ class EvaluateThread(QThread):
         model.run_model(self.result_folder)
 
         # self.sig.emit(True)
-
-
-# import os
-# import sys
-
-# current_directory = os.path.dirname(os.path.abspath(__file__))
-# sys.path.append(current_directory)
-
-# if __name__ == "__main__":
-#     # print(os.path.abspath("./"))
-#     print(current_directory)

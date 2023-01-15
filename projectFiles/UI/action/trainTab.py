@@ -16,6 +16,7 @@ class trainTab(Ui_trainTab, QWidget):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.run_thread = None
 
     def set_workspace(self, workspace: Workspace):
         """
@@ -65,9 +66,10 @@ class trainTab(Ui_trainTab, QWidget):
     @pyqtSlot()
     def on_pushButton_train_clicked(self):
         self.update_settings()
-        self.run_thread.set_workspace(self.workspace)
         self.lineEdit_status.setText("running...")
         self.widget_loss.reset_plot_item()
+        self.run_thread = RunThread()
+        self.run_thread.set_workspace(self.workspace)
         self.run_thread.start()
 
     def train_finished(self):

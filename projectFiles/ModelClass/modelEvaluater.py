@@ -13,6 +13,10 @@ class ModelEvaluater:
         self.model: Model = model
         self.predict_dataset = None
 
+    def set_model(self, model):
+        self.model = model
+
+
     def load_predict_data(self, data_path):
         """"加载数据,参数（数据路径）"""
         self.predict_dataset = MyDataSetPre(data_path)

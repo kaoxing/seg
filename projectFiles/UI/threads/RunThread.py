@@ -1,6 +1,7 @@
 from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot, QObject
 from workspace import Workspace
-from myModel import Model
+from ModelClass.myModel import modelTrainer
+
 import logging
 logging.basicConfig(
     # filename='./log.txt',
@@ -9,7 +10,7 @@ logging.basicConfig(
 )
 
 
-class RunThread(QThread, Model):
+class RunThread(QThread, ModelTrain):
     loss_sig = pyqtSignal(float)
 
     def __init__(self, parent=None):

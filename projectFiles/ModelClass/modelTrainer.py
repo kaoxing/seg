@@ -9,10 +9,13 @@ from myModel import Model
 class ModelTrainer:
     """模型训练器"""
 
-    def __init__(self, model: Model):
-        self.model: Model = None
+    def __init__(self, model: Model = None):
+        self.model: Model = model
         self.train_dataset = None
         self.train_loss = 0
+
+    def set_model(self, model):
+        self.model = model
 
     def load_train_data(self, data_path, mask_path):
         """加载标签,参数（标签路径）"""
@@ -63,5 +66,3 @@ class ModelTrainer:
     @abstractmethod
     def state_change(self):
         pass
-
-

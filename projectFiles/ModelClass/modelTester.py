@@ -17,6 +17,9 @@ class ModelTester:
         self.test_dataset = None
         self.test_dice = 0
 
+    def set_model(self, model):
+        self.model = model
+
     def load_test_data(self, data_path, mask_path):
         """加载测试集,参数（测试集数据）"""
         self.test_dataset = MyDataSetTra(data_path, mask_path)

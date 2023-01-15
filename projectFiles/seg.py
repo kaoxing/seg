@@ -1,14 +1,11 @@
 import os
 import sys
-import datetime
+import sysPath
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileSystemModel, QFileDialog, QTreeView
 from ui import MainWindow
 from UI.action.newWorkspace import newWorkspace
 from UI.threads.EvaluateThread import EvaluateThread
 from UI.threads.RunThread import RunThread
-from workspace import Workspace
-
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -17,7 +14,7 @@ if __name__ == "__main__":
     new_workspace_widget = newWorkspace()
     # 线程
     evaluate_thread = EvaluateThread()
-    run_thread = RunThread()
+    # run_thread = RunThread()
     main_window.tab_3.set_threads(run_thread)
     main_window.tab_4.set_threads(evaluate_thread)
     # 信号与槽
