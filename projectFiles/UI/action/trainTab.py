@@ -2,6 +2,7 @@ from PyQt5.QtCore import pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import QWidget, QFileDialog
 from UI.static.trainTab import Ui_trainTab
 from UI.threads.RunThread import RunThread
+from UI.threads.TestThread import TestThread
 from workspace import Workspace
 import logging
 logging.basicConfig(
@@ -18,6 +19,7 @@ class trainTab(Ui_trainTab, QWidget):
         super().__init__()
         self.setupUi(self)
         self.run_thread = RunThread()
+        self.test_thread = TestThread()
         self.set_threads()
 
     def set_workspace(self, workspace: Workspace):
@@ -40,6 +42,8 @@ class trainTab(Ui_trainTab, QWidget):
         """
         self.run_thread.loss_sig.connect(self.widget_loss.loss_plot)
         self.run_thread.finished.connect(self.train_finished)
+        # self.test_thread.dice_sig.connect(self.widget_loss.loss_plot)
+        self.test_thread.finished.connect(self.test_finished)
 
     def update_settings(self):
         """
@@ -81,6 +85,13 @@ class trainTab(Ui_trainTab, QWidget):
     @pyqtSlot()
     def on_pushButton_test_clicked(self):
         logging.info("pushButton_test clicked")
+        self.lineEdit_status.setText("testing...")
+        self.test_thread.set_workspace(self.workspace)
+        self.test_thread.start()
+
+    def test_finished(self):
+        logging.info("test finished")
+        self.lineEdit_status.setText("test finished")
 
     @pyqtSlot()
     def on_pushButton_save_clicked(self):

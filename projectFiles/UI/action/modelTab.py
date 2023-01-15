@@ -83,4 +83,5 @@ class modelTab(Ui_modelTab, QWidget):
         model = Model()
         model.load_model(model_path,net_path)
         self.workspace.set_model(model)
+        # TODO 改trainTab
         logging.info(f"model set:{self.workspace.get_model()}")

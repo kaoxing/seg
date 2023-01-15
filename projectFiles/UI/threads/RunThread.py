@@ -23,7 +23,6 @@ class RunThread(QThread, ModelTrainer):
 
     def set_workspace(self, workspace: Workspace):
         self.train_folder = workspace.get_train_folder()
-        self.test_folder = workspace.get_test_folder()
         self.model = workspace.get_model()
         self.settings = workspace.get_settings()
 

@@ -37,6 +37,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         os.mkdir(workdir + "/data/test")
         os.mkdir(workdir + "/data/test/image")
         os.mkdir(workdir + "/data/test/label")
+        os.mkdir(workdir + "/data/test/result")
         os.mkdir(workdir + "/models")
         os.mkdir(workdir + "/result")
         self.init_workspace(workdir)
