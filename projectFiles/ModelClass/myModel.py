@@ -31,6 +31,8 @@ class Model:
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.model.to(device)
 
+    def save_model(self, save_path):
+        torch.save(self.model.state_dict(), save_path)
 
 
 

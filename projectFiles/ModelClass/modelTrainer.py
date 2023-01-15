@@ -22,9 +22,6 @@ class ModelTrainer:
         """加载标签,参数（标签路径）"""
         self.train_dataset = MyDataSetTra(data_path, mask_path)
 
-    def save_model(self, save_path):
-        torch.save(self.model.state_dict(), save_path)
-
     def train_model(self, epoch, batch_size, learning_rate=0.000001,
                     shuffle=True, optim="Adam", loss_func="BCELoss"):
         """训练模型,参数（训练轮数,训练批次大小,学习率,数据集是否打乱,优化器,），若新model名为空则将覆盖原model"""
@@ -44,11 +41,14 @@ class ModelTrainer:
             loss_func = nn.NLLLoss2d()
         loss_func = loss_func.to(device)
         if optim == "Adam":
-            optimizer = torch.optim.Adam(self.model.parameters(), lr=learning_rate)
+            optimizer = torch.optim.Adam(
+                self.model.parameters(), lr=learning_rate)
         elif optim == "SGD":
-            optimizer = torch.optim.SGD(self.model.parameters(), lr=learning_rate)
+            optimizer = torch.optim.SGD(
+                self.model.parameters(), lr=learning_rate)
         elif optim == "RMSProp":
-            optimizer = torch.optim.RMSprop(self.model.parameters(), lr=learning_rate)
+            optimizer = torch.optim.RMSprop(
+                self.model.parameters(), lr=learning_rate)
         for cnt in range(epoch):
             if not self.flag:
                 break

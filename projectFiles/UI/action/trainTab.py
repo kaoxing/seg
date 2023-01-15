@@ -42,7 +42,7 @@ class trainTab(Ui_trainTab, QWidget):
         """
         self.run_thread.loss_sig.connect(self.widget_loss.loss_plot)
         self.run_thread.finished.connect(self.train_finished)
-        # self.test_thread.dice_sig.connect(self.widget_loss.loss_plot)
+        self.test_thread.dice_sig.connect(self.widget_dice.dice_plot)
         self.test_thread.finished.connect(self.test_finished)
 
     def update_settings(self):
@@ -97,4 +97,4 @@ class trainTab(Ui_trainTab, QWidget):
     def on_pushButton_save_clicked(self):
         file, _ = QFileDialog.getSaveFileName(
             self, "save model", filter="pth file(*.pth)")
-        print(file)
+        self.workspace.get_model().save_model(file)

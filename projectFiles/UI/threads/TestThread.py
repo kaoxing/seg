@@ -27,11 +27,11 @@ class TestThread(QThread, ModelTester):
 
     def state_change(self):
         self.dice_sig.emit(self.test_dice)
-        logging.info(f"dice sig emitted,loss:{self.self.test_dice}")
+        logging.info(f"dice sig emitted,dice:{self.test_dice}")
         return super().state_change()
 
     def run(self):
-        logging.info("run thread is running")
+        logging.info("test thread is running")
         data_path = f"{self.test_folder}/image"
         mask_path = f"{self.test_folder}/label"
         result_path = f"{self.test_folder}/result"
