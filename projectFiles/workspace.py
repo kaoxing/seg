@@ -1,5 +1,6 @@
 import json
 import os
+from ModelClass.myModel import Model
 import logging
 logging.basicConfig(
     # filename='./log.txt',
@@ -16,23 +17,23 @@ class Workspace:
     def __init__(self, workdir: str):
         self.workdir = workdir
         config = workdir+"/.config"
+        self.project_name = os.path.basename(workdir)
+        self.train_folder = workdir + "/data/train"
+        self.test_folder = workdir + "/data/test"
+        self.evaluate_folder = ""
+        self.result_folder = workdir + "/result"
+        self.model = None
+        self.epochs = 0
+        self.batch_size = 0
+        self.loss_function = "Cross-Entropy"
+        self.lr = 0.000001
+        self.optimizer = "Adam"
+        self.pretrain_model = "to be loaded"
+        self.status = "waiting..."
         # 根据.config文件初始化
         if os.path.exists(config):
             self.load_project()
         else:
-            self.project_name = os.path.basename(workdir)
-            self.train_folder = workdir + "/data/train"
-            self.test_folder = workdir + "/data/test"
-            self.evaluate_folder = ""
-            self.result_folder = workdir + "/result"
-            self.model_index = 0
-            self.epochs = 0
-            self.batch_size = 0
-            self.loss_function = "Cross-Entropy"
-            self.lr = 0.000001
-            self.optimizer = "Adam"
-            self.pretrain_model = "to be loaded"
-            self.status = "waiting..."
             self.save_project()
 
     # 下面几个方法都是SET系列的(START)
@@ -51,8 +52,8 @@ class Workspace:
     def set_result_folder(self, result_folder: str):
         self.result_folder = result_folder
 
-    def set_model_index(self, model_index: int):
-        self.model_index = model_index
+    def set_model(self, model: Model):
+        self.model = model
 
     def set_settings(self, settings: dict):
         self.epochs = settings["epochs"]
@@ -80,8 +81,8 @@ class Workspace:
     def get_result_folder(self):
         return self.result_folder
 
-    def get_model_index(self):
-        return self.model_index
+    def get_model(self):
+        return self.model
 
     def get_settings(self):
         settings = {
@@ -106,7 +107,6 @@ class Workspace:
             "test_folder": self.test_folder,
             "evaluate_folder": self.evaluate_folder,
             "result_folder": self.result_folder,
-            "model_index": self.model_index,
             "epochs": self.epochs,
             "batch_size": self.batch_size,
             "loss_function": self.loss_function,
@@ -137,7 +137,6 @@ class Workspace:
             self.test_folder = dic["test_folder"]
             self.evaluate_folder = dic["evaluate_folder"]
             self.result_folder = dic["result_folder"]
-            self.model_index = dic["model_index"]
             self.epochs = dic["epochs"]
             self.batch_size = dic["batch_size"]
             self.loss_function = dic["loss_function"]

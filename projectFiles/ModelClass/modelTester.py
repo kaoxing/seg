@@ -4,9 +4,9 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 from PIL import Image
-from myDataSetTra import MyDataSetTra
+from ModelClass.myDataSetTra import MyDataSetTra
 from abc import abstractmethod
-from myModel import Model
+from ModelClass.myModel import Model
 
 
 class ModelTester:

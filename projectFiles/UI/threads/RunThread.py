@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot, QObject
 from workspace import Workspace
-from ModelClass.myModel import modelTrainer
+from ModelClass.modelTrainer import ModelTrainer
 
 import logging
 logging.basicConfig(
@@ -10,7 +10,7 @@ logging.basicConfig(
 )
 
 
-class RunThread(QThread, ModelTrain):
+class RunThread(QThread, ModelTrainer):
     loss_sig = pyqtSignal(float)
 
     def __init__(self, parent=None):
@@ -24,7 +24,7 @@ class RunThread(QThread, ModelTrain):
     def set_workspace(self, workspace: Workspace):
         self.train_folder = workspace.get_train_folder()
         self.test_folder = workspace.get_test_folder()
-        self.model_index = workspace.get_model_index()
+        self.model = workspace.get_model()
         self.settings = workspace.get_settings()
 
     def state_change(self):
@@ -34,15 +34,10 @@ class RunThread(QThread, ModelTrain):
 
     def run(self):
         logging.info("run thread is running")
-        if self.model_index == 1:
-            self.load_model("./models/UNet/cnn_24.pth",
-                            "./models/UNet/UNet.py")
-        else:
-            logging.error("model not found")
-            return
         data_path = f"{self.train_folder}/image"
         mask_path = f"{self.train_folder}/label"
         self.load_train_data(data_path, mask_path)
+        self.set_model(self.model)
         self.train_model(
             epoch=self.settings["epochs"],
             batch_size=self.settings["batch_size"],

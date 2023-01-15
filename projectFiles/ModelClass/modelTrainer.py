@@ -1,9 +1,9 @@
 import torch
 from torch.utils.data import DataLoader
 import torch.nn as nn
-from myDataSetTra import MyDataSetTra
+from ModelClass.myDataSetTra import MyDataSetTra
 from abc import abstractmethod
-from myModel import Model
+from ModelClass.myModel import Model
 
 
 class ModelTrainer:

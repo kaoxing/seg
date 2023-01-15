@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
-from myDataSetPre import MyDataSetPre
-from myModel import Model
+from ModelClass.myDataSetPre import MyDataSetPre
+from ModelClass.myModel import Model
 
 
 class ModelEvaluater:
