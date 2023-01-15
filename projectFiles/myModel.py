@@ -48,14 +48,9 @@ class Model:
             shuffle=False,
         )
 
-    def load_test_data(self, test_path):
+    def load_test_data(self, data_path, mask_path):
         """加载测试集,参数（测试集数据）"""
-        self.test_dataset = MyDataSetTra(test_path)
-        self.test_dataset = DataLoader(
-            dataset=self.test_dataset,
-            batch_size=1,
-            shuffle=False,
-        )
+        self.test_dataset = MyDataSetTra(data_path, mask_path)
 
     def load_train_data(self, data_path, mask_path):
         """加载标签,参数（标签路径）"""
@@ -120,7 +115,30 @@ class Model:
             self.train_loss = Loss
             self.state_change()
 
-    # def test_model(self):
+    def test_model(self, result_path):
+        dataloader = DataLoader(
+            dataset=self.test_dataset,
+            batch_size=1,
+            shuffle=False,
+        )
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        dices = np.array([])
+        for i, data in enumerate(dataloader):
+            input_data, labels = data
+            input_data = input_data.to(device)
+            predict = self.model(input_data)
+            img_pre = torch.reshape(predict, (512, 512)).cpu().detach().numpy()
+            img_lab = torch.reshape(labels, (512, 512)).detach().numpy()
+            img_pre = np.round(img_pre)
+            img_lab = np.round(img_lab)
+            temp = self.__dice(img_pre, img_lab)
+            dices = np.append(dices, temp)
+            img_pre = img_pre * 255
+            im = Image.fromarray(img_pre)
+            im = np.array(im, dtype='uint8')
+            cv2.imwrite(os.path.join(result_path, "%03d.png" % i), im, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            print("dice:", temp)
+        print("average:", dices.sum() / len(dataloader))
 
     @staticmethod
     def __dice(predict, label):
@@ -131,7 +149,6 @@ class Model:
                 if predict[x][y] == 1 and label[x][y] == 1:
                     same += 1
         return same * 2 / cnt
-
 
     @abstractmethod
     def state_change(self):
