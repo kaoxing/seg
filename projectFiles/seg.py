@@ -1,11 +1,8 @@
-import os
 import sys
 import sysPath
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileSystemModel, QFileDialog, QTreeView
+from PyQt5.QtWidgets import QApplication
 from ui import MainWindow
 from UI.action.newWorkspace import newWorkspace
-from UI.threads.EvaluateThread import EvaluateThread
-from UI.threads.RunThread import RunThread
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

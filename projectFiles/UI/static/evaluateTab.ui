@@ -13,18 +13,18 @@
   <property name="windowTitle">
    <string>evaluateTab</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1,9,1">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,0,7,1">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_23">
      <item>
       <widget class="QLabel" name="label_25">
        <property name="font">
         <font>
-         <family>宋体</family>
-         <pointsize>15</pointsize>
-         <weight>50</weight>
+         <family>Times New Roman</family>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
          <italic>false</italic>
-         <bold>false</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -36,8 +36,8 @@
       <widget class="QLineEdit" name="lineEdit_evaluate_folder">
        <property name="font">
         <font>
-         <family>宋体</family>
-         <pointsize>15</pointsize>
+         <family>Times New Roman</family>
+         <pointsize>16</pointsize>
          <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>
@@ -61,8 +61,8 @@
       <widget class="QPushButton" name="pushButton_evaluate">
        <property name="font">
         <font>
-         <family>宋体</family>
-         <pointsize>15</pointsize>
+         <family>Times New Roman</family>
+         <pointsize>16</pointsize>
          <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>
@@ -70,6 +70,71 @@
        </property>
        <property name="text">
         <string>Browse</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_20">
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Loaded Model:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_loaded_model">
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_21">
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>status:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_status">
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -102,20 +167,20 @@
            <widget class="QLabel" name="label_26">
             <property name="font">
              <font>
-              <family>宋体</family>
-              <pointsize>15</pointsize>
-              <weight>50</weight>
+              <family>Times New Roman</family>
+              <pointsize>16</pointsize>
+              <weight>75</weight>
               <italic>false</italic>
-              <bold>false</bold>
+              <bold>true</bold>
              </font>
             </property>
             <property name="text">
-             <string> image：</string>
+             <string> input：</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QTreeView" name="treeView_image"/>
+           <widget class="ImageListWidget" name="widget_input" native="true"/>
           </item>
          </layout>
         </widget>
@@ -125,20 +190,20 @@
            <widget class="QLabel" name="label_27">
             <property name="font">
              <font>
-              <family>宋体</family>
-              <pointsize>15</pointsize>
-              <weight>50</weight>
+              <family>Times New Roman</family>
+              <pointsize>16</pointsize>
+              <weight>75</weight>
               <italic>false</italic>
-              <bold>false</bold>
+              <bold>true</bold>
              </font>
             </property>
             <property name="text">
-             <string>evaluate：</string>
+             <string>result：</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QTreeView" name="treeView_evaluate"/>
+           <widget class="ImageListWidget" name="widget_result" native="true"/>
           </item>
          </layout>
         </widget>
@@ -169,11 +234,11 @@
        </property>
        <property name="font">
         <font>
-         <family>宋体</family>
-         <pointsize>15</pointsize>
-         <weight>50</weight>
+         <family>Times New Roman</family>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
          <italic>false</italic>
-         <bold>false</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -198,6 +263,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ImageListWidget</class>
+   <extends>QWidget</extends>
+   <header>UI/Widgets/imageWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

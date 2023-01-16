@@ -32,7 +32,7 @@ class RunThread(QThread, ModelTrainer):
         return super().state_change()
 
     def run(self):
-        logging.info("run thread is running")
+        logging.info("train thread is running")
         data_path = f"{self.train_folder}/image"
         mask_path = f"{self.train_folder}/label"
         self.load_train_data(data_path, mask_path)

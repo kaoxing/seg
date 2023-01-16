@@ -1,3 +1,5 @@
+import datetime
+import os
 from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot, QObject
 from workspace import Workspace
 from ModelClass.modelTester import ModelTester
@@ -12,6 +14,7 @@ logging.basicConfig(
 
 class TestThread(QThread, ModelTester):
     dice_sig = pyqtSignal(float)
+    img_sig = pyqtSignal(str)
 
     def __init__(self, parent=None):
         super(TestThread, self).__init__(parent)
@@ -26,7 +29,7 @@ class TestThread(QThread, ModelTester):
 
     def state_change(self):
         self.dice_sig.emit(self.test_dice)
-        logging.info(f"dice sig emitted,dice:{self.test_dice}")
+        self.img_sig.emit(self.filename)
         return super().state_change()
 
     def run(self):
@@ -34,6 +37,9 @@ class TestThread(QThread, ModelTester):
         data_path = f"{self.test_folder}/image"
         mask_path = f"{self.test_folder}/label"
         result_path = f"{self.test_folder}/result"
+        sub_folder = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        result_path = os.path.join(result_path,sub_folder)
+        os.mkdir(result_path)
         self.load_test_data(data_path, mask_path)
         self.set_model(self.model)
         self.test_model(result_path)

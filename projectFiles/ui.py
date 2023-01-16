@@ -14,6 +14,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setupUi(self)
         self.workspace = None
         self.tabWidget.hide()
+        self.tab.workspace_change_sig.connect(self.tab_3.reset_widget_label)
         self.tab_2.model_loaded_sig.connect(self.model_loaded)
         self.tab_3.change_tab_sig.connect(self.change_tab)
 
@@ -72,6 +73,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def model_loaded(self):
         model_name = self.workspace.get_pretrain_model()
         self.tab_3.lineEdit_pretrain_model.setText(model_name)
+        self.tab_4.lineEdit_loaded_model.setText(model_name)
 
     def change_tab(self, page: int):
         self.tabWidget.setCurrentIndex(page)

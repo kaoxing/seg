@@ -243,6 +243,9 @@
            <bold>false</bold>
           </font>
          </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
          <property name="placeholderText">
           <string>select test folder</string>
          </property>
@@ -296,6 +299,9 @@
            <italic>false</italic>
            <bold>false</bold>
           </font>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
          <property name="placeholderText">
           <string>select result folder</string>

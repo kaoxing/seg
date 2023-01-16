@@ -505,7 +505,7 @@
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_8">
+          <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,1">
            <item>
             <widget class="QLabel" name="label_17">
              <property name="font">
@@ -539,7 +539,7 @@
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_13">
+          <layout class="QVBoxLayout" name="verticalLayout_13" stretch="0,1">
            <item>
             <widget class="QLabel" name="label_19">
              <property name="font">
@@ -552,12 +552,12 @@
               </font>
              </property>
              <property name="text">
-              <string>...:</string>
+              <string>Ground Truth:</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="widget" native="true"/>
+            <widget class="ImageListWidget" name="widget_label" native="true"/>
            </item>
           </layout>
          </widget>
@@ -568,7 +568,7 @@
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_12">
+          <layout class="QVBoxLayout" name="verticalLayout_12" stretch="0,1">
            <item>
             <widget class="QLabel" name="label_18">
              <property name="font">
@@ -581,12 +581,12 @@
               </font>
              </property>
              <property name="text">
-              <string>...:</string>
+              <string>Test Result:</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="widget_2" native="true"/>
+            <widget class="ImageListWidget" name="widget_result" native="true"/>
            </item>
           </layout>
          </widget>
@@ -609,6 +609,12 @@
    <class>diceWidget</class>
    <extends>QWidget</extends>
    <header>UI/Widgets/diceWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ImageListWidget</class>
+   <extends>QWidget</extends>
+   <header>UI/Widgets/imageWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

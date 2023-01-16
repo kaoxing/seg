@@ -1,11 +1,12 @@
 import os
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSignal,pyqtSlot
 from PyQt5.QtWidgets import QWidget, QFileDialog, QListWidgetItem, QLineEdit
 from UI.static.projectTab import Ui_projectTab
 from workspace import Workspace
 
 
 class projectTab(Ui_projectTab, QWidget):
+    workspace_change_sig = pyqtSignal()
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -57,6 +58,7 @@ class projectTab(Ui_projectTab, QWidget):
         self.workspace.set_test_folder(self.lineEdit_test_folder.text())
         self.workspace.set_result_folder(self.lineEdit_result_folder.text())
         self.workspace.save_project()
+        self.workspace_change_sig.emit()
 
 
 

@@ -4,17 +4,19 @@ import torch
 from torch.utils.data import DataLoader
 from ModelClass.myDataSetPre import MyDataSetPre
 from ModelClass.myModel import Model
+from abc import abstractmethod
 
 
 class ModelEvaluater:
     """模型评估器"""
 
-    def __init__(self, model: Model):
-        self.model: Model = model
+    def __init__(self):
+        self.model: Model = None
         self.predict_dataset = None
+        self.filename = None
 
-    def set_model(self, model):
-        self.model = model
+    def set_model(self, model: Model):
+        self.model = model.get_model()
 
 
     def load_predict_data(self, data_path):
@@ -39,7 +41,14 @@ class ModelEvaluater:
             predict = predict.numpy()
             predict = predict.round()
             predict = predict * 255
+            filename = "{0}/{1:0>3d}.png".format(predict_result_path, i)
             img = np.array(predict, dtype='uint8')
-            cv2.imwrite("{0}/{1:0>3d}.png".format(predict_result_path, i), img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            cv2.imwrite(filename, img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            self.filename = filename
+            self.state_change()
+
+    @abstractmethod
+    def state_change(self):
+        pass
 
 

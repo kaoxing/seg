@@ -16,6 +16,8 @@ class ModelTester:
         self.model: Model = None
         self.test_dataset = None
         self.test_dice = 0
+        self.filename = None
+
 
     def set_model(self, model):
         self.model = model.get_model()
@@ -44,7 +46,9 @@ class ModelTester:
             img_pre = img_pre * 255
             im = Image.fromarray(img_pre)
             im = np.array(im, dtype='uint8')
-            cv2.imwrite(os.path.join(result_path, "%03d.png" % i), im, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            filename = os.path.join(result_path, "%03d.png" % i)
+            cv2.imwrite(filename, im, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            self.filename = filename
             self.state_change()
             # print("dice:", self.test_dice)
         # print("average:", dices.sum() / len(dataloader))

@@ -1,3 +1,4 @@
+import os
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import QWidget, QFileDialog
 from UI.static.trainTab import Ui_trainTab
@@ -35,6 +36,10 @@ class trainTab(Ui_trainTab, QWidget):
         self.comboBox_optimizer.setCurrentText(settings["optimizer"])
         self.lineEdit_pretrain_model.setText(workspace.get_pretrain_model())
         self.lineEdit_status.setText(workspace.get_status())
+        self.reset_widget_label()
+
+    def reset_widget_label(self):
+        self.widget_label.load_images(os.path.join(self.workspace.get_test_folder(),"label"))
 
     def set_threads(self):
         """
@@ -43,6 +48,7 @@ class trainTab(Ui_trainTab, QWidget):
         self.run_thread.loss_sig.connect(self.widget_loss.loss_plot)
         self.run_thread.finished.connect(self.train_finished)
         self.test_thread.dice_sig.connect(self.widget_dice.dice_plot)
+        self.test_thread.img_sig.connect(self.widget_result.add_image)
         self.test_thread.finished.connect(self.test_finished)
 
     def update_settings(self):
@@ -71,7 +77,7 @@ class trainTab(Ui_trainTab, QWidget):
         训练按钮
         """
         self.update_settings()
-        self.lineEdit_status.setText("running...")
+        self.lineEdit_status.setText("trainning...")
         self.widget_loss.reset_plot_item()
         self.run_thread.set_workspace(self.workspace)
         self.run_thread.start()
@@ -82,8 +88,12 @@ class trainTab(Ui_trainTab, QWidget):
 
     @pyqtSlot()
     def on_pushButton_test_clicked(self):
+        """
+        测试按钮
+        """
         self.lineEdit_status.setText("testing...")
         self.widget_dice.reset_plot_item()
+        self.widget_result.clear()
         self.test_thread.set_workspace(self.workspace)
         self.test_thread.start()
 
@@ -95,5 +105,5 @@ class trainTab(Ui_trainTab, QWidget):
     def on_pushButton_save_clicked(self):
         file, _ = QFileDialog.getSaveFileName(
             self, "save model", filter="pth file(*.pth)")
-        if file!="":
+        if os.path.exists(file):
             self.workspace.get_model().save_model(file)
