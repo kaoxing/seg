@@ -23,7 +23,6 @@ class TestThread(QThread, ModelTester):
     def set_workspace(self, workspace: Workspace):
         self.test_folder = workspace.get_test_folder()
         self.model = workspace.get_model()
-        self.settings = workspace.get_settings()
 
     def state_change(self):
         self.dice_sig.emit(self.test_dice)

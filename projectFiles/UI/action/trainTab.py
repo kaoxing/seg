@@ -33,8 +33,8 @@ class trainTab(Ui_trainTab, QWidget):
         self.comboBox_loss_function.setCurrentText(settings["loss_function"])
         self.doubleSpinBox_lr.setValue(settings["lr"])
         self.comboBox_optimizer.setCurrentText(settings["optimizer"])
-        self.lineEdit_pretrain_model.setText(settings["pretrain_model"])
-        self.lineEdit_status.setText(settings["status"])
+        self.lineEdit_pretrain_model.setText(workspace.get_pretrain_model())
+        self.lineEdit_status.setText(workspace.get_status())
 
     def set_threads(self):
         """
@@ -55,8 +55,6 @@ class trainTab(Ui_trainTab, QWidget):
             "loss_function": self.comboBox_loss_function.currentText(),
             "lr": self.doubleSpinBox_lr.value(),
             "optimizer": self.comboBox_optimizer.currentText(),
-            "pretrain_model": self.lineEdit_pretrain_model.text(),
-            "status": self.lineEdit_status.text(),
         }
         self.workspace.set_settings(settings)
         self.workspace.save_project()
@@ -84,8 +82,8 @@ class trainTab(Ui_trainTab, QWidget):
 
     @pyqtSlot()
     def on_pushButton_test_clicked(self):
-        logging.info("pushButton_test clicked")
         self.lineEdit_status.setText("testing...")
+        self.widget_dice.reset_plot_item()
         self.test_thread.set_workspace(self.workspace)
         self.test_thread.start()
 
@@ -97,4 +95,5 @@ class trainTab(Ui_trainTab, QWidget):
     def on_pushButton_save_clicked(self):
         file, _ = QFileDialog.getSaveFileName(
             self, "save model", filter="pth file(*.pth)")
-        self.workspace.get_model().save_model(file)
+        if file!="":
+            self.workspace.get_model().save_model(file)

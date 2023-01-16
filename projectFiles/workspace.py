@@ -22,6 +22,8 @@ class Workspace:
         self.test_folder = workdir + "/data/test"
         self.evaluate_folder = ""
         self.result_folder = workdir + "/result"
+        self.from_my_model = False
+        self.model_index = 0
         self.model = None
         self.epochs = 0
         self.batch_size = 0
@@ -52,6 +54,12 @@ class Workspace:
     def set_result_folder(self, result_folder: str):
         self.result_folder = result_folder
 
+    def set_from_my_model(self, b: bool):
+        self.from_my_model = b
+
+    def set_model_index(self, index: int):
+        self.model_index = index
+
     def set_model(self, model: Model):
         self.model = model
 
@@ -61,8 +69,12 @@ class Workspace:
         self.loss_function = settings["loss_function"]
         self.lr = settings["lr"]
         self.optimizer = settings["optimizer"]
-        self.pretrain_model = settings["pretrain_model"]
-        self.status = settings["status"]
+
+    def set_pretrain_model(self, pretrain_model: str):
+        self.pretrain_model = pretrain_model
+
+    def set_status(self, status: str):
+        self.status = status
     # 上面几个方法都是SET系列的(END)
 
     # 下面几个方法都是GET系列的(START)
@@ -81,6 +93,12 @@ class Workspace:
     def get_result_folder(self):
         return self.result_folder
 
+    def get_from_my_model(self):
+        return self.from_my_model
+
+    def get_model_index(self):
+        return self.model_index
+
     def get_model(self):
         return self.model
 
@@ -91,10 +109,14 @@ class Workspace:
             "loss_function": self.loss_function,
             "lr": self.lr,
             "optimizer": self.optimizer,
-            "pretrain_model": self.pretrain_model,
-            "status": self.status,
         }
         return settings
+
+    def get_pretrain_model(self):
+        return self.pretrain_model
+
+    def get_status(self):
+        return self.status
     # 上面几个方法都是GET系列的(END)
 
     def save_project(self):
@@ -107,6 +129,8 @@ class Workspace:
             "test_folder": self.test_folder,
             "evaluate_folder": self.evaluate_folder,
             "result_folder": self.result_folder,
+            "from_my_model": self.from_my_model,
+            "model_index": self.model_index,
             "epochs": self.epochs,
             "batch_size": self.batch_size,
             "loss_function": self.loss_function,
@@ -137,13 +161,15 @@ class Workspace:
             self.test_folder = dic["test_folder"]
             self.evaluate_folder = dic["evaluate_folder"]
             self.result_folder = dic["result_folder"]
+            self.from_my_model = dic["from_my_model"]
+            self.model_index = dic["model_index"]
             self.epochs = dic["epochs"]
             self.batch_size = dic["batch_size"]
             self.loss_function = dic["loss_function"]
             self.lr = dic["lr"]
             self.optimizer = dic["optimizer"]
-            self.pretrain_model = dic["pretrain_model"]
-            self.status = dic["status"]
+            # self.pretrain_model = dic["pretrain_model"]
+            # self.status = dic["status"]
             logging.info(f"project loaded from {path}")
             return True
         else:
