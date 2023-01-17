@@ -20,7 +20,7 @@ class Workspace:
         self.project_name = os.path.basename(workdir)
         self.train_folder = workdir + "/data/train"
         self.test_folder = workdir + "/data/test"
-        self.evaluate_folder = ""
+        self.evaluate_folder = workdir + "/evaluate"
         self.result_folder = workdir + "/result"
         self.from_my_model = False
         self.model_index = 0
