@@ -24,6 +24,7 @@ class Ui_trainTab(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.frame)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label_5 = QtWidgets.QLabel(self.frame)
+        self.label_5.setMaximumSize(QtCore.QSize(16777215, 50))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(20)

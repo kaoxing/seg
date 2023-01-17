@@ -130,6 +130,6 @@ if __name__ == '__main__':
     # net = train()
     net = torch.load('./projectFiles/models/cnn_24.pt', map_location='cuda' if torch.cuda.is_available() else 'cpu')
     torch.save(net, 'projectFiles/models/cnn24.pt')
-    # torch.save(net.state_dict(), './projectFiles/models/cnn_24.pth')
+    # torch.save(net.state_dict(), './projectFiles/models/UNet.pth')
     # test(net)
     print("finished")
