@@ -4,6 +4,7 @@ import numpy as np
 import pyqtgraph as pg
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout
 import logging
+
 logging.basicConfig(
     # filename='./log.txt',
     level=logging.DEBUG,
@@ -61,6 +62,7 @@ class diceWidget(QWidget):
         """
         self.plot_item.clear()
         self.dice_list = []
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

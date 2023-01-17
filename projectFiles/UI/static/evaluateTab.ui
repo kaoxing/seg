@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1090</width>
-    <height>639</height>
+    <width>1133</width>
+    <height>866</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>evaluateTab</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,0,7,1">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,0,0,7,1">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_23">
      <item>
@@ -141,6 +141,16 @@
     </layout>
    </item>
    <item>
+    <widget class="Image3dWidget" name="widget_3d" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>500</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer name="horizontalSpacer_17">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -155,6 +165,18 @@
    </item>
    <item>
     <widget class="QWidget" name="widget_13" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>250</height>
+      </size>
+     </property>
      <layout class="QGridLayout" name="gridLayout_5">
       <item row="0" column="0">
        <widget class="QSplitter" name="splitter_5">
@@ -247,6 +269,21 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="pushButton_modeling">
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Modeling</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer_19">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -268,6 +305,12 @@
    <class>ImageListWidget</class>
    <extends>QWidget</extends>
    <header>UI/Widgets/imageWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Image3dWidget</class>
+   <extends>QWidget</extends>
+   <header>UI/Widgets/image3dWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

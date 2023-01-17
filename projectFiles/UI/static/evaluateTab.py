@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_evaluateTab(object):
     def setupUi(self, evaluateTab):
         evaluateTab.setObjectName("evaluateTab")
-        evaluateTab.resize(1090, 639)
+        evaluateTab.resize(1133, 811)
         self.verticalLayout = QtWidgets.QVBoxLayout(evaluateTab)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_23 = QtWidgets.QHBoxLayout()
@@ -93,9 +93,15 @@ class Ui_evaluateTab(object):
         self.lineEdit_status.setObjectName("lineEdit_status")
         self.horizontalLayout.addWidget(self.lineEdit_status)
         self.verticalLayout.addLayout(self.horizontalLayout)
+        self.widget_3d = Image3dWidget(evaluateTab)
+        self.widget_3d.setMinimumSize(QtCore.QSize(0, 500))
+        self.widget_3d.setObjectName("widget_3d")
+        self.verticalLayout.addWidget(self.widget_3d)
         spacerItem = QtWidgets.QSpacerItem(1069, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout.addItem(spacerItem)
         self.widget_13 = QtWidgets.QWidget(evaluateTab)
+        self.widget_13.setMinimumSize(QtCore.QSize(0, 200))
+        self.widget_13.setMaximumSize(QtCore.QSize(16777215, 250))
         self.widget_13.setObjectName("widget_13")
         self.gridLayout_5 = QtWidgets.QGridLayout(self.widget_13)
         self.gridLayout_5.setObjectName("gridLayout_5")
@@ -160,8 +166,8 @@ class Ui_evaluateTab(object):
         self.verticalLayout.addLayout(self.horizontalLayout_24)
         self.verticalLayout.setStretch(0, 1)
         self.verticalLayout.setStretch(1, 1)
-        self.verticalLayout.setStretch(3, 7)
-        self.verticalLayout.setStretch(4, 1)
+        self.verticalLayout.setStretch(4, 7)
+        self.verticalLayout.setStretch(5, 1)
 
         self.retranslateUi(evaluateTab)
         QtCore.QMetaObject.connectSlotsByName(evaluateTab)
@@ -177,4 +183,5 @@ class Ui_evaluateTab(object):
         self.label_26.setText(_translate("evaluateTab", " input："))
         self.label_27.setText(_translate("evaluateTab", "result："))
         self.pushButton_start.setText(_translate("evaluateTab", "start"))
+from UI.Widgets.image3dWidget import Image3dWidget
 from UI.Widgets.imageWidget import ImageListWidget

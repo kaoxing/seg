@@ -12,6 +12,7 @@ from PyQt5.QtWidgets import QMenu, QAbstractItemView, QListWidgetItem, QListView
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
 from UI.Widgets.singleImageView import SingleImageView
 
+
 class ImageListWidget(QtWidgets.QListWidget):
     show_single_image_sig = pyqtSignal(str)
 
@@ -87,7 +88,7 @@ class ImageListWidget(QtWidgets.QListWidget):
     #     except BaseException as e:
     #         print(e)
     #         return
-        # self.signal.emit(row)
+    # self.signal.emit(row)
 
     def mouseDoubleClickEvent(self, e: QtGui.QMouseEvent) -> None:
         super().mouseDoubleClickEvent(e)
@@ -99,11 +100,11 @@ class ImageListWidget(QtWidgets.QListWidget):
             # 打开新窗口显示单张图片
             self.show_single_image_sig.emit(img_path)
 
-    def load_images(self, image_folder:str):
+    def load_images(self, image_folder: str):
         for image in os.listdir(image_folder):
-            self.add_image(os.path.join(image_folder,image))
+            self.add_image(os.path.join(image_folder, image))
 
-    def add_image(self,path:str):
+    def add_image(self, path: str):
         if path.endswith(".png") or path.endswith(".jpg"):
             img_item = ImageQListWidgetItem(path)
             self.addItem(img_item)
@@ -114,7 +115,7 @@ class ImageListWidget(QtWidgets.QListWidget):
 
 # 自定义的item 继承自QListWidgetItem
 class ImageQListWidgetItem(QListWidgetItem):
-    def __init__(self,img_path:str):
+    def __init__(self, img_path: str):
         super().__init__()
 
         self.img_path = img_path
@@ -158,7 +159,6 @@ if __name__ == '__main__':
     app = QApplication([])
     main_window = ImageListWidget()
     main_window.show()
-
 
     # 数据扩充
     main_window.load_images("E:/CodeField/workdir_20230114_180927/data/test/image")

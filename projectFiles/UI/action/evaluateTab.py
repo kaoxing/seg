@@ -19,6 +19,7 @@ class evaluateTab(Ui_evaluateTab, QWidget):
         self.lineEdit_status.setText("waiting...")
         self.evaluate_thread = EvaluateThread()
         self.set_threads()
+        self.widget_3d
 
     def set_workspace(self, workspace: Workspace):
         """
