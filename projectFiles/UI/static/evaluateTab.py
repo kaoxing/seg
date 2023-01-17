@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_evaluateTab(object):
     def setupUi(self, evaluateTab):
         evaluateTab.setObjectName("evaluateTab")
-        evaluateTab.resize(1133, 811)
+        evaluateTab.resize(1133, 866)
         self.verticalLayout = QtWidgets.QVBoxLayout(evaluateTab)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_23 = QtWidgets.QHBoxLayout()
@@ -161,6 +161,15 @@ class Ui_evaluateTab(object):
         self.pushButton_start.setFont(font)
         self.pushButton_start.setObjectName("pushButton_start")
         self.horizontalLayout_24.addWidget(self.pushButton_start)
+        self.pushButton_modeling = QtWidgets.QPushButton(evaluateTab)
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_modeling.setFont(font)
+        self.pushButton_modeling.setObjectName("pushButton_modeling")
+        self.horizontalLayout_24.addWidget(self.pushButton_modeling)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_24.addItem(spacerItem2)
         self.verticalLayout.addLayout(self.horizontalLayout_24)
@@ -183,5 +192,6 @@ class Ui_evaluateTab(object):
         self.label_26.setText(_translate("evaluateTab", " input："))
         self.label_27.setText(_translate("evaluateTab", "result："))
         self.pushButton_start.setText(_translate("evaluateTab", "start"))
+        self.pushButton_modeling.setText(_translate("evaluateTab", "Modeling"))
 from UI.Widgets.image3dWidget import Image3dWidget
 from UI.Widgets.imageWidget import ImageListWidget

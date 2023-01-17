@@ -4,6 +4,7 @@ from UI.static.evaluateTab import Ui_evaluateTab
 from UI.threads.EvaluateThread import EvaluateThread
 from workspace import Workspace
 import logging
+
 logging.basicConfig(
     # filename='./log.txt',
     level=logging.DEBUG,
@@ -19,7 +20,6 @@ class evaluateTab(Ui_evaluateTab, QWidget):
         self.lineEdit_status.setText("waiting...")
         self.evaluate_thread = EvaluateThread()
         self.set_threads()
-        self.widget_3d
 
     def set_workspace(self, workspace: Workspace):
         """
@@ -59,6 +59,15 @@ class evaluateTab(Ui_evaluateTab, QWidget):
         self.widget_result.clear()
         self.evaluate_thread.set_workspace(self.workspace)
         self.evaluate_thread.start()
+
+    @pyqtSlot()
+    def on_pushButton_modeling_clicked(self):
+        """
+        modeling 按钮
+        """
+        self.lineEdit_status.setText("modeling...")
+        self.widget_3d.load_images(self.evaluate_thread.result_folder)  # 加载数据
+        self.widget_3d.show_images()    # 运行建模
 
     def evaluate_finished(self):
         """
