@@ -15,7 +15,7 @@ class Model:
     def get_model(self):
         return self.model
 
-    def load_model(self, net_path, has_net=False, model_path=None):
+    def load_model(self, net_path, has_net=False, dict_path=None):
         """加载模型,参数（模型路径，网络路径）"""
         # self.models = MyModel(model_path)
         # models.load_state_dict(torch.load(PATH))
@@ -30,14 +30,11 @@ class Model:
         Net = getattr(metaclass, net_name)  # 获取构造函数
         # print(net_name,metaclass,Net)
         self.model: nn.Module = Net()
-        self.model_path = model_path
-        if has_net:
-            self.model.load_state_dict(torch.load(model_path))
+        self.model_path = dict_path
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        if has_net:
+            self.model.load_state_dict(torch.load(dict_path, map_location=device))
         self.model.to(device)
 
     def save_model(self, save_path):
         torch.save(self.model.state_dict(), save_path)
-
-
-

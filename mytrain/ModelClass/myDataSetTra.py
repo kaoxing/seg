@@ -15,7 +15,7 @@ class MyDataSetTra(Dataset):
         mask_list = os.listdir(mask_path)
         imgType_list = {'jpg', 'bmp', 'png', 'jpeg', 'jfif'}
         for image in mask_list:
-            print(image)
+            # print(image)
             if imghdr.what(os.path.join(mask_path, image)) in imgType_list:
                 data_y_path = os.path.join(mask_path, image)
                 data = cv2.imread(data_y_path, cv2.IMREAD_GRAYSCALE)
@@ -25,7 +25,7 @@ class MyDataSetTra(Dataset):
                 # print(data_y_path)
         raw_list = os.listdir(data_path)
         for image in raw_list:
-            print(image)
+            # print(image)
             if imghdr.what(os.path.join(data_path, image)) in imgType_list:
                 data_x_path = os.path.join(data_path, image)
                 data = cv2.imread(data_x_path, cv2.IMREAD_GRAYSCALE)

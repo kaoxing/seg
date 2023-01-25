@@ -27,8 +27,8 @@ class Model:
         Net = getattr(metaclass, net_name)  # 获取构造函数
         self.model: nn.Module = Net(1, 1)
         self.model_path = model_path
-        self.model.load_state_dict(torch.load(model_path))
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.model.load_state_dict(torch.load(model_path,map_location=device))
         self.model.to(device)
 
     def save_model(self, save_path):

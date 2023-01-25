@@ -9,7 +9,8 @@ if __name__ == '__main__':
     print(device)
     net = Model()
     model_path = "./AttentionUNet/AttentionUNet.py"
-    net.load_model(model_path)
+    dict_path = "./AttentionUNet.pth"
+    net.load_model(model_path, has_net=True, dict_path=dict_path)
     trainer = ModelTrainer()
     trainer.set_model(net)
     raw_path = "./data/train/raw/"
@@ -17,7 +18,7 @@ if __name__ == '__main__':
     # raw_path = "./data/test/raw/"
     # label_path = "./data/test/label/"
     trainer.load_train_data(raw_path, label_path)
-    trainer.train_model(20, 4, 0.0001)
+    trainer.train_model(10, 4, 0.0001)
     tester = ModelTester()
     tester.set_model(net)
     raw_path = "./data/test/raw/"
