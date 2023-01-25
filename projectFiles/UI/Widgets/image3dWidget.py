@@ -27,7 +27,7 @@ class Image3dWidget(QWidget):
 class Image3d(gl.GLViewWidget):
     def __init__(self):
         super().__init__()
-        pg.setConfigOptions(antialias=True,foreground='y')
+        pg.setConfigOptions(antialias=True, foreground='y')
         self.setCameraPosition(distance=800)
         self.images = []
 
@@ -46,15 +46,16 @@ class Image3d(gl.GLViewWidget):
         length = -int(len(self.images) / 2)
         for i, image in enumerate(self.images):
             item = gl.GLImageItem(image, smooth=True)
-            item.translate(-len(image[0])/2, -len(image)/2, i+length)  # 这是为了使模型居中
+            item.translate(-len(image[0]) / 2, -len(image) / 2, i + length)  # 这是为了使模型居中
             self.addItem(item)
         self.images.clear()
 
-if __name__ == '__main__':
-    app = QApplication([])
-    main_window = Image3dWidget()
-    main_window.show()
-    main_window.load_images("D:\\BigProject\\Seg\\Seg\\mydataset")
-    main_window.show_images()
-    app.exec_()
+
+# if __name__ == '__main__':
+    # app = QApplication([])
+    # main_window = Image3dWidget()
+    # main_window.show()
+    # main_window.load_images("D:\\BigProject\\Seg\\Seg\\mydataset")
+    # main_window.show_images()
+    # app.exec_()
 
