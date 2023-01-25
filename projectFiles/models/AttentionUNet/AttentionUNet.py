@@ -5,7 +5,7 @@ from axial_attention import AxialAttention, AxialPositionalEmbedding, AxialImage
 
 class AttentionUNet(nn.Module):
 
-    def __init__(self, in_channels, out_channels):
+    def __init__(self, in_channels=1, out_channels=1):
         super(AttentionUNet, self).__init__()
         self.conv1 = ConvolutionLayer(in_channels, 32)  # out = (1,32,512,512)
         self.attention1 = AttentionBlock(32, 2, 1)
@@ -152,13 +152,13 @@ class AttentionBlock(nn.Module):
         return self.transformer(x)
 
 
-if __name__ == '__main__':
-    img1 = torch.randn(1, 1, 512, 512)
-    # img2 = torch.randn(1, 1, 512, 512)
-    net = AttentionUnet(1, 1)
-    print(net(img1))
-    # conv = ConvolutionLayer(1,32)
-    # atten = AttentionBlock(32,2,1)
-    # img1 = conv(img1)
-    # print(img1.size())
-    # atten(img1)
+# if __name__ == '__main__':
+#     img1 = torch.randn(1, 1, 512, 512)
+#     # img2 = torch.randn(1, 1, 512, 512)
+#     net = AttentionUnet(1, 1)
+#     print(net(img1))
+#     conv = ConvolutionLayer(1,32)
+#     atten = AttentionBlock(32,2,1)
+#     img1 = conv(img1)
+#     print(img1.size())
+#     atten(img1)

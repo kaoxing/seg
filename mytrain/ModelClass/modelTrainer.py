@@ -23,12 +23,13 @@ class ModelTrainer:
         self.train_dataset = MyDataSetTra(data_path, mask_path)
 
     def train_model(self, epoch, batch_size, learning_rate=0.000001,
-                    shuffle=True, optim="Adam", loss_func="BCELoss"):
+                    shuffle=True, optim="Adam", loss_func="BCELoss", num_workers=14):
         """训练模型,参数（训练轮数,训练批次大小,学习率,数据集是否打乱,优化器,），若新model名为空则将覆盖原model"""
         dataloader = DataLoader(
             dataset=self.train_dataset,
             batch_size=batch_size,
             shuffle=shuffle,
+            num_workers=num_workers
         )
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         if loss_func == "BCELoss":
@@ -50,7 +51,7 @@ class ModelTrainer:
             optimizer = torch.optim.RMSprop(
                 self.model.parameters(), lr=learning_rate)
         for cnt in range(epoch):
-            print("迭代轮次:",cnt)
+            print("迭代轮次:", cnt)
             if not self.flag:
                 break
             Loss = 0

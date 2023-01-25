@@ -15,8 +15,8 @@ class Model:
     def get_model(self):
         return self.model
 
-    def load_model(self, net_path, has_net=False, dict_path=None):
-        """加载模型,参数（模型路径，网络路径）"""
+    def load_model(self, net_path, has_net=False, dict_path=None, multiple_gpu=False):
+        """加载模型,参数（网络.py路径，是否已经有参数，参数路径，是否多GPU）"""
         # self.models = MyModel(model_path)
         # models.load_state_dict(torch.load(PATH))
         # models.eval()
@@ -34,6 +34,9 @@ class Model:
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         if has_net:
             self.model.load_state_dict(torch.load(dict_path, map_location=device))
+        if torch.cuda.device_count() > 1 and multiple_gpu:
+            print("Let's use", torch.cuda.device_count(), "GPUs!")
+            self.model = nn.DataParallel(self.model)
         self.model.to(device)
 
     def save_model(self, save_path):
