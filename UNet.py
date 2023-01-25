@@ -4,25 +4,25 @@ import torch
 
 class UNet(nn.Module):
 
-    def __init__(self, in_channels, out_channels):
+    def __init__(self, in_channels=1, out_channels=1):
         super(UNet, self).__init__()
-        self.conv1 = ConvolutionLayer(in_channels, 32)  # 三通道拓展至32通道
+        self.conv1 = ConvolutionLayer(in_channels, 32)  # out = (1,32,512,512)
         self.down1 = DownSample()  # 下采样至1/2
-        self.conv2 = ConvolutionLayer(32, 64)  # 32通道==>64通道
+        self.conv2 = ConvolutionLayer(32, 64)  # out = (1,64,512,512)
         self.down2 = DownSample()  # 下采样至1/4
-        self.conv3 = ConvolutionLayer(64, 128)  # 64通道==>128通道
+        self.conv3 = ConvolutionLayer(64, 128)  # out = (1,128,512,512)
         self.down3 = DownSample()  # 下采样至1/8
-        self.conv4 = ConvolutionLayer(128, 256)  # 128通道==>256通道
+        self.conv4 = ConvolutionLayer(128, 256)  # out = (1,256,512,512)
         self.down4 = DownSample()  # 下采样至1/16
-        self.conv5 = ConvolutionLayer(256, 512)  # 256通道==>512通道
+        self.conv5 = ConvolutionLayer(256, 512)  # out = (1,512,512,512)
         self.up1 = UpSample(512)  # 上采样至1/8
-        self.conv6 = ConvolutionLayer(512, 256)  # 512通道==>256通道
+        self.conv6 = ConvolutionLayer(512, 256)  # out = (1,256,512,512)
         self.up2 = UpSample(256)  # 上采样至1/4
-        self.conv7 = ConvolutionLayer(256, 128)  # 256通道==>128通道
+        self.conv7 = ConvolutionLayer(256, 128)  # out = (1,128,512,512)
         self.up3 = UpSample(128)  # 上采样至1/2
-        self.conv8 = ConvolutionLayer(128, 64)  # 128通道==>64通道
+        self.conv8 = ConvolutionLayer(128, 64)  # out = (1,64,512,512)
         self.up4 = UpSample(64)  # 上采样至1/1
-        self.conv9 = ConvolutionLayer(64, 32)  # 64通道==>32通道
+        self.conv9 = ConvolutionLayer(64, 32)  # out = (1,32,512,512)
         self.predict = nn.Sequential(  # 输出层，由sigmoid函数激活
             nn.Conv2d(32, out_channels, kernel_size=(3, 3), stride=(1, 1), padding=1),
             nn.Sigmoid()
@@ -32,16 +32,16 @@ class UNet(nn.Module):
         """下采样"""
         x1 = self.conv1(x)  # ===> 1/1 64
         d1 = self.down1(x1)  # ===> 1/2 64
-
+        # print(x1.size())
         x2 = self.conv2(d1)  # ===> 1/2 128
         d2 = self.down2(x2)  # ===> 1/4 128
-
+        # print(x2.size())
         x3 = self.conv3(d2)  # ===> 1/4 256
         d3 = self.down3(x3)  # ===> 1/8 256
-
+        # print(x3.size())
         x4 = self.conv4(d3)  # ===> 1/8 512
         d4 = self.down4(x4)  # ===> 1/16 512
-
+        # print(x4.size())
         x5 = self.conv5(d4)  # ===> 1/16 1024
         """上采样"""
         up1 = self.up1(x5)  # ===> 1/8 512
@@ -111,3 +111,9 @@ class UpSample(nn.Module):
 
     def forward(self, x):
         return self.layer(x)
+
+
+if __name__ == '__main__':
+    net = UNet(1,1)
+    img = torch.randn(1, 1, 512, 512)
+    print(net(img))
