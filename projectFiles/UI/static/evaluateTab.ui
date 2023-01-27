@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>1133</width>
-    <height>866</height>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>evaluateTab</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,0,0,7,1">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,0,7,1">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_23">
      <item>
@@ -145,23 +145,10 @@
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>500</height>
+       <height>0</height>
       </size>
      </property>
     </widget>
-   </item>
-   <item>
-    <spacer name="horizontalSpacer_17">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>1069</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
    <item>
     <widget class="QWidget" name="widget_13" native="true">

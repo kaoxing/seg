@@ -35,25 +35,26 @@ class ModelTester:
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         # dices = np.array([])
         Dice = 0
-        for i, data in enumerate(dataloader):
-            input_data, labels = data
-            input_data = input_data.to(device)
-            predict = self.model(input_data)
-            img_pre = torch.reshape(predict, (512, 512)).cpu().detach().numpy()
-            img_lab = torch.reshape(labels, (512, 512)).detach().numpy()
-            img_pre = np.round(img_pre)
-            img_lab = np.round(img_lab)
-            self.test_dice = self.__dice(img_pre, img_lab)
-            img_pre = img_pre * 255
-            im = Image.fromarray(img_pre)
-            im = np.array(im, dtype='uint8')
-            filename = os.path.join(result_path, "%03d.png" % i)
-            cv2.imwrite(filename, im, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-            self.filename = filename
-            self.state_change()
-            print("dice:", self.test_dice)
-            Dice += self.test_dice
-        print("average:", Dice / len(dataloader))
+        with torch.no_grad():
+            for i, data in enumerate(dataloader):
+                input_data, labels = data
+                input_data = input_data.to(device)
+                predict = self.model(input_data)
+                img_pre = torch.reshape(predict, (512, 512)).cpu().detach().numpy()
+                img_lab = torch.reshape(labels, (512, 512)).detach().numpy()
+                img_pre = np.round(img_pre)
+                img_lab = np.round(img_lab)
+                self.test_dice = self.__dice(img_pre, img_lab)
+                img_pre = img_pre * 255
+                im = Image.fromarray(img_pre)
+                im = np.array(im, dtype='uint8')
+                filename = os.path.join(result_path, "%03d.png" % i)
+                cv2.imwrite(filename, im, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+                self.filename = filename
+                self.state_change()
+                print("dice:", self.test_dice)
+                Dice += self.test_dice
+            print("average:", Dice / len(dataloader))
 
     @staticmethod
     def __dice(predict, label):

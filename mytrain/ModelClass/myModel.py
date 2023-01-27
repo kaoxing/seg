@@ -34,9 +34,6 @@ class Model:
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         if has_net:
             self.model.load_state_dict(torch.load(dict_path, map_location=device))
-        if torch.cuda.device_count() > 1 and multiple_gpu:
-            print("Let's use", torch.cuda.device_count(), "GPUs!")
-            self.model = nn.DataParallel(self.model)
         self.model.to(device)
 
     def save_model(self, save_path):
