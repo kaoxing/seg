@@ -25,7 +25,9 @@ class ModelTester:
         """加载测试集,参数（测试集数据）"""
         self.test_dataset = MyDataSetTra(data_path, mask_path)
 
-    def test_model(self, result_path, num_workers=14):
+    def test_model(self, result_path, num_workers=-1):
+        if num_workers == -1:
+            num_workers = torch.cuda.device_count() * 4 + 2
         dataloader = DataLoader(
             dataset=self.test_dataset,
             batch_size=1,

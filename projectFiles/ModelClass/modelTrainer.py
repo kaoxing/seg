@@ -32,7 +32,7 @@ class ModelTrainer:
         多GPU模式可能会导致模型精度变差
         """
         if num_workers == -1:
-            num_workers = torch.cuda.device_count() * 4
+            num_workers = torch.cuda.device_count() * 4 + 2
         dataloader = DataLoader(
             dataset=self.train_dataset,
             batch_size=batch_size,

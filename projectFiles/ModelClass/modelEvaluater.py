@@ -20,11 +20,13 @@ class ModelEvaluater:
 
     def load_predict_data(self, data_path):
         """"加载数据,参数（数据路径）"""
+        num_workers = torch.cuda.device_count() * 4 + 2
         self.predict_dataset = MyDataSetPre(data_path)
         self.predict_dataset = DataLoader(
             dataset=self.predict_dataset,
             batch_size=1,
             shuffle=False,
+            num_workers=num_workers
         )
 
     def run_model(self, predict_result_path):

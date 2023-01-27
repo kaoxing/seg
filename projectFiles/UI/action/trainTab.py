@@ -6,6 +6,7 @@ from UI.threads.RunThread import RunThread
 from UI.threads.TestThread import TestThread
 from workspace import Workspace
 import logging
+import time
 logging.basicConfig(
     # filename='./log.txt',
     level=logging.DEBUG,
@@ -22,6 +23,7 @@ class trainTab(Ui_trainTab, QWidget):
         self.run_thread = RunThread()
         self.test_thread = TestThread()
         self.set_threads()
+        self.time = 0
 
     def set_workspace(self, workspace: Workspace):
         """
@@ -80,11 +82,13 @@ class trainTab(Ui_trainTab, QWidget):
         self.lineEdit_status.setText("trainning...")
         self.widget_loss.reset_plot_item()
         self.run_thread.set_workspace(self.workspace)
+        self.time = time.time()
         self.run_thread.start()
 
     def train_finished(self):
-        logging.info("train finished")
-        self.lineEdit_status.setText("train finished")
+        runTime = time.time() - self.time
+        logging.info("train finished in {:.2f} sec".format(runTime))
+        self.lineEdit_status.setText(f"train finished in {runTime} sec")
 
     @pyqtSlot()
     def on_pushButton_test_clicked(self):
@@ -95,11 +99,13 @@ class trainTab(Ui_trainTab, QWidget):
         self.widget_dice.reset_plot_item()
         self.widget_result.clear()
         self.test_thread.set_workspace(self.workspace)
+        self.time = time.time()
         self.test_thread.start()
 
     def test_finished(self):
-        logging.info("test finished")
-        self.lineEdit_status.setText("test finished")
+        runTime = time.time() - self.time
+        logging.info("test finished in {:.2f} sec".format(runTime))
+        self.lineEdit_status.setText(f"test finished in {runTime} sec")
 
     @pyqtSlot()
     def on_pushButton_save_clicked(self):

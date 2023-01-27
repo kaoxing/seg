@@ -34,6 +34,7 @@ class TestThread(QThread, ModelTester):
 
     def run(self):
         logging.info("test thread is running")
+
         data_path = f"{self.test_folder}/image"
         mask_path = f"{self.test_folder}/label"
         result_path = f"{self.test_folder}/result"
