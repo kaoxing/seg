@@ -88,7 +88,7 @@ class trainTab(Ui_trainTab, QWidget):
     def train_finished(self):
         runTime = time.time() - self.time
         logging.info("train finished in {:.2f} sec".format(runTime))
-        self.lineEdit_status.setText(f"train finished in {runTime} sec")
+        self.lineEdit_status.setText("train finished in {:.2f} sec".format(runTime))
 
     @pyqtSlot()
     def on_pushButton_test_clicked(self):
@@ -105,7 +105,7 @@ class trainTab(Ui_trainTab, QWidget):
     def test_finished(self):
         runTime = time.time() - self.time
         logging.info("test finished in {:.2f} sec".format(runTime))
-        self.lineEdit_status.setText(f"test finished in {runTime} sec")
+        self.lineEdit_status.setText("test finished in {:.2f} sec".format(runTime))
 
     @pyqtSlot()
     def on_pushButton_save_clicked(self):
