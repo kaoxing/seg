@@ -18,7 +18,6 @@ class ModelTester:
         self.test_dice = 0
         self.filename = None
 
-
     def set_model(self, model):
         self.model = model.get_model()
 
@@ -26,14 +25,16 @@ class ModelTester:
         """加载测试集,参数（测试集数据）"""
         self.test_dataset = MyDataSetTra(data_path, mask_path)
 
-    def test_model(self, result_path):
+    def test_model(self, result_path, num_workers=14):
         dataloader = DataLoader(
             dataset=self.test_dataset,
             batch_size=1,
             shuffle=False,
+            num_workers=num_workers
         )
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         # dices = np.array([])
+        self.model = self.model.to(device)
         Dice = 0
         with torch.no_grad():
             for i, data in enumerate(dataloader):
@@ -69,5 +70,3 @@ class ModelTester:
     @abstractmethod
     def state_change(self):
         pass
-
-

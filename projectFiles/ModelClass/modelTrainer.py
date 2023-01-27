@@ -23,23 +23,28 @@ class ModelTrainer:
         self.train_dataset = MyDataSetTra(data_path, mask_path)
 
     def train_model(self, epoch, batch_size, learning_rate=0.000001,
-                    shuffle=True, optim="Adam", loss_func="BCELoss", num_workers=14, multiple_gpu=False):
+                    shuffle=True, optim="Adam", loss_func="BCELoss",
+                    num_workers=-1, multiple_gpu=False, pin_memory=True):
         """
-        训练模型,参数（训练轮数,训练批次大小,学习率,数据集是否打乱,优化器,数据装载线程数,多GPU模式）
+        训练模型,参数（训练轮数,训练批次大小,学习率,数据集是否打乱,优化器,数据装载线程数,多GPU模式,内存优化）
         若新model名为空则将覆盖原model
-        数据装载线程数一般不要动，它表示装载tensor数据的线程数，默认值14是一个平均表现较好的数量
+        数据装载线程数表示装载tensor数据的线程数，若为默认值-1则会自动安排一个较为合理的数量
         多GPU模式可能会导致模型精度变差
         """
+        if num_workers == -1:
+            num_workers = torch.cuda.device_count() * 4
         dataloader = DataLoader(
             dataset=self.train_dataset,
             batch_size=batch_size,
             shuffle=shuffle,
-            num_workers=num_workers
+            num_workers=num_workers,
+            pin_memory=pin_memory
         )
         if torch.cuda.device_count() > 1 and multiple_gpu:
             print("On", torch.cuda.device_count(), "GPU")
             self.model = nn.DataParallel(self.model)
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.model = self.model.to(device)
         if loss_func == "BCELoss":
             loss_func = nn.BCELoss()
         elif loss_func == "CrossEntropyLoss":
@@ -58,7 +63,6 @@ class ModelTrainer:
         elif optim == "RMSProp":
             optimizer = torch.optim.RMSprop(
                 self.model.parameters(), lr=learning_rate)
-        self.model = self.model.to(device)
         for cnt in range(epoch):
             if not self.flag:
                 break

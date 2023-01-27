@@ -18,7 +18,6 @@ class ModelEvaluater:
     def set_model(self, model: Model):
         self.model = model.get_model()
 
-
     def load_predict_data(self, data_path):
         """"加载数据,参数（数据路径）"""
         self.predict_dataset = MyDataSetPre(data_path)
@@ -30,25 +29,24 @@ class ModelEvaluater:
 
     def run_model(self, predict_result_path):
         """运行模型，参数(结果保存路径)"""
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        for i, data in enumerate(self.predict_dataset):
-            print(i)
-            data = data.to(device)
-            predict = self.model(data)
-            predict = torch.reshape(predict, (512, 512))
-            predict = predict.cpu()
-            predict = predict.detach()
-            predict = predict.numpy()
-            predict = predict.round()
-            predict = predict * 255
-            filename = "{0}/{1:0>3d}.png".format(predict_result_path, i)
-            img = np.array(predict, dtype='uint8')
-            cv2.imwrite(filename, img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-            self.filename = filename
-            self.state_change()
+        with torch.no_grad():
+            device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+            for i, data in enumerate(self.predict_dataset):
+                print(i)
+                data = data.to(device)
+                predict = self.model(data)
+                predict = torch.reshape(predict, (512, 512))
+                predict = predict.cpu()
+                predict = predict.detach()
+                predict = predict.numpy()
+                predict = predict.round()
+                predict = predict * 255
+                filename = "{0}/{1:0>3d}.png".format(predict_result_path, i)
+                img = np.array(predict, dtype='uint8')
+                cv2.imwrite(filename, img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+                self.filename = filename
+                self.state_change()
 
     @abstractmethod
     def state_change(self):
         pass
-
-

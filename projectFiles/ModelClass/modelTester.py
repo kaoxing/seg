@@ -18,7 +18,6 @@ class ModelTester:
         self.test_dice = 0
         self.filename = None
 
-
     def set_model(self, model):
         self.model = model.get_model()
 
@@ -26,32 +25,35 @@ class ModelTester:
         """加载测试集,参数（测试集数据）"""
         self.test_dataset = MyDataSetTra(data_path, mask_path)
 
-    def test_model(self, result_path):
+    def test_model(self, result_path, num_workers=14):
         dataloader = DataLoader(
             dataset=self.test_dataset,
             batch_size=1,
             shuffle=False,
+            num_workers=num_workers
         )
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.model = self.model.to(device)
         # dices = np.array([])
-        for i, data in enumerate(dataloader):
-            input_data, labels = data
-            input_data = input_data.to(device)
-            predict = self.model(input_data)
-            img_pre = torch.reshape(predict, (512, 512)).cpu().detach().numpy()
-            img_lab = torch.reshape(labels, (512, 512)).detach().numpy()
-            img_pre = np.round(img_pre)
-            img_lab = np.round(img_lab)
-            self.test_dice = self.__dice(img_pre, img_lab)
-            img_pre = img_pre * 255
-            im = Image.fromarray(img_pre)
-            im = np.array(im, dtype='uint8')
-            filename = os.path.join(result_path, "%03d.png" % i)
-            cv2.imwrite(filename, im, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-            self.filename = filename
-            self.state_change()
-            # print("dice:", self.test_dice)
-        # print("average:", dices.sum() / len(dataloader))
+        with torch.no_grad():
+            for i, data in enumerate(dataloader):
+                input_data, labels = data
+                input_data = input_data.to(device)
+                predict = self.model(input_data)
+                img_pre = torch.reshape(predict, (512, 512)).cpu().detach().numpy()
+                img_lab = torch.reshape(labels, (512, 512)).detach().numpy()
+                img_pre = np.round(img_pre)
+                img_lab = np.round(img_lab)
+                self.test_dice = self.__dice(img_pre, img_lab)
+                img_pre = img_pre * 255
+                im = Image.fromarray(img_pre)
+                im = np.array(im, dtype='uint8')
+                filename = os.path.join(result_path, "%03d.png" % i)
+                cv2.imwrite(filename, im, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+                self.filename = filename
+                self.state_change()
+                # print("dice:", self.test_dice)
+            # print("average:", dices.sum() / len(dataloader))
 
     @staticmethod
     def __dice(predict, label):
@@ -66,5 +68,3 @@ class ModelTester:
     @abstractmethod
     def state_change(self):
         pass
-
-
