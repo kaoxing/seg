@@ -15,6 +15,8 @@
 |              |-- 000_mask.jpg/.png
 |              |-- 001_mask.jpg/.png
 |              |-- ...
+|           |-- result
+|              |-- ...
 |       |-- test
 |           |-- image
 |               |-- 000.jpg/.png
@@ -24,11 +26,15 @@
 |              |-- 000_mask.jpg/.png
 |              |-- 001_mask.jpg/.png
 |              |-- ...
-|   |-- model
+|   |-- models
 |       |-- xxNet
 |           |-- xxNet.pth
 |           |-- xxNet.py
 |           |-- xxNet.md/.txt
+|       |-- ...
+|   |-- evaluate
+|       |-- 000.jpg/.png
+|       |-- 001.jpg/.png
 |       |-- ...
 |   |-- result
 |       |-- ...

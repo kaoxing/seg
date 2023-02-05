@@ -27,6 +27,5 @@ class newWorkspace(Ui_newWorkspace, QWidget):
             name = self.lineEdit.text()
             if len(name)>0:
                 workdir = f"{temp}/{name}"
-                print(workdir)
                 self.sig.emit(workdir)
                 self.hide()

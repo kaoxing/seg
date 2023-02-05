@@ -1,5 +1,5 @@
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QWidget, QFileDialog
+from PyQt5.QtWidgets import QWidget, QFileDialog,QMessageBox
 from UI.static.evaluateTab import Ui_evaluateTab
 from UI.threads.EvaluateThread import EvaluateThread
 from workspace import Workspace
@@ -18,6 +18,7 @@ class evaluateTab(Ui_evaluateTab, QWidget):
         self.setupUi(self)
         self.lineEdit_loaded_model.setText("to be loaded")
         self.lineEdit_status.setText("waiting...")
+        self.frame_3d.hide()
         self.evaluate_thread = EvaluateThread()
         self.set_threads()
 
@@ -55,6 +56,13 @@ class evaluateTab(Ui_evaluateTab, QWidget):
         """
         start evaluate按钮
         """
+        if self.workspace.get_model() is None:
+            QMessageBox.critical(
+                self,
+                "evaluate",
+                "model to be loaded!"
+            )
+            return
         self.lineEdit_status.setText("evaluating...")
         self.widget_result.clear()
         self.evaluate_thread.set_workspace(self.workspace)
@@ -65,6 +73,7 @@ class evaluateTab(Ui_evaluateTab, QWidget):
         """
         modeling 按钮
         """
+        self.frame_3d.show()
         self.lineEdit_status.setText("modeling...")
         self.widget_3d.load_images(self.evaluate_thread.result_folder)  # 加载数据
         self.widget_3d.show_images()    # 运行建模

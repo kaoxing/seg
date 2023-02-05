@@ -34,7 +34,6 @@ class ModelEvaluater:
         with torch.no_grad():
             device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
             for i, data in enumerate(self.predict_dataset):
-                print(i)
                 data = data.to(device)
                 predict = self.model(data)
                 predict = torch.reshape(predict, (512, 512))

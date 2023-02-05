@@ -1,6 +1,6 @@
 import os
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
-from PyQt5.QtWidgets import QWidget, QFileDialog
+from PyQt5.QtWidgets import QWidget, QFileDialog,QMessageBox
 from UI.static.trainTab import Ui_trainTab
 from UI.threads.RunThread import RunThread
 from UI.threads.TestThread import TestThread
@@ -67,7 +67,6 @@ class trainTab(Ui_trainTab, QWidget):
         self.workspace.set_settings(settings)
         self.workspace.save_project()
         logging.info("setting updated")
-        print(settings)
 
     @pyqtSlot()
     def on_pushButton_change_clicked(self):
@@ -79,6 +78,13 @@ class trainTab(Ui_trainTab, QWidget):
         训练按钮
         """
         self.update_settings()
+        if self.workspace.get_model() is None:
+            QMessageBox.critical(
+                self,
+                "train",
+                "model to be loaded!"
+            )
+            return
         self.lineEdit_status.setText("trainning...")
         self.widget_loss.reset_plot_item()
         self.run_thread.set_workspace(self.workspace)
@@ -95,6 +101,13 @@ class trainTab(Ui_trainTab, QWidget):
         """
         测试按钮
         """
+        if self.workspace.get_model() is None:
+            QMessageBox.critical(
+                self,
+                "test",
+                "model to be loaded!"
+            )
+            return
         self.lineEdit_status.setText("testing...")
         self.widget_dice.reset_plot_item()
         self.widget_result.clear()
@@ -109,7 +122,13 @@ class trainTab(Ui_trainTab, QWidget):
 
     @pyqtSlot()
     def on_pushButton_save_clicked(self):
+        if self.workspace.get_model() is None:
+            QMessageBox.critical(
+                self,
+                "save model",
+                "There is no model to save!"
+            )
+            return
         file, _ = QFileDialog.getSaveFileName(
             self, "save model", filter="pth file(*.pth)")
-        if os.path.exists(file):
-            self.workspace.get_model().save_model(file)
+        self.workspace.get_model().save_model(file)

@@ -107,7 +107,6 @@ class modelTab(Ui_modelTab, QWidget):
             )
             logging.info(f"model loaded:{self.workspace.get_model()}")
         else:
-            print(type(self))
             QMessageBox.critical(
                 self,
                 "load model",
