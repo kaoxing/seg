@@ -18,7 +18,6 @@ class evaluateTab(Ui_evaluateTab, QWidget):
         self.setupUi(self)
         self.lineEdit_loaded_model.setText("to be loaded")
         self.lineEdit_status.setText("waiting...")
-        self.frame_3d.hide()
         self.evaluate_thread = EvaluateThread()
         self.set_threads()
 
@@ -73,7 +72,6 @@ class evaluateTab(Ui_evaluateTab, QWidget):
         """
         modeling 按钮
         """
-        self.frame_3d.show()
         self.lineEdit_status.setText("modeling...")
         self.widget_3d.load_images(self.evaluate_thread.result_folder)  # 加载数据
         self.widget_3d.show_images()    # 运行建模
