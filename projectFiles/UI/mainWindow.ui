@@ -52,6 +52,11 @@
         <string>Evaluate</string>
        </attribute>
       </widget>
+      <widget class="dataTab" name="tab_5">
+       <attribute name="title">
+        <string>data(demo)</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -133,6 +138,12 @@
    <class>evaluateTab</class>
    <extends>QWidget</extends>
    <header>UI/action/evaluateTab.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>dataTab</class>
+   <extends>QWidget</extends>
+   <header>UI/action/dataTab.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

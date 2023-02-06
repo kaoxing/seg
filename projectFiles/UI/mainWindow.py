@@ -41,6 +41,9 @@ class Ui_MainWindow(object):
         self.tab_4 = evaluateTab()
         self.tab_4.setObjectName("tab_4")
         self.tabWidget.addTab(self.tab_4, "")
+        self.tab_5 = dataTab()
+        self.tab_5.setObjectName("tab_5")
+        self.tabWidget.addTab(self.tab_5, "")
         self.horizontalLayout_centralwidget.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -83,6 +86,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Model"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Training"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "Evaluate"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), _translate("MainWindow", "data(demo)"))
         self.menu.setTitle(_translate("MainWindow", "文件"))
         self.menu_2.setTitle(_translate("MainWindow", "设置"))
         self.menu_3.setTitle(_translate("MainWindow", "模型"))
@@ -90,6 +94,7 @@ class Ui_MainWindow(object):
         self.action_new_workdir.setText(_translate("MainWindow", "新建工作区"))
         self.action_U_net.setText(_translate("MainWindow", "U-net"))
         self.action_close_workdir.setText(_translate("MainWindow", "关闭工作区"))
+from UI.action.dataTab import dataTab
 from UI.action.evaluateTab import evaluateTab
 from UI.action.modelTab import modelTab
 from UI.action.projectTab import projectTab

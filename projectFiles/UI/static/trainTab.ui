@@ -25,10 +25,16 @@
      <layout class="QVBoxLayout" name="verticalLayout" stretch="1,5,1,2,2">
       <item>
        <widget class="QLabel" name="label_5">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>50</height>
+          <height>16777215</height>
          </size>
         </property>
         <property name="font">
@@ -606,6 +612,12 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>ImageListWidget</class>
+   <extends>QWidget</extends>
+   <header>UI/Widgets/imageWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>lossWidget</class>
    <extends>QWidget</extends>
    <header>UI/Widgets/lossWidget.h</header>
@@ -615,12 +627,6 @@
    <class>diceWidget</class>
    <extends>QWidget</extends>
    <header>UI/Widgets/diceWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ImageListWidget</class>
-   <extends>QWidget</extends>
-   <header>UI/Widgets/imageWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
