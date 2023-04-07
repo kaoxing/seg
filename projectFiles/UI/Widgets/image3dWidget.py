@@ -27,7 +27,7 @@ class Image3dWidget(QWidget):
 class Image3d(gl.GLViewWidget):
     def __init__(self):
         super().__init__()
-        pg.setConfigOptions(antialias=True, foreground='y')
+        pg.setConfigOptions(antialias=True, foreground='y', background='w')
         self.setCameraPosition(distance=800)
         self.images = []
 
@@ -51,11 +51,11 @@ class Image3d(gl.GLViewWidget):
         self.images.clear()
 
 
-# if __name__ == '__main__':
-    # app = QApplication([])
-    # main_window = Image3dWidget()
-    # main_window.show()
-    # main_window.load_images("D:\\BigProject\\Seg\\Seg\\mydataset")
-    # main_window.show_images()
-    # app.exec_()
+if __name__ == '__main__':
+    app = QApplication([])
+    main_window = Image3dWidget()
+    main_window.show()
+    main_window.load_images("D:\\BigProject\\Seg\\Seg\\mydataset")
+    main_window.show_images()
+    app.exec_()
 
