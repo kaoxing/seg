@@ -24,15 +24,17 @@ class ModelTrainer:
 
     def train_model(self, epoch, batch_size, learning_rate=0.000001,
                     shuffle=True, optim="Adam", loss_func="BCELoss",
-                    num_workers=-1, multiple_gpu=False, pin_memory=True):
+                    num_workers=-1, multiple_gpu=False, pin_memory=False):
         """
         训练模型,参数（训练轮数,训练批次大小,学习率,数据集是否打乱,优化器,数据装载线程数,多GPU模式,内存优化）
         若新model名为空则将覆盖原model
         数据装载线程数表示装载tensor数据的线程数，若为默认值-1则会自动安排一个较为合理的数量
         多GPU模式可能会导致模型精度变差
         """
-        if num_workers == -1:
-            num_workers = torch.cuda.device_count() * 4 + 2
+        # if num_workers == -1:
+        #     num_workers = (torch.cuda.device_count()-1) * 4 + 2
+        #     num_workers = 1
+        num_workers = 0
         dataloader = DataLoader(
             dataset=self.train_dataset,
             batch_size=batch_size,

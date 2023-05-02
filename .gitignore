@@ -12,4 +12,4 @@
 /projectFiles/projectList
 /mydataset_expand/
 __pycache__/
-
+*.nrrd

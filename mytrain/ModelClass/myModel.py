@@ -31,6 +31,7 @@ class Model:
         # print(net_name,metaclass,Net)
         self.model: nn.Module = Net()
         self.model_path = dict_path
+        os.environ['CUDA_VISIBLE_DEVICES'] = '0'
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         if has_net:
             self.model.load_state_dict(torch.load(dict_path, map_location=device))

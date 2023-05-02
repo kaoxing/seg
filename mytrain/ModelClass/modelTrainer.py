@@ -4,6 +4,7 @@ import torch.nn as nn
 from ModelClass.myDataSetTra import MyDataSetTra
 from abc import abstractmethod
 from ModelClass.myModel import Model
+from ModelClass.NiiDataset import CreateNiiDataset
 
 
 class ModelTrainer:
@@ -18,9 +19,14 @@ class ModelTrainer:
     def set_model(self, model):
         self.model = model.get_model()
 
-    def load_train_data(self, data_path, mask_path):
+    def load_train_data(self, data_path, mask_path, data_type="img"):
         """加载标签,参数（标签路径）"""
-        self.train_dataset = MyDataSetTra(data_path, mask_path)
+        if data_type == "img":
+            self.train_dataset = MyDataSetTra(data_path, mask_path)
+        elif data_type == "nii":
+            self.train_dataset = CreateNiiDataset(data_path, mask_path)
+        else:
+            raise ValueError("data_type can only be 'img' or 'nii'")
 
     def train_model(self, epoch, batch_size, learning_rate=0.000001,
                     shuffle=True, optim="Adam", loss_func="BCELoss", num_workers=14):

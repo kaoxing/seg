@@ -1,6 +1,6 @@
 from torch import nn
 import torch
-from axial_attention import AxialAttention, AxialPositionalEmbedding, AxialImageTransformer
+from axial_attention import AxialImageTransformer
 
 
 class AttentionUNet(nn.Module):

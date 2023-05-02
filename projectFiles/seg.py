@@ -1,11 +1,14 @@
 import sys
 import sysPath
+import os
 from PyQt5.QtWidgets import QApplication
 from ui import MainWindow
 from UI.action.newWorkspace import newWorkspace
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+    # print(os.environ['PYTORCH_CUDA_ALLOC_CONF'])
     # 窗口
     main_window = MainWindow()
     new_workspace_widget = newWorkspace()

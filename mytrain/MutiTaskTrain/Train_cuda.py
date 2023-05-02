@@ -15,17 +15,18 @@ from torch.utils.data import DataLoader
 import LossFunction as lf
 
 if __name__ == '__main__':
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    os.environ['CUDA_VISIBLE_DEVICE'] = '0'
+    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # 获取参数
     # argv = sys.argv[1:]
     # print(argv)
     # batch_size = int(input("batch_size="))
-    batch_size = 2
+    batch_size = 1
     # learning_rate = float(input("learning_rate="))
-    learning_rate_g = 0.003
-    learning_rate_d = 0.02
+    learning_rate_g = 0.006
+    learning_rate_d = 0.04
     # epoch = int(input("epoch="))
-    epoch = 3
+    epoch = 10
     clip = 0.01
     n_critic = 2
     # result_path = os.path.join("./dataset/result/", input("result_dir="))
@@ -36,14 +37,18 @@ if __name__ == '__main__':
     raw_path = "./dataset/train/raw/"
     # d_path = os.path.join("./models/d/", input("d_name="))
     # g_path = os.path.join("./models/g/", input("g_name="))
-    d_path = os.path.join("./models/d/", "100_d.pth")
-    g_path = os.path.join("./models/g/", "100_g.pth")
+    d_path = os.path.join("./models/d/", "10_d.pth")
+    g_path = os.path.join("./models/g/", "10_g.pth")
 
     # 加载模型
     D = UNet()
     # D.load_state_dict(torch.load(os.path.join("./models/d/", "30_d.pth")))
+    total = sum([param.nelement() for param in D.parameters()])
+    print("Parameter of Dis: %.2fK" % (total / 1e3))
     D.to(device)
     G = GAN()
+    total = sum([param.nelement() for param in G.parameters()])
+    print("Parameter of Gen: %.2fM" % (total / 1e6))
     # G.load_state_dict(torch.load(os.path.join("./models/g/", "30_g.pth")))
     G.to(device)
 
@@ -53,7 +58,7 @@ if __name__ == '__main__':
         dataset=dataset,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=14
+        num_workers=1
     )
     dataset_test = MyDataSetTra(raw_path, label_path)
     dataset_test = DataLoader(
