@@ -1,7 +1,7 @@
 import torch
 from torch.utils.data import DataLoader
 import torch.nn as nn
-from ModelClass.myDataSetTra import MyDataSetTra
+from ModelClass.imgDataSetTra import MyDataSetTra
 from abc import abstractmethod
 from ModelClass.myModel import Model
 

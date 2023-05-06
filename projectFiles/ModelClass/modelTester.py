@@ -4,7 +4,7 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 from PIL import Image
-from ModelClass.myDataSetTra import MyDataSetTra
+from ModelClass.imgDataSetTra import MyDataSetTra
 from abc import abstractmethod
 from ModelClass.myModel import Model
 
