@@ -4,6 +4,8 @@ import torch.nn as nn
 from ModelClass.imgDataSetTra import MyDataSetTra
 from abc import abstractmethod
 from ModelClass.myModel import Model
+from ModelClass.NewNiiDataset import CreateNiiDataset
+import time
 
 
 class ModelTrainer:
@@ -18,35 +20,27 @@ class ModelTrainer:
     def set_model(self, model):
         self.model = model.get_model()
 
-    def load_train_data(self, data_path, mask_path):
+    def load_train_data(self, data_path, mask_path, data_type="img", max_size=0, remove_black=False):
         """加载标签,参数（标签路径）"""
-        self.train_dataset = MyDataSetTra(data_path, mask_path)
+        if data_type == "img":
+            self.train_dataset = MyDataSetTra(data_path, mask_path)
+        elif data_type == "nii":
+            self.train_dataset = CreateNiiDataset(data_path, mask_path, True, max_size=max_size,
+                                                  remove_black=remove_black)
+        else:
+            raise ValueError("data_type can only be 'img' or 'nii'")
 
     def train_model(self, epoch, batch_size, learning_rate=0.000001,
-                    shuffle=True, optim="Adam", loss_func="BCELoss",
-                    num_workers=-1, multiple_gpu=False, pin_memory=False):
-        """
-        训练模型,参数（训练轮数,训练批次大小,学习率,数据集是否打乱,优化器,数据装载线程数,多GPU模式,内存优化）
-        若新model名为空则将覆盖原model
-        数据装载线程数表示装载tensor数据的线程数，若为默认值-1则会自动安排一个较为合理的数量
-        多GPU模式可能会导致模型精度变差
-        """
-        # if num_workers == -1:
-        #     num_workers = (torch.cuda.device_count()-1) * 4 + 2
-        #     num_workers = 1
-        num_workers = 0
+                    shuffle=True, optim="Adam", loss_func="BCELoss", num_workers=14):
+        """训练模型,参数（训练轮数,训练批次大小,学习率,数据集是否打乱,优化器,），若新model名为空则将覆盖原model"""
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        # device = torch.device('cpu')
         dataloader = DataLoader(
             dataset=self.train_dataset,
             batch_size=batch_size,
             shuffle=shuffle,
-            num_workers=num_workers,
-            pin_memory=pin_memory
+            num_workers=num_workers
         )
-        if torch.cuda.device_count() > 1 and multiple_gpu:
-            print("On", torch.cuda.device_count(), "GPU")
-            self.model = nn.DataParallel(self.model)
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.model = self.model.to(device)
         if loss_func == "BCELoss":
             loss_func = nn.BCELoss()
         elif loss_func == "CrossEntropyLoss":
@@ -65,7 +59,10 @@ class ModelTrainer:
         elif optim == "RMSProp":
             optimizer = torch.optim.RMSprop(
                 self.model.parameters(), lr=learning_rate)
+        print("len", len(self.train_dataset))
         for cnt in range(epoch):
+            print("迭代轮次:", cnt)
+            start_t = time.time()
             if not self.flag:
                 break
             Loss = 0
@@ -79,10 +76,14 @@ class ModelTrainer:
                 loss.backward()  # 误差逆传播
                 optimizer.step()  # 通过梯度调整参数
                 Loss += loss.item()
-                print("loss.item():", loss.item())
+                # print("loss.item():", loss.item())
+                if i % 50 == 0:
+                    print("loss.item():", loss.item())
             print("Loss:", Loss)
-            self.train_loss = Loss
-            self.state_change()
+            end_t = time.time()
+            print("本轮耗时:", end_t - start_t, "s")
+            # self.train_loss = Loss
+            # self.state_change()
 
     @abstractmethod
     def state_change(self):

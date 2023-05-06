@@ -9,6 +9,7 @@ import numpy as np
 
 class CreateNiiDataset(Dataset):
     def __init__(self, path_raw, path_label):
+        self.black = set()
         self.path_raw = path_raw
         self.path_label = path_label
         lines = os.listdir(path_raw)
@@ -30,8 +31,9 @@ class CreateNiiDataset(Dataset):
     #     return image_crop
 
     def __getitem__(self, item):
-        img1 = sitk.ReadImage(os.path.join(self.path_raw, self.file_raw))
-        img2 = sitk.ReadImage(os.path.join(self.path_label, self.file_label))
+        # print("item",item)
+        img1 = sitk.ReadImage(os.path.join(self.path_raw, self.file_raw[item]))
+        img2 = sitk.ReadImage(os.path.join(self.path_label, self.file_label[item]))
         data1 = sitk.GetArrayFromImage(img1)
         data2 = sitk.GetArrayFromImage(img2)
 
@@ -44,30 +46,43 @@ class CreateNiiDataset(Dataset):
         data1 = cv2.resize(data1, (512, 512))
         data2 = cv2.resize(data2, (512, 512))
 
-        if np.min(data1) < 0:
-            data1 = data1 - np.min(data1)
-            # data1 = (data1 - np.min(data1)) / (np.max(data1) - np.min(data1))
+        # data1 = cv2.equalizeHist(data1)
+        # sitk.WriteImage(sitk.GetImageFromArray(data1), "D:\\pythonProject\\seg\\mytrain\\data\\{}.nrrd".format(item))
+        data1 = (data1 - np.min(data1)) / (np.max(data1) - np.min(data1))
+        if np.max(data2) == 0:
+            self.black.add(item)
+        data2 = data2 / 255
+        data1 = data1[np.newaxis, :, :]
+        # data1_tensor = torch.from_numpy(np.concatenate([data1, data1, data1], 1))
+        data1 = torch.from_numpy(data1)
+        data1_tensor = data1.type(torch.FloatTensor)
 
-        if np.min(data2) < 0:
-            data2 = data2 - np.min(data2)
-            # data2 = (data2 - np.min(data2)) / (np.max(data2) - np.min(data2))
-
-        data1 = data1[np.newaxis, np.newaxis, :, :]
-        data1_tensor = torch.from_numpy(np.concatenate([data1, data1, data1], 1))
-        data1_tensor = data1_tensor.type(torch.FloatTensor)
-
-        data2 = data2[np.newaxis, np.newaxis, :, :]
-        data2_tensor = torch.from_numpy(np.concatenate([data2, data2, data2], 1))
-        data2_tensor = data2_tensor.type(torch.FloatTensor)
+        data2 = data2[np.newaxis, :, :]
+        # data2_tensor = torch.from_numpy(np.concatenate([data2, data2, data2], 1))
+        data2 = torch.from_numpy(data2)
+        data2_tensor = data2.type(torch.FloatTensor)
         return data1_tensor, data2_tensor
+
+    def remove_black(self):
+        # print(self.black)
+        temp_raw = []
+        temp_label = []
+        for i in range(len(self.file_label)):
+            if i not in self.black:
+                temp_raw.append(self.file_raw[i])
+                temp_label.append(self.file_label[i])
+        self.file_raw = temp_raw
+        self.file_label = temp_label
+        self.black = set()
 
     def load_data(self):
         return self
 
     def __len__(self):
+        if len(self.black) != 0:
+            self.remove_black()
+        # print("len",len(self.file_raw))
         if len(self.file_raw) < len(self.file_label):
             return len(self.file_raw)
         else:
             return len(self.file_label)
-
-

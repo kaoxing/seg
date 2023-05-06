@@ -1,4 +1,3 @@
-import imghdr
 import os
 import cv2
 import torch
@@ -30,8 +29,8 @@ class CreateNiiDataset(Dataset):
     #     return image_crop
 
     def __getitem__(self, item):
-        img1 = sitk.ReadImage(os.path.join(self.path_raw, self.file_raw))
-        img2 = sitk.ReadImage(os.path.join(self.path_label, self.file_label))
+        img1 = sitk.ReadImage(os.path.join(self.path_raw, self.file_raw[0]))
+        img2 = sitk.ReadImage(os.path.join(self.path_label, self.file_label[0]))
         data1 = sitk.GetArrayFromImage(img1)
         data2 = sitk.GetArrayFromImage(img2)
 

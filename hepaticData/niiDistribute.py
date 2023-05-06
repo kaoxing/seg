@@ -16,7 +16,6 @@ def dicomDistribute(fileroot, saveroot, type="nii", axial="x"):
             print(i, filepath)
             ct = sitk.ReadImage(filepath)
             ct_array = sitk.GetArrayFromImage(ct)
-
             size = 0
             if axial == "x":
                 size = ct_array.shape[0]
