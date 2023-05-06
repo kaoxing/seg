@@ -64,10 +64,13 @@ class Ui_MainWindow(object):
         self.action_close_workdir.setObjectName("action_close_workdir")
         self.action_pre_process = QtWidgets.QAction(MainWindow)
         self.action_pre_process.setObjectName("action_pre_process")
+        self.action_modeling = QtWidgets.QAction(MainWindow)
+        self.action_modeling.setObjectName("action_modeling")
         self.menu.addAction(self.action_new_workdir)
         self.menu.addAction(self.action_open_workdir)
         self.menu.addAction(self.action_close_workdir)
         self.menu_2.addAction(self.action_pre_process)
+        self.menu_2.addAction(self.action_modeling)
         self.menubar.addAction(self.menu.menuAction())
         self.menubar.addAction(self.menu_2.menuAction())
 
@@ -89,6 +92,7 @@ class Ui_MainWindow(object):
         self.action_U_net.setText(_translate("MainWindow", "U-net"))
         self.action_close_workdir.setText(_translate("MainWindow", "close workdir"))
         self.action_pre_process.setText(_translate("MainWindow", "pre process"))
+        self.action_modeling.setText(_translate("MainWindow", "modeling"))
 from UI.action.evaluateTab import evaluateTab
 from UI.action.modelTab import modelTab
 from UI.action.projectTab import projectTab

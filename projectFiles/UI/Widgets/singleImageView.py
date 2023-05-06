@@ -43,6 +43,9 @@ class SingleImageView(QWidget):
             image_name = os.path.basename(image_path)
             self.setWindowTitle(image_name)
 
+    def set_2darray(self,array):
+        self.graphicsView.setImage(array)
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = SingleImageView()

@@ -3,6 +3,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileSystemModel, QFileDialog, QTreeView, QAction
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
 from UI.mainWindow import Ui_MainWindow
+from UI.action.modelingTab import ModelingTab
 from workspace import Workspace
 
 
@@ -18,6 +19,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.tab.workspace_change_sig.connect(self.tab_3.reset_widget_label)
         self.tab_2.model_loaded_sig.connect(self.model_loaded)
         self.tab_3.change_tab_sig.connect(self.change_tab)
+        self.modelingTab = ModelingTab()
 
     def init_workspace(self, workdir: str):
         """
@@ -65,6 +67,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         elif q_action == self.action_pre_process:
             # 数据预处理
             self.data_tab_sig.emit()
+        elif q_action == self.action_modeling:
+            self.modelingTab.show()
 
     def set_tree_view(self, view: QTreeView, path: str):
         tree_model = QFileSystemModel()

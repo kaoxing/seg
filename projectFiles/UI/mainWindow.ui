@@ -78,6 +78,7 @@
      <string>data</string>
     </property>
     <addaction name="action_pre_process"/>
+    <addaction name="action_modeling"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
@@ -106,6 +107,11 @@
   <action name="action_pre_process">
    <property name="text">
     <string>pre process</string>
+   </property>
+  </action>
+  <action name="action_modeling">
+   <property name="text">
+    <string>modeling</string>
    </property>
   </action>
  </widget>
