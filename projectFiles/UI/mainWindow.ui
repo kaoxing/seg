@@ -30,7 +30,7 @@
        <enum>QTabWidget::North</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="projectTab" name="tab">
        <attribute name="title">
@@ -52,11 +52,6 @@
         <string>Evaluate</string>
        </attribute>
       </widget>
-      <widget class="dataTab" name="tab_5">
-       <attribute name="title">
-        <string>data(demo)</string>
-       </attribute>
-      </widget>
      </widget>
     </item>
    </layout>
@@ -72,7 +67,7 @@
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>文件</string>
+     <string>workdir</string>
     </property>
     <addaction name="action_new_workdir"/>
     <addaction name="action_open_workdir"/>
@@ -80,28 +75,22 @@
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
-     <string>设置</string>
+     <string>data</string>
     </property>
-   </widget>
-   <widget class="QMenu" name="menu_3">
-    <property name="title">
-     <string>模型</string>
-    </property>
-    <addaction name="action_U_net"/>
+    <addaction name="action_pre_process"/>
    </widget>
    <addaction name="menu"/>
-   <addaction name="menu_3"/>
    <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_open_workdir">
    <property name="text">
-    <string>打开工作区</string>
+    <string>open workdir</string>
    </property>
   </action>
   <action name="action_new_workdir">
    <property name="text">
-    <string>新建工作区</string>
+    <string>new workdir</string>
    </property>
   </action>
   <action name="action_U_net">
@@ -111,7 +100,12 @@
   </action>
   <action name="action_close_workdir">
    <property name="text">
-    <string>关闭工作区</string>
+    <string>close workdir</string>
+   </property>
+  </action>
+  <action name="action_pre_process">
+   <property name="text">
+    <string>pre process</string>
    </property>
   </action>
  </widget>
@@ -138,12 +132,6 @@
    <class>evaluateTab</class>
    <extends>QWidget</extends>
    <header>UI/action/evaluateTab.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>dataTab</class>
-   <extends>QWidget</extends>
-   <header>UI/action/dataTab.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

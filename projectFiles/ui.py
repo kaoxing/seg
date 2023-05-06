@@ -8,6 +8,7 @@ from workspace import Workspace
 
 class MainWindow(Ui_MainWindow, QMainWindow):
     new_workspace_sig = pyqtSignal()  # 新建工作区
+    data_tab_sig = pyqtSignal()  # 数据预处理
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -61,6 +62,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             # 关闭工作区
             self.workspace = None
             self.tabWidget.hide()
+        elif q_action == self.action_pre_process:
+            # 数据预处理
+            self.data_tab_sig.emit()
 
     def set_tree_view(self, view: QTreeView, path: str):
         tree_model = QFileSystemModel()

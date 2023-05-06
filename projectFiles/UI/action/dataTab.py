@@ -1,5 +1,5 @@
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QWidget, QFileDialog, QLineEdit
+from PyQt5.QtWidgets import QWidget, QFileDialog, QLineEdit, QMessageBox
 from UI.static.dataTab import Ui_dataTab
 import dataOpe.dataOpeMethod as dom
 import logging
@@ -22,6 +22,11 @@ class dataTab(Ui_dataTab, QWidget):
         """
         _path = self.lineEdit_standardize_folder.text()
         dom.standardize(_path)
+        QMessageBox.information(
+            self,
+            "standardize",
+            "images standardized successfully!"
+        )
 
     @pyqtSlot()
     def on_pushButton_expend_clicked(self):
@@ -31,6 +36,11 @@ class dataTab(Ui_dataTab, QWidget):
         _spath = self.lineEdit_input_folder.text()
         _rpath = self.lineEdit_output_folder.text()
         dom.expend(_spath, _rpath)
+        QMessageBox.information(
+            self,
+            "expend",
+            "images expend successfully!"
+        )
 
     # 下面几个方法都是用来选择文件夹的(START)
     def select_folder(self, item: QLineEdit):
