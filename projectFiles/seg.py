@@ -2,12 +2,14 @@ import sys
 import sysPath
 import os
 from PyQt5.QtWidgets import QApplication
+from qt_material import apply_stylesheet
 from ui import MainWindow
 from UI.action.newWorkspace import newWorkspace
 from UI.action.dataTab import dataTab
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    apply_stylesheet(app,('light_purple.xml'))
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     # print(os.environ['PYTORCH_CUDA_ALLOC_CONF'])
     # 窗口
